@@ -60,7 +60,6 @@ interface IMessageUser {
 	isEdited: boolean;
 	isReadReceiptEnabled?: boolean;
 	unread?: boolean;
-	pinned?: boolean;
 	isTranslated: boolean;
 }
 
@@ -98,21 +97,41 @@ const User = React.memo(
 
 			const textContent = (
 				<>
-					{alias || username}
+					{itsMe ? '' : alias || username}
 					{aliasUsername}
 				</>
 			);
 
 			if (messageHaveAuthorName(type as MessageTypesValues)) {
 				return (
-					<Text style={[styles.usernameInfoMessage, { color: colors.fontTitlesLabels }]} onPress={onUserPress}>
+					<Text
+						style={[
+							styles.usernameInfoMessage,
+							{ color: colors.fontTitlesLabels },
+							itsMe
+								? {
+										textAlign: 'right'
+								  }
+								: {}
+						]}
+						onPress={onUserPress}
+					>
 						{textContent}
 					</Text>
 				);
 			}
 
 			return (
-				<View style={styles.container}>
+				<View
+					style={[
+						styles.container,
+						itsMe
+							? {
+									alignSelf: 'flex-end'
+							  }
+							: {}
+					]}
+				>
 					<TouchableOpacity testID={`username-header-${username}`} style={styles.titleContainer} onPress={onUserPress}>
 						<Text style={[styles.username, { color: colors.fontTitlesLabels }]} numberOfLines={1}>
 							{textContent}
@@ -125,7 +144,6 @@ const User = React.memo(
 						hasError={hasError}
 						isReadReceiptEnabled={props.isReadReceiptEnabled}
 						unread={props.unread}
-						pinned={props.pinned}
 						isTranslated={isTranslated}
 					/>
 				</View>

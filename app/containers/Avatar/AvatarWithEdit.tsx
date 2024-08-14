@@ -65,7 +65,7 @@ const AvatarWithEdit = ({
 				isStatic={isStatic}
 				rid={rid}
 			/>
-			{handleEdit && serverVersion && compareServerVersion(serverVersion, 'greaterThanOrEqualTo', '3.6.0') ? (
+			{/* {handleEdit && serverVersion && compareServerVersion(serverVersion, 'greaterThanOrEqualTo', '3.6.0') ? (
 				<Button
 					title={I18n.t('Edit')}
 					type='secondary'
@@ -76,7 +76,7 @@ const AvatarWithEdit = ({
 					color={colors.fontTitlesLabels}
 					hitSlop={BUTTON_HIT_SLOP}
 				/>
-			) : null}
+			) : null} */}
 		</>
 	);
 };

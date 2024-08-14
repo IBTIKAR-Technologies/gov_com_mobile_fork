@@ -1,4 +1,4 @@
-package chat.rocket.reactnative;
+package mr.gov.mtnima.govcom;
 
 import static com.wix.reactnativenotifications.Defs.NOTIFICATION_RECEIVED_EVENT_NAME;
 

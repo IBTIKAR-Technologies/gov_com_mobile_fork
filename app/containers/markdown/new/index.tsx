@@ -50,7 +50,8 @@ const Body = ({
 				navToRoomInfo,
 				getCustomEmoji,
 				onLinkPress
-			}}>
+			}}
+		>
 			{tokens?.map(block => {
 				switch (block.type) {
 					case 'BIG_EMOJI':

@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInputProps, TouchableOpacity, TouchableOpacityPro
 
 import I18n from '../../../i18n';
 import sharedStyles from '../../Styles';
+import { CustomIcon } from '../../../containers/CustomIcon';
 import { useTheme } from '../../../theme';
 import SearchHeader from '../../../containers/SearchHeader';
 import { useAppSelector } from '../../../lib/hooks';
@@ -11,6 +12,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center'
+		// backgroundColor: ''
 	},
 	button: {
 		flexDirection: 'row',
@@ -24,6 +26,9 @@ const styles = StyleSheet.create({
 	subtitle: {
 		fontSize: 14,
 		...sharedStyles.textRegular
+	},
+	upsideDown: {
+		transform: [{ scaleY: -1 }]
 	}
 });
 
@@ -33,61 +38,41 @@ interface IRoomHeader {
 	isFetching: boolean;
 	serverName: string;
 	server: string;
+	showServerDropdown: boolean;
 	showSearchHeader: boolean;
 	onSearchChangeText: TextInputProps['onChangeText'];
 	onPress: TouchableOpacityProps['onPress'];
 }
 
-const Header = React.memo(
-	({
-		connecting,
-		connected,
-		isFetching,
-		serverName = 'Rocket.Chat',
-		server,
-		showSearchHeader,
-		onSearchChangeText,
-		onPress
-	}: IRoomHeader) => {
-		const { status: supportedVersionsStatus } = useAppSelector(state => state.supportedVersions);
-		const { colors } = useTheme();
+const Header = React.memo(({ connecting, connected, isFetching, server, showSearchHeader, onSearchChangeText }: IRoomHeader) => {
+	const { status: supportedVersionsStatus } = useAppSelector(state => state.supportedVersions);
+	const { colors } = useTheme();
 
-		if (showSearchHeader) {
-			return <SearchHeader onSearchChangeText={onSearchChangeText} testID='rooms-list-view-search-input' />;
-		}
-		let subtitle;
-		if (supportedVersionsStatus === 'expired') {
-			subtitle = 'Cannot connect';
-		} else if (connecting) {
-			subtitle = I18n.t('Connecting');
-		} else if (isFetching) {
-			subtitle = I18n.t('Updating');
-		} else if (!connected) {
-			subtitle = I18n.t('Waiting_for_network');
-		} else {
-			subtitle = server?.replace(/(^\w+:|^)\/\//, '');
-		}
-		// improve copy
-		return (
-			<View style={styles.container} accessibilityLabel={`${serverName} ${subtitle}`} accessibilityRole='header' accessible>
-				<TouchableOpacity onPress={onPress} testID='rooms-list-header-servers-list-button'>
-					<View style={styles.button}>
-						<Text style={[styles.title, { color: colors.fontTitlesLabels }]} numberOfLines={1}>
-							{serverName}
-						</Text>
-					</View>
-					{subtitle ? (
-						<Text
-							testID='rooms-list-header-server-subtitle'
-							style={[styles.subtitle, { color: colors.fontSecondaryInfo }]}
-							numberOfLines={1}>
-							{subtitle}
-						</Text>
-					) : null}
-				</TouchableOpacity>
-			</View>
-		);
+	if (showSearchHeader) {
+		return <SearchHeader onSearchChangeText={onSearchChangeText} testID='rooms-list-view-search-input' />;
 	}
-);
+	let subtitle;
+	if (supportedVersionsStatus === 'expired') {
+		subtitle = 'Cannot connect';
+	} else if (connecting) {
+		subtitle = I18n.t('Connecting');
+	} else if (isFetching) {
+		subtitle = I18n.t('Updating');
+	} else if (!connected) {
+		subtitle = I18n.t('Waiting_for_network');
+	} else {
+		subtitle = server?.replace(/(^\w+:|^)\/\//, '');
+	}
+
+	return (
+		<View style={[styles.container]}>
+			{subtitle ? (
+				<Text testID='rooms-list-header-server-subtitle' style={[styles.subtitle, { color: '#bbb' }]} numberOfLines={1}>
+					{subtitle}
+				</Text>
+			) : null}
+		</View>
+	);
+});
 
 export default Header;

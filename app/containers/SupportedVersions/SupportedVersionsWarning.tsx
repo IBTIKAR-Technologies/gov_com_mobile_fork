@@ -52,7 +52,7 @@ export const SupportedVersionsWarning = ({ navigation, route }: { navigation?: a
 			) : null}
 			<Button
 				testID='sv-warn-button'
-				title={I18n.t('Learn_more')}
+				title='Learn more'
 				type='secondary'
 				backgroundColor={colors.surfaceTint}
 				onPress={() => Linking.openURL(message.link || LEARN_MORE_URL)}

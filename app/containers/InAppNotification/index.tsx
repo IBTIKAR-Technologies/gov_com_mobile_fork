@@ -28,11 +28,13 @@ const InAppNotification = memo(() => {
 			swipeEnabled?: boolean;
 		}
 	) => {
+		console.log('notication 1111111', notification);
 		if (appState !== 'foreground') return;
 
 		const { payload } = notification;
 		const state = Navigation.navigationRef.current?.getRootState();
 		const route = getActiveRoute(state);
+
 		if (payload?.rid || notification.customNotification) {
 			if (route?.name === 'JitsiMeetView' || payload?.message?.t === 'videoconf') return;
 

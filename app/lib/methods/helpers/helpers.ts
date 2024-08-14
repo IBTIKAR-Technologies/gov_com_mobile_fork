@@ -53,7 +53,7 @@ export function getRoomTitle(room) {
 	if (allowSpecialChars && room.t !== 'd') {
 		return room.fname || room.name;
 	}
-	return ((room?.prid || useRealName) && room?.fname) || room?.name;
+	return room?.fname || room?.name;
 }
 
 export function getSenderName(sender) {

@@ -1,6 +1,7 @@
 import { Action } from 'redux';
 import { delay, put, takeEvery } from 'redux-saga/effects';
 import { call } from 'typed-redux-saga';
+import axios from 'axios';
 
 import { VIDEO_CONF } from '../actions/actionsTypes';
 import { removeVideoConfCall, setCalling, setVideoConfCall, TCallProps } from '../actions/videoConf';
@@ -47,6 +48,7 @@ const CALL_INTERVAL = 3000;
 const CALL_ATTEMPT_LIMIT = 10;
 
 function* onDirectCall(payload: ICallInfo) {
+	console.log('onDirectCall', payload);
 	const calls = yield* appSelector(state => state.videoConf.calls);
 	const currentCall = calls.find(c => c.callId === payload.callId);
 	const hasAnotherCall = calls.find(c => c.action === 'call');
@@ -92,6 +94,7 @@ function* onDirectCallRejected() {
 }
 
 function* onDirectCallConfirmed(payload: ICallInfo) {
+	console.log('onDirect call confirmed', payload);
 	const calls = yield* appSelector(state => state.videoConf.calls);
 	const currentCall = calls.find(c => c.callId === payload.callId);
 	if (currentCall) {
@@ -102,6 +105,7 @@ function* onDirectCallConfirmed(payload: ICallInfo) {
 }
 
 function* onDirectCallJoined(payload: ICallInfo) {
+	console.log('onDirect call joined', payload);
 	const calls = yield* appSelector(state => state.videoConf.calls);
 	const currentCall = calls.find(c => c.callId === payload.callId);
 	if (currentCall && (currentCall.action === 'accepted' || currentCall.action === 'calling')) {
@@ -121,18 +125,45 @@ function* onDirectCallEnded(payload: ICallInfo) {
 	}
 }
 
+const getCall = messageID =>
+	new Promise((resolve, reject) => {
+		axios
+			.get(`https://com-cov-dashboard.vercel.app/api/getcallid?messageId=${messageID}`)
+			.then(response => {
+				resolve(response.data);
+			})
+			.catch(error => {
+				reject(error);
+			});
+	});
+
 function* handleVideoConfIncomingWebsocketMessages({ data }: { data: any }) {
-	const { action, params } = data.action;
+	let { action, params } = data;
+	console.log('handleVideoConfIncomingWebsocketMessages', data);
 
 	if (!action || typeof action !== 'string') {
 		return;
 	}
+
+	if (action === 'updated') {
+		console.log('getting callId');
+		const callId = yield getCall(params.lastMessage?._id);
+		params.uid = params.lastMessage?.u?._id;
+		params.callId = callId;
+		params.rid = params.lastMessage?.rid;
+		action = 'call';
+		console.log('callId =======', callId);
+		console.log('params =======', params);
+	}
+
 	if (!params || typeof params !== 'object' || !params.callId || !params.uid || !params.rid) {
 		return;
 	}
 	const prop = { ...params, action };
+	console.log('action', action);
 	switch (action) {
 		case 'call':
+			console.log('direct call');
 			yield call(onDirectCall, prop);
 			break;
 		case 'canceled':
@@ -235,10 +266,14 @@ function* acceptCall({ payload: { callId } }: { payload: { callId: string } }) {
 	const currentCall = calls.find(c => c.callId === callId);
 	if (currentCall && currentCall.action === 'call') {
 		const userId = yield* appSelector(state => state.login.user.id);
-		yield call(notifyUser, `${currentCall.uid}/video-conference`, {
-			action: 'accepted',
-			params: { uid: userId, rid: currentCall.rid, callId: currentCall.callId }
-		});
+		try {
+			yield call(notifyUser, `${currentCall.uid}/video-conference`, {
+				action: 'accepted',
+				params: { uid: userId, rid: currentCall.rid, callId: currentCall.callId }
+			});
+		} catch (err) {
+			console.log(err);
+		}
 		yield put(setVideoConfCall({ ...currentCall, action: 'accepted' }));
 		hideNotification();
 	}

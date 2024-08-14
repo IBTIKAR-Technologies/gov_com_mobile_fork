@@ -56,17 +56,19 @@ export const pushNotificationConfigure = (onNotification: (notification: INotifi
 	}
 
 	Notifications.events().registerRemoteNotificationsRegistered((event: Registered) => {
+		console.log('eventdeviceToken ', event.deviceToken);
 		deviceToken = event.deviceToken;
 	});
 
 	Notifications.events().registerRemoteNotificationsRegistrationFailed((event: RegistrationError) => {
 		// TODO: Handle error
-		console.log(event);
+		console.log('notification err', event);
 	});
 
 	Notifications.events().registerNotificationReceivedForeground(
 		(notification: Notification, completion: (response: NotificationCompletion) => void) => {
 			completion({ alert: false, sound: false, badge: false });
+			console.log('foreground notification', notification);
 		}
 	);
 
@@ -84,6 +86,7 @@ export const pushNotificationConfigure = (onNotification: (notification: INotifi
 
 	Notifications.events().registerNotificationReceivedBackground(
 		(notification: Notification, completion: (response: any) => void) => {
+			console.log('Notification Received - Background', notification.payload);
 			completion({ alert: true, sound: true, badge: false });
 		}
 	);

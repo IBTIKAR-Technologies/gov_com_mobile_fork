@@ -1,11 +1,8 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:colorEdgeEffect">#aaaaaa</item>
-        <item name="colorPrimaryDark">@color/splashBackground</item>
-        <item name="android:navigationBarColor">@color/splashBackground</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:forceDarkAllowed">false</item>
-        <!-- RN 0.68.2 -->
-        <item name="android:editTextBackground">@drawable/rn_edit_text_material</item> 
     </style>
 
     <style name="ShareTheme" parent="AppTheme">
@@ -13,10 +10,8 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="BootTheme" parent="Theme.SplashScreen">
-      <item name="windowSplashScreenBackground">@color/splashBackground</item>
-      <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-      <item name="postSplashScreenTheme">@style/AppTheme</item>
+    <style name="Theme.App.SplashScreen" parent="AppTheme">
+        <item name="android:windowBackground">@layout/launch_screen</item>
     </style>
 
     <!--  https://github.com/facebook/react-native/blob/d1ab03235cb4b93304150878d2b9057ab45bba77/ReactAndroid/src/main/res/views/modal/values/themes.xml#L5  -->

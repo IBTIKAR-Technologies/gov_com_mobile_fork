@@ -1,5 +1,6 @@
 import { all, call, delay, put, select, take, takeLatest } from 'redux-saga/effects';
 
+import axios from 'axios';
 import * as types from '../actions/actionsTypes';
 import { appInit, appStart } from '../actions/app';
 import { inviteLinksRequest, inviteLinksSetToken } from '../actions/inviteLinks';
@@ -170,26 +171,51 @@ const handleOpen = function* handleOpen({ params }) {
 };
 
 const handleNavigateCallRoom = function* handleNavigateCallRoom({ params }) {
+	console.log('handle navigate call room', params);
 	yield put(appStart({ root: RootEnum.ROOT_INSIDE }));
 	const db = database.active;
 	const subsCollection = db.get('subscriptions');
+	const messagesCollection = db.get('messages');
 	const room = yield subsCollection.find(params.rid);
+  // get callId from https://com-cov-dashboard.vercel.app/api/getcallid?messageId=iYdPohtQziFJiyJfa
+  const getCall = messageID => new Promise((resolve, reject) => {
+    axios.get(`https://com-cov-dashboard.vercel.app/api/getcallid?messageId=${messageID}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 	if (room) {
+		const callId = yield getCall(params.messageId);
+		console.log('callId', callId);
 		const isMasterDetail = yield select(state => state.app.isMasterDetail);
 		yield navigateToRoom({ item: room, isMasterDetail, popToRoot: true });
 		const uid = params.caller._id;
-		const { rid, callId, event } = params;
+		console.log('uid', uid);
+		const { rid, event } = params;
+		console.log(rid);
+
 		if (event === 'accept') {
-			yield call(Services.notifyUser, `${uid}/video-conference`, {
-				action: 'accepted',
-				params: { uid, rid, callId }
-			});
-			yield videoConfJoin(callId, true, false, true);
+			try {
+				yield call(Services.notifyUser, `${uid}/video-conference`, {
+					action: 'accepted',
+					params: { uid, rid, callId }
+				});
+			} catch (err) {
+				console.log('notifyuser error', err);
+			}
+			yield videoConfJoin(callId, false, true, true);
 		} else if (event === 'decline') {
-			yield call(Services.notifyUser, `${uid}/video-conference`, {
-				action: 'rejected',
-				params: { uid, rid, callId }
-			});
+			try {
+				yield call(Services.notifyUser, `${uid}/video-conference`, {
+					action: 'rejected',
+					params: { uid, rid, callId }
+				});
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	}
 };

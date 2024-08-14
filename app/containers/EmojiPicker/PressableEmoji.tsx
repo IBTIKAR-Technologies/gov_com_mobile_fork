@@ -20,7 +20,8 @@ export const PressableEmoji = ({ emoji, onPress }: { emoji: IEmoji; onPress: (em
 				{
 					backgroundColor: isIOS && pressed ? colors.buttonBackgroundSecondaryPress : 'transparent'
 				}
-			]}>
+			]}
+		>
 			<Emoji emoji={emoji} />
 		</Pressable>
 	);

@@ -3,9 +3,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { useAppSelector } from '../../lib/hooks';
-import FormContainer, { FormContainerInner } from '../../containers/FormContainer';
 import * as HeaderButton from '../../containers/HeaderButton';
-import LoginServices from '../../containers/LoginServices';
 import { OutsideParamList } from '../../stacks/types';
 import UserForm from './UserForm';
 
@@ -28,12 +26,13 @@ const LoginView = () => {
 	}, [navigation, title]);
 
 	return (
-		<FormContainer testID='login-view'>
-			<FormContainerInner>
-				<LoginServices separator={Accounts_ShowFormLogin} />
-				{Accounts_ShowFormLogin ? <UserForm /> : null}
-			</FormContainerInner>
-		</FormContainer>
+		// <FormContainer testID='login-view' scrollViewStyle={localStyles.scrollViewStyle}>
+		// 	<FormContainerInner>
+		// 		<LoginServices separator={Accounts_ShowFormLogin} />
+		// 		{Accounts_ShowFormLogin ? <UserForm /> : null}
+		// 	</FormContainerInner>
+		// </FormContainer>
+		<>{Accounts_ShowFormLogin ? <UserForm /> : null}</>
 	);
 };
 

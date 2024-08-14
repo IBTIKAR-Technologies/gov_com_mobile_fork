@@ -176,7 +176,8 @@ class RegisterView extends React.Component<IProps, any> {
 										newValue[key] = value;
 										this.setState({ customFields: { ...customFields, ...newValue } });
 									}}
-									value={customFields[key]}>
+									value={customFields[key]}
+								>
 									<FormTextInput
 										inputRef={e => {
 											// @ts-ignore
@@ -230,9 +231,7 @@ class RegisterView extends React.Component<IProps, any> {
 			<FormContainer testID='register-view'>
 				<FormContainerInner>
 					<LoginServices separator />
-					<Text style={[styles.title, sharedStyles.textBold, { color: themes[theme].fontTitlesLabels }]}>
-						{I18n.t('Sign_Up')}
-					</Text>
+					<Text style={[styles.title, sharedStyles.textBold, { color: themes[theme].fontTitlesLabels }]}>{I18n.t('Sign_Up')}</Text>
 					<FormTextInput
 						label={I18n.t('Name')}
 						containerStyle={styles.inputContainer}

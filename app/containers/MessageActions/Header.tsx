@@ -65,7 +65,8 @@ const HeaderItem = ({ item, onReaction, theme }: THeaderItem) => (
 	<Touch
 		testID={`message-actions-emoji-${item}`}
 		onPress={() => onReaction({ emoji: item })}
-		style={[styles.headerItem, { backgroundColor: themes[theme].surfaceHover }]}>
+		style={[styles.headerItem, { backgroundColor: themes[theme].surfaceHover }]}
+	>
 		{typeof item === 'string' ? (
 			<Text style={styles.headerIcon}>{shortnameToUnicode(`:${item}:`)}</Text>
 		) : (
@@ -75,13 +76,22 @@ const HeaderItem = ({ item, onReaction, theme }: THeaderItem) => (
 );
 
 const HeaderFooter = ({ onReaction, theme }: THeaderFooter) => (
-	<Touch
-		testID='add-reaction'
-		onPress={(param: any) => onReaction(param)}
-		style={[styles.headerItem, { backgroundColor: themes[theme].surfaceHover }]}>
-		<CustomIcon name='reaction-add' size={24} />
-	</Touch>
+	<View
+		style={{
+			height: 40
+		}}
+	/>
 );
+
+{
+	/* <Touch
+	testID='add-reaction'
+	onPress={(param: any) => onReaction(param)}
+	style={[styles.headerItem, { backgroundColor: themes[theme].surfaceHover }]}
+>
+	<CustomIcon name='reaction-add' size={24} />
+</Touch>; */
+}
 
 const Header = React.memo(({ handleReaction, message, isMasterDetail }: IHeader) => {
 	const { width } = useWindowDimensions();
@@ -108,7 +118,7 @@ const Header = React.memo(({ handleReaction, message, isMasterDetail }: IHeader)
 	return (
 		<View style={[styles.container, { backgroundColor: themes[theme].surfaceLight }]}>
 			<FlatList
-				data={frequentlyUsed.slice(0, quantity)}
+				data={[]}
 				renderItem={renderItem}
 				ListFooterComponent={renderFooter}
 				style={{ backgroundColor: themes[theme].surfaceLight }}

@@ -161,7 +161,8 @@ class Markdown extends PureComponent<IMarkdownProps, any> {
 						borderColor: themes[theme!].surfaceNeutral
 					},
 					...style
-				]}>
+				]}
+			>
 				{literal}
 			</Text>
 		);
@@ -179,7 +180,8 @@ class Markdown extends PureComponent<IMarkdownProps, any> {
 						color: themes[theme!].fontDefault
 					},
 					...style
-				]}>
+				]}
+			>
 				{literal}
 			</Text>
 		);

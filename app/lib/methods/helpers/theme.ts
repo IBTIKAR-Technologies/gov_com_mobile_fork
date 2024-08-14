@@ -33,7 +33,7 @@ export const getTheme = (themePreferences: IThemePreference): TSupportedThemes =
 	if (currentTheme === 'automatic') {
 		theme = defaultTheme();
 	}
-	return theme === 'dark' ? darkLevel : 'light';
+	return 'light';
 };
 
 export const newThemeState = (prevState: { themePreferences: IThemePreference }, newTheme: IThemePreference) => {

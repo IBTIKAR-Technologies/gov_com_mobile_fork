@@ -112,8 +112,8 @@ const RoomInfoView = (): React.ReactElement => {
 		);
 		setOptions({
 			headerLeft: showCloseModal ? () => <HeaderButton.CloseModal /> : undefined,
-			title: isDirect ? I18n.t('User_Info') : I18n.t('Room_Info'),
-			headerRight: canEdit ? () => <HeaderRight /> : undefined
+			title: isDirect ? I18n.t('User_Info') : I18n.t('Room_Info')
+			// headerRight: canEdit ? () => <HeaderRight /> : undefined
 		});
 	};
 
@@ -283,10 +283,10 @@ const RoomInfoView = (): React.ReactElement => {
 	};
 
 	return (
-		<ScrollView style={[styles.scroll, { backgroundColor: colors.surfaceRoom }]}>
+		<ScrollView style={[styles.scroll]}>
 			<StatusBar />
-			<SafeAreaView style={{ backgroundColor: colors.surfaceRoom }} testID='room-info-view'>
-				<View style={[styles.avatarContainer, { backgroundColor: colors.surfaceHover }]}>
+			<SafeAreaView style={{}} testID='room-info-view'>
+				<View style={[styles.avatarContainer, { backgroundColor: colors.surfaceHover, flex: 1 }]}>
 					<RoomInfoViewAvatar
 						username={room?.name || roomUser.username}
 						rid={room?.rid}

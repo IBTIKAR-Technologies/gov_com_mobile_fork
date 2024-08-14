@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import I18n from '../../i18n';
@@ -34,8 +34,9 @@ const styles = StyleSheet.create({
 		...sharedStyles.textSemibold
 	},
 	subtitle: {
+		...sharedStyles.textRegular,
 		flexShrink: 1,
-		...sharedStyles.textRegular
+		color: 'black'
 	},
 	typingUsers: {
 		...sharedStyles.textSemibold
@@ -74,7 +75,6 @@ interface IRoomHeader {
 	onPress: Function;
 	testID?: string;
 	sourceType?: IOmnichannelSource;
-	disabled?: boolean;
 }
 
 const SubTitle = React.memo(({ usersTyping, subtitle, renderFunc, scale }: TRoomHeaderSubTitle) => {
@@ -103,7 +103,7 @@ const SubTitle = React.memo(({ usersTyping, subtitle, renderFunc, scale }: TRoom
 
 	// subtitle
 	if (subtitle) {
-		return <MarkdownPreview msg={subtitle} style={[styles.subtitle, { fontSize, color: colors.fontSecondaryInfo }]} />;
+		return <MarkdownPreview msg={subtitle} style={[styles.subtitle, { fontSize, color: '#777' }]} />;
 	}
 
 	return null;
@@ -140,8 +140,7 @@ const Header = React.memo(
 		teamMain,
 		testID,
 		usersTyping = [],
-		sourceType,
-		disabled
+		sourceType
 	}: IRoomHeader) => {
 		const { colors } = useTheme();
 		const portrait = height > width;
@@ -174,27 +173,15 @@ const Header = React.memo(
 
 		const handleOnPress = useCallback(() => onPress(), []);
 
-		const accessibilityLabel = useMemo(() => {
-			if (tmid) {
-				return `${title} ${parentTitle}`;
-			}
-			return title;
-		}, [title, parentTitle, tmid]);
-
 		return (
 			<TouchableOpacity
 				testID='room-header'
-				accessibilityLabel={accessibilityLabel}
+				accessibilityLabel={title}
 				onPress={handleOnPress}
-				style={[
-					styles.container,
-					{
-						opacity: disabled ? 0.5 : 1
-					}
-				]}
-				disabled={disabled}
+				style={styles.container}
+				disabled={!!tmid}
 				hitSlop={HIT_SLOP}
-				accessibilityRole='header'>
+			>
 				<View style={styles.titleContainer}>
 					{tmid ? null : (
 						<RoomTypeIcon

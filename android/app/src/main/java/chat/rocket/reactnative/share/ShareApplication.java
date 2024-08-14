@@ -1,6 +1,6 @@
-package chat.rocket.reactnative.share;
+package mr.gov.mtnima.govcom.share;
 
-import chat.rocket.reactnative.BuildConfig;
+import mr.gov.mtnima.govcom.BuildConfig;
 
 import chat.rocket.SharePackage;
 

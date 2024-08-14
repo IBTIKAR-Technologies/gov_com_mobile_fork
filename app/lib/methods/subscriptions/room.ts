@@ -19,7 +19,6 @@ import { IDDPMessage } from '../../../definitions/IDDPMessage';
 import sdk from '../../services/sdk';
 import { readMessages } from '../readMessages';
 import { loadMissedMessages } from '../loadMissedMessages';
-import { updateLastOpen } from '../updateLastOpen';
 
 const WINDOW_TIME = 1000;
 
@@ -75,7 +74,6 @@ export default class RoomSubscription {
 
 	unsubscribe = async () => {
 		console.log(`[RCRN] Unsubscribing from room ${this.rid}`);
-		updateLastOpen(this.rid);
 		this.isAlive = false;
 		reduxStore.dispatch(unsubscribeRoom(this.rid));
 		if (this.promises) {

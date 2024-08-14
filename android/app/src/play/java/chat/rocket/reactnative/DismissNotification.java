@@ -1,4 +1,4 @@
-package chat.rocket.reactnative;
+package mr.gov.mtnima.govcom;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

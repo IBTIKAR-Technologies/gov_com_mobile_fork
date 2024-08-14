@@ -16,7 +16,8 @@ const RoomInfoViewBody = ({
 	room?: ISubscription;
 }): React.ReactElement => {
 	if (isDirect) {
-		return <Direct roomUser={roomUser as IUser} />;
+		return null;
+		// return <Direct roomUser={roomUser as IUser} />;
 	}
 
 	if (room?.t === SubscriptionType.OMNICHANNEL && room) {

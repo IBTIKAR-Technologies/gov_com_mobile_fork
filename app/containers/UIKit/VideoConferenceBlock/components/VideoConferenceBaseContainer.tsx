@@ -13,32 +13,32 @@ type VideoConfMessageIconProps = {
 
 export const VideoConferenceBaseContainer = ({ variant, children }: VideoConfMessageIconProps): React.ReactElement => {
 	const { colors } = useTheme();
-	const style = useStyle();
+	const style = useStyle(variant);
 
 	const iconStyle: { [key: string]: { icon: TIconsName; color: string; backgroundColor: string; label: string } } = {
 		ended: {
 			icon: 'phone-end',
 			color: colors.fontSecondaryInfo,
 			backgroundColor: colors.surfaceNeutral,
-			label: i18n.t('Call_ended')
+			label: i18n.t('Call')
 		},
 		incoming: {
 			icon: 'phone-in',
 			color: colors.fontInfo,
 			backgroundColor: colors.buttonBackgroundPrimaryDisabled,
-			label: i18n.t('Calling')
+			label: i18n.t('Call')
 		},
 		outgoing: {
 			icon: 'phone',
 			color: colors.buttonBackgroundSuccessDefault,
 			backgroundColor: colors.buttonBackgroundSuccessDisabled,
-			label: i18n.t('Call_ongoing')
+			label: i18n.t('Call')
 		},
 		issue: {
 			icon: 'phone-issue',
 			color: colors.statusFontWarning,
 			backgroundColor: colors.statusBackgroundWarning,
-			label: i18n.t('Call_issue')
+			label: i18n.t('Call')
 		}
 	};
 
@@ -49,7 +49,8 @@ export const VideoConferenceBaseContainer = ({ variant, children }: VideoConfMes
 					style={{
 						...style.iconContainer,
 						backgroundColor: iconStyle[variant].backgroundColor
-					}}>
+					}}
+				>
 					<CustomIcon name={iconStyle[variant].icon} size={24} color={iconStyle[variant].color} />
 				</View>
 				<Text style={style.infoContainerText}>{iconStyle[variant].label}</Text>

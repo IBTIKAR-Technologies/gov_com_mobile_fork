@@ -1,4 +1,4 @@
-package chat.rocket.reactnative
+package mr.gov.mtnima.govcom
 
 import android.app.Application
 import com.facebook.react.PackageList
@@ -9,14 +9,13 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
-import com.facebook.react.flipper.ReactNativeFlipper
 import com.facebook.soloader.SoLoader
 import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage;
 import com.facebook.react.bridge.JSIModulePackage;
 
 import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ReactNativeHostWrapper
-import chat.rocket.reactnative.networking.SSLPinningPackage;
+import mr.gov.mtnima.govcom.networking.SSLPinningPackage;
 import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
 import android.content.res.Configuration;
 

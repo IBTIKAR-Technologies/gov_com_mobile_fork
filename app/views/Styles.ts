@@ -1,6 +1,6 @@
 import { Platform, StyleSheet, TextStyle } from 'react-native';
 
-import { MAX_SCREEN_CONTENT_WIDTH } from '../lib/constants/tablet';
+import { MAX_SCREEN_CONTENT_WIDTH } from '../lib/constants';
 
 const defaultTextStyle: TextStyle = {
 	textAlign: 'left',

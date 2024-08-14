@@ -219,13 +219,7 @@ const Touchable = ({
 							displayMode={displayMode}
 						/>
 						<Animated.View style={animatedStyles}>
-							<Touch
-								onPress={handlePress}
-								testID={testID}
-								style={{
-									backgroundColor: isFocused ? colors.surfaceTint : colors.surfaceRoom
-								}}
-							>
+							<Touch onPress={handlePress} testID={testID}>
 								{children}
 							</Touch>
 						</Animated.View>

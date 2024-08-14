@@ -1,3 +1,4 @@
+import RNFetchBlob from 'rn-fetch-blob';
 import { settings as RocketChatSettings } from '@rocket.chat/sdk';
 import { KJUR } from 'jsrsasign';
 import moment from 'moment';
@@ -44,12 +45,12 @@ const verifyJWT = (jwt?: string): ISupportedVersionsData | null => {
 
 export async function getServerInfo(server: string): Promise<TServerInfoResult> {
 	try {
-		const response = await fetch(`${server}/api/info`, {
+		const response = await RNFetchBlob.fetch('GET', `${server}/api/info`, {
 			...RocketChatSettings.customHeaders
 		});
 		try {
-			const serverInfo: IApiServerInfo = await response.json();
-			if (!serverInfo?.success) {
+			const jsonRes: IApiServerInfo = response.json();
+			if (!jsonRes?.success) {
 				return {
 					success: false,
 					message: I18n.t('Not_RC_Server', { contact: I18n.t('Contact_your_server_admin') })
@@ -57,7 +58,7 @@ export async function getServerInfo(server: string): Promise<TServerInfoResult> 
 			}
 
 			// Makes use of signed JWT to get supported versions
-			const supportedVersions = verifyJWT(serverInfo.supportedVersions?.signed);
+			const supportedVersions = verifyJWT(jsonRes.supportedVersions?.signed);
 
 			// if backend doesn't have supported versions or JWT is invalid, request from cloud
 			if (!supportedVersions) {
@@ -68,7 +69,7 @@ export async function getServerInfo(server: string): Promise<TServerInfoResult> 
 					moment(new Date()).diff(serverRecord?.supportedVersionsUpdatedAt, 'hours') <= SV_CLOUD_UPDATE_INTERVAL
 				) {
 					return {
-						...serverInfo,
+						...jsonRes,
 						success: true
 					};
 				}
@@ -78,7 +79,7 @@ export async function getServerInfo(server: string): Promise<TServerInfoResult> 
 				// Allows airgapped servers to use the app until enforcementStartDate
 				if (!cloudInfo) {
 					return {
-						...serverInfo,
+						...jsonRes,
 						success: true
 					};
 				}
@@ -87,14 +88,14 @@ export async function getServerInfo(server: string): Promise<TServerInfoResult> 
 				const supportedVersionsCloud = verifyJWT(cloudInfo?.signed);
 
 				return {
-					...serverInfo,
+					...jsonRes,
 					success: true,
 					supportedVersions: supportedVersionsCloud
 				};
 			}
 
 			return {
-				...serverInfo,
+				...jsonRes,
 				success: true,
 				supportedVersions
 			};

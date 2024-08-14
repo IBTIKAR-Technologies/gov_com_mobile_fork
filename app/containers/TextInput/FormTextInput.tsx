@@ -1,4 +1,4 @@
-import { BottomSheetTextInput } from '@discord/bottom-sheet';
+import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import React, { useState } from 'react';
 import { StyleProp, StyleSheet, Text, TextInput as RNTextInput, TextInputProps, TextStyle, View, ViewStyle } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
@@ -103,7 +103,6 @@ export const FormTextInput = ({
 						iconLeft && styles.inputIconLeft,
 						(secureTextEntry || iconRight || showClearInput) && styles.inputIconRight,
 						{
-							backgroundColor: colors.surfaceRoom,
 							borderColor: colors.strokeLight,
 							color: colors.fontTitlesLabels
 						},
@@ -150,7 +149,6 @@ export const FormTextInput = ({
 						size={20}
 						color={colors.fontDefault}
 						style={[styles.iconContainer, styles.iconRight]}
-						accessible={false}
 					/>
 				) : null}
 

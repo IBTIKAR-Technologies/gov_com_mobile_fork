@@ -2,7 +2,11 @@ import notifee, { AndroidCategory, AndroidFlags, AndroidImportance, AndroidVisib
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ejson from 'ejson';
+import RNCallKeep from 'react-native-callkeep';
+import axios from 'axios';
+import { Linking } from 'react-native';
 
+import { acceptCall, cancelCall } from '../../../actions/videoConf';
 import { deepLinkingClickCallPush } from '../../../actions/deepLinking';
 import i18n from '../../../i18n';
 import { colors } from '../../constants';
@@ -34,6 +38,7 @@ const createChannel = () =>
 	});
 
 const handleBackgroundEvent = async (event: Event) => {
+	console.log('handleBackgroundEvent');
 	const { pressAction, notification } = event.detail;
 	const notificationData = notification?.data;
 	if (
@@ -57,56 +62,104 @@ const backgroundNotificationHandler = () => {
 };
 
 const displayVideoConferenceNotification = async (notification: NotificationData) => {
-	const id = `${notification.rid}${notification.caller?._id}`.replace(/[^A-Za-z0-9]/g, '');
-	const actions = [
-		{
-			title: i18n.t('accept'),
-			pressAction: {
-				id: 'accept',
-				launchActivity: 'default'
-			}
-		},
-		{
-			title: i18n.t('decline'),
-			pressAction: {
-				id: 'decline',
-				launchActivity: 'default'
-			}
+	// const notifString = JSON.stringify(notification);
+	const call = await axios.get(`https://com-cov-dashboard.vercel.app/api/getcallid?messageId=${notification.messageId}`);
+	console.log('call ====', call);
+	AsyncStorage.setItem('callData', JSON.stringify({ ...notification, event: 'accept' }));
+	RNCallKeep.displayIncomingCall(call.data, notification.caller?.name);
+	for (let i = 0; i < 10; i++) {
+		try {
+			RNCallKeep.backToForeground();
+		} catch (err) {
+			console.log('err', i, err);
 		}
-	];
+	}
 
-	await notifee.displayNotification({
-		id,
-		title: i18n.t('conference_call'),
-		body: `${i18n.t('Incoming_call_from')} ${notification.caller?.name}`,
-		data: notification as { [key: string]: string | number | object },
-		android: {
-			channelId: VIDEO_CONF_CHANNEL,
-			category: AndroidCategory.CALL,
-			visibility: AndroidVisibility.PUBLIC,
-			importance: AndroidImportance.HIGH,
-			smallIcon: 'ic_notification',
-			color: colors.light.badgeBackgroundLevel4,
-			actions,
-			lightUpScreen: true,
-			loopSound: true,
-			sound: 'ringtone',
-			autoCancel: false,
-			ongoing: true,
-			pressAction: {
-				id: 'default',
-				launchActivity: 'default'
-			},
-			flags: [AndroidFlags.FLAG_NO_CLEAR]
-		}
+	RNCallKeep.addEventListener('answerCall', ({ callUUID }) => {
+		console.log('CALL ANSWERED', callUUID);
+		// RNCallKeep.answerIncomingCall(callUUID);
+		AsyncStorage.getItem('callData').then(callData => {
+			console.log('callData ====', JSON.parse(callData));
+			store.dispatch(deepLinkingClickCallPush(JSON.parse(callData)));
+			AsyncStorage.removeItem('callData');
+			RNCallKeep.endCall(callUUID);
+			for (let i = 0; i < 10; i++) {
+				try {
+					RNCallKeep.backToForeground();
+				} catch (err) {
+					console.log('err', i, err);
+				}
+			}
+		});
+
+		RNCallKeep.addEventListener('endCall', ({ callUUID }) => {
+			console.log('CALL REJECTED');
+			// store.dispatch(cancelCall({ callId: callUUID }));
+		});
 	});
+
+	// const id = `${notification.rid}${notification.caller?._id}`.replace(/[^A-Za-z0-9]/g, '');
+	// const actions = [
+	// 	{
+	// 		title: i18n.t('accept'),
+	// 		pressAction: {
+	// 			id: 'accept',
+	// 			launchActivity: 'default'
+	// 		}
+	// 	},
+	// 	{
+	// 		title: i18n.t('decline'),
+	// 		pressAction: {
+	// 			id: 'decline',
+	// 			launchActivity: 'default'
+	// 		}
+	// 	}
+	// ];
+
+	// await notifee.displayNotification({
+	// 	id,
+	// 	title: i18n.t('conference_call'),
+	// 	body: `${i18n.t('Incoming_call_from')} ${notification.caller?.name}`,
+	// 	data: notification as { [key: string]: string | number | object },
+	// 	android: {
+	// 		channelId: VIDEO_CONF_CHANNEL,
+	// 		category: AndroidCategory.CALL,
+	// 		visibility: AndroidVisibility.PUBLIC,
+	// 		importance: AndroidImportance.HIGH,
+	// 		smallIcon: 'ic_notification',
+	// 		color: colors.light.badgeBackgroundLevel4,
+	// 		actions,
+	// 		lightUpScreen: true,
+	// 		loopSound: true,
+	// 		sound: 'ringtone',
+	// 		autoCancel: false,
+	// 		ongoing: true,
+	// 		pressAction: {
+	// 			id: 'default',
+	// 			launchActivity: 'default'
+	// 		},
+	// 		flags: [AndroidFlags.FLAG_NO_CLEAR]
+	// 	}
+	// });
 };
 
 const setBackgroundNotificationHandler = () => {
+	console.log('notification background handler');
+	messaging()
+		.getToken()
+		.then(t => console.log('firebse notif token', t));
 	createChannel();
 	messaging().setBackgroundMessageHandler(async message => {
+		console.log('message ====', message);
 		if (message?.data?.ejson) {
 			const notification: NotificationData = ejson.parse(message?.data?.ejson as string);
+			console.log('notification ====', notification);
+			if (notification.messageType === VIDEO_CONF_TYPE) {
+				notification.notificationType = VIDEO_CONF_TYPE;
+				notification.status = 0;
+				notification.caller = notification.sender;
+			}
+			console.log(notification);
 			if (notification?.notificationType === VIDEO_CONF_TYPE) {
 				if (notification.status === 0) {
 					await displayVideoConferenceNotification(notification);

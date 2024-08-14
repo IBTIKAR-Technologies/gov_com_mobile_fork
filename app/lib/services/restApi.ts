@@ -879,6 +879,7 @@ export const editMessage = async (message: Pick<IMessage, 'id' | 'msg' | 'rid'>)
 export const registerPushToken = () =>
 	new Promise<void>(async resolve => {
 		const token = getDeviceToken();
+		console.log('token', token);
 		if (token) {
 			const type = isIOS ? 'apn' : 'gcm';
 			const data = {
@@ -1012,5 +1013,3 @@ export const getUsersRoles = (): Promise<boolean> => sdk.methodCall('getUserRole
 
 export const getSupportedVersionsCloud = (uniqueId?: string, domain?: string) =>
 	fetch(`https://releases.rocket.chat/v2/server/supportedVersions?uniqueId=${uniqueId}&domain=${domain}&source=mobile`);
-
-export const setUserPassword = (password: string) => sdk.methodCall('setUserPassword', password);

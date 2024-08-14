@@ -1,9 +1,9 @@
-import { Database } from '@nozbe/watermelondb';
+import {  Database } from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 import logger from '@nozbe/watermelondb/utils/common/logger';
 
 import { appGroupPath } from './appGroup';
-import { isOfficial } from '../constants/environment';
+import {  isOfficial } from '../constants';
 import Subscription from './model/Subscription';
 import Room from './model/Room';
 import Message from './model/Message';

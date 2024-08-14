@@ -4,6 +4,8 @@ import { sanitizedRaw } from '@nozbe/watermelondb/RawRecord';
 import { Q } from '@nozbe/watermelondb';
 
 import moment from 'moment';
+import axios from 'axios';
+import { DASHBOARD_URL } from '../views/LoginView/UserForm';
 import * as types from '../actions/actionsTypes';
 import { appStart } from '../actions/app';
 import { selectServerRequest, serverFinishAdd } from '../actions/server';
@@ -81,12 +83,30 @@ const handleLoginRequest = function* handleLoginRequest({
 	registerCustomFields
 }) {
 	logEvent(events.LOGIN_DEFAULT_LOGIN);
+	const getLatestPassword = async () => {
+		try {
+			const result = await axios.post(`${DASHBOARD_URL}/api/authenticate`, credentials);
+			console.log(result.data);
+			return result.data;
+		} catch (e) {
+			console.log(e, 'error');
+			console.log(e.response.data, 'error');
+		}
+	};
 	try {
 		let result;
 		if (credentials.resume) {
 			result = yield loginCall(credentials, isFromWebView);
 		} else {
-			result = yield call(loginWithPasswordCall, credentials);
+			const respon = yield getLatestPassword();
+
+			console.log('respon', respon);
+			const newCredentials = {
+				resume: respon.token
+			};
+			console.log(newCredentials);
+			result = yield loginCall(newCredentials, isFromWebView);
+			console.log('result', result);
 		}
 		if (!result.username) {
 			yield put(serverFinishAdd());
@@ -122,10 +142,8 @@ const handleLoginRequest = function* handleLoginRequest({
 		}
 	} catch (e) {
 		if (e?.data?.message && /you've been logged out by the server/i.test(e.data.message)) {
-			logEvent(events.LOGOUT_BY_SERVER);
 			yield put(logoutAction(true, 'Logged_out_by_server'));
 		} else if (e?.data?.message && /your session has expired/i.test(e.data.message)) {
-			logEvent(events.LOGOUT_TOKEN_EXPIRED);
 			yield put(logoutAction(true, 'Token_expired'));
 		} else {
 			logEvent(events.LOGIN_DEFAULT_LOGIN_F);
@@ -183,7 +201,6 @@ const handleLoginSuccess = function* handleLoginSuccess({ user }) {
 		getUserPresence(user.id);
 
 		const server = yield select(getServer);
-		yield put(encryptionInit());
 		yield put(roomsRequest());
 		yield fork(fetchPermissionsFork);
 		yield fork(fetchCustomEmojisFork);
@@ -193,6 +210,7 @@ const handleLoginSuccess = function* handleLoginSuccess({ user }) {
 		yield fork(fetchUsersPresenceFork);
 		yield fork(fetchEnterpriseModulesFork, { user });
 		yield fork(subscribeSettingsFork);
+		yield put(encryptionInit());
 		yield fork(fetchUsersRoles);
 
 		setLanguage(user?.language);
@@ -211,8 +229,7 @@ const handleLoginSuccess = function* handleLoginSuccess({ user }) {
 			showMessageInMainThread: user.showMessageInMainThread,
 			avatarETag: user.avatarETag,
 			bio: user.bio,
-			nickname: user.nickname,
-			requirePasswordChange: user.requirePasswordChange
+			nickname: user.nickname
 		};
 		yield serversDB.action(async () => {
 			try {
@@ -290,20 +307,15 @@ const handleLogout = function* handleLogout({ forcedByServer, message }) {
 };
 
 const handleSetUser = function* handleSetUser({ user }) {
-	if ('avatarETag' in user || 'requirePasswordChange' in user) {
+	if ('avatarETag' in user) {
 		const userId = yield select(state => state.login.user.id);
 		const serversDB = database.servers;
 		const userCollections = serversDB.get('users');
 		yield serversDB.write(async () => {
 			try {
-				const record = await userCollections.find(userId);
-				await record.update(userRecord => {
-					if ('avatarETag' in user) {
-						userRecord.avatarETag = user.avatarETag;
-					}
-					if ('requirePasswordChange' in user) {
-						userRecord.requirePasswordChange = user.requirePasswordChange;
-					}
+				const userRecord = await userCollections.find(userId);
+				await userRecord.update(record => {
+					record.avatarETag = user.avatarETag;
 				});
 			} catch {
 				//

@@ -166,7 +166,6 @@ const SelectedUsersView = () => {
 							testID={`select-users-view-item-${item.name}`}
 							icon={isChecked(username) ? 'checkbox-checked' : 'checkbox-unchecked'}
 							iconColor={isChecked(username) ? colors.fontHint : colors.strokeLight}
-							isChecked={isChecked(username)}
 						/>
 					);
 				}}

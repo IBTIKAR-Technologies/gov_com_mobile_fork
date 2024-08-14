@@ -182,7 +182,7 @@ const createOrUpdateSubscription = async (subscription: ISubscription, room: ISe
 							s.bannerClosed = false;
 						}
 					}
-					if (sub.hideUnreadStatus && subscription.hasOwnProperty('hideUnreadStatus')) {
+					if (sub.hideUnreadStatus) {
 						if (sub.hideUnreadStatus !== subscription.hideUnreadStatus) {
 							s.hideUnreadStatus = !!subscription.hideUnreadStatus;
 						}
@@ -290,6 +290,10 @@ export default function subscribeRooms() {
 	const handleStreamMessageReceived = protectedFunction(async (ddpMessage: IDDPMessage) => {
 		const db = database.active;
 
+		const ddpMessageData = ddpMessage.fields.args[1];
+		console.log('ddpMessage', ddpMessage);
+		console.log('ddpMessageData', ddpMessageData);
+
 		// check if the server from variable is the same as the js sdk client
 		if (sdk && sdk.current.client && sdk.current.client.host !== subServer) {
 			return;
@@ -299,6 +303,7 @@ export default function subscribeRooms() {
 		}
 		const [type, data] = ddpMessage.fields.args;
 		const [, ev] = ddpMessage.fields.eventName.split('/');
+		console.log('event name ', ev);
 		if (/userData/.test(ev)) {
 			const [{ diff, unset }] = ddpMessage.fields.args;
 			if (diff.emails?.length > 0) {
@@ -399,16 +404,14 @@ export default function subscribeRooms() {
 
 				// If it's from a encrypted room
 				if (message?.t === E2E_MESSAGE_TYPE) {
-					if (message.msg) {
-						// Decrypt this message content
-						const { msg } = await Encryption.decryptMessage({ ...message, rid });
-						// If it's a direct the content is the message decrypted
-						if (room.t === 'd') {
-							notification.text = msg;
-							// If it's a private group we should add the sender name
-						} else {
-							notification.text = `${getSenderName(sender)}: ${msg}`;
-						}
+					// Decrypt this message content
+					const { msg } = await Encryption.decryptMessage({ ...message, rid });
+					// If it's a direct the content is the message decrypted
+					if (room.t === 'd') {
+						notification.text = msg;
+						// If it's a private group we should add the sender name
+					} else {
+						notification.text = `${getSenderName(sender)}: ${msg}`;
 					}
 				}
 			} catch (e) {
@@ -428,7 +431,7 @@ export default function subscribeRooms() {
 				log(e);
 			}
 		}
-		if (/video-conference/.test(ev)) {
+		if (/video-conference/.test(ev) || ddpMessageData?.lastMessage?.t === 'videoconf') {
 			const [action, params] = ddpMessage.fields.args;
 			store.dispatch(handleVideoConfIncomingWebsocketMessages({ action, params }));
 		}

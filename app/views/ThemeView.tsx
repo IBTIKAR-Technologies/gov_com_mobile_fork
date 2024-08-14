@@ -76,8 +76,6 @@ const Item = ({
 				onPress={onPress}
 				testID={`theme-view-${value}`}
 				right={() => (isSelected ? <List.Icon name='check' color={colors.badgeBackgroundLevel2} /> : null)}
-				additionalAcessibilityLabel={isSelected}
-				additionalAcessibilityLabelCheck
 			/>
 			<List.Separator />
 		</>
@@ -123,7 +121,7 @@ const ThemeView = (): React.ReactElement => {
 	const handleTheme = (theme: Partial<IThemePreference>) => {
 		const newTheme: IThemePreference = { ...(themePreferences as IThemePreference), ...theme };
 		if (setTheme) {
-			setTheme(newTheme);
+			setTheme('light');
 			UserPreferences.setMap(THEME_PREFERENCES_KEY, newTheme);
 		}
 	};

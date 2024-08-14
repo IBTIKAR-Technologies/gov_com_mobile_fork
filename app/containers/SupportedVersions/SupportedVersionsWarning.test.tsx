@@ -15,7 +15,7 @@ const Render = () => (
 );
 
 const TODAY = '2023-04-01T00:00:00.000Z';
-jest.useFakeTimers();
+jest.useFakeTimers('modern');
 jest.setSystemTime(new Date(TODAY));
 
 describe('SupportedVersionsWarning', () => {

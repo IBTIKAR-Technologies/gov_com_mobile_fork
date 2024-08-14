@@ -12,6 +12,7 @@ import { useTheme } from '../../theme';
 
 const CallButton = React.memo(({ handleEnterCall }: IMessageCallButton) => {
 	const { theme } = useTheme();
+
 	return (
 		<View style={styles.buttonContainer}>
 			<Touchable

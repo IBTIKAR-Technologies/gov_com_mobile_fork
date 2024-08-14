@@ -41,9 +41,7 @@ const InsideStack = () => {
 
 	return (
 		<Inside.Navigator screenOptions={screenOptions}>
-			{/* @ts-ignore */}
 			<Inside.Screen name='ShareListView' component={ShareListView} />
-			{/* @ts-ignore */}
 			<Inside.Screen name='ShareView' component={ShareView} />
 			<Inside.Screen name='SelectServerView' component={SelectServerView} />
 		</Inside.Navigator>
@@ -119,7 +117,8 @@ const Root = (): React.ReactElement => {
 						height,
 						scale,
 						fontScale
-					}}>
+					}}
+				>
 					<NavigationContainer
 						theme={navTheme}
 						ref={Navigation.navigationRef}
@@ -130,7 +129,8 @@ const Root = (): React.ReactElement => {
 								setCurrentScreen(currentRouteName);
 							}
 							Navigation.routeNameRef.current = currentRouteName;
-						}}>
+						}}
+					>
 						<App root={root} />
 						<Loading />
 					</NavigationContainer>

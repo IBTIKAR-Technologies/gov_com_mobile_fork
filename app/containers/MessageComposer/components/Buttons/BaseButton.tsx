@@ -4,6 +4,8 @@ import { View, StyleSheet } from 'react-native';
 
 import I18n from '../../../../i18n';
 import { CustomIcon, TIconsName } from '../../../CustomIcon';
+import RecordIcon from '../../../../svgs/RecordIcon';
+import SendIcon from '../../../../svgs/SendIcon';
 
 export interface IBaseButton {
 	testID: string;
@@ -23,7 +25,13 @@ export const hitSlop = {
 export const BaseButton = ({ accessibilityLabel, icon, color, testID, onPress }: IBaseButton) => (
 	<BorderlessButton style={styles.button} onPress={() => onPress()} testID={testID} hitSlop={hitSlop}>
 		<View accessible accessibilityLabel={I18n.t(accessibilityLabel)} accessibilityRole='button'>
-			<CustomIcon name={icon} size={24} color={color} />
+			{icon === 'send-filled' ? (
+				<SendIcon />
+			) : icon === 'microphone' ? (
+				<RecordIcon />
+			) : (
+				<CustomIcon name={icon} size={24} color={color} />
+			)}
 		</View>
 	</BorderlessButton>
 );

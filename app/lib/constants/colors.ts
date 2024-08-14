@@ -3,7 +3,7 @@ const backdropColor = '#000000';
 const light = {
 	surfaceLight: '#FFFFFF',
 	surfaceTint: '#F7F8FA',
-	surfaceRoom: '#FFFFFF',
+	surfaceRoom: '#005D0D',
 	surfaceNeutral: '#E4E7EA',
 	surfaceDisabled: '#F7F8FA',
 	surfaceHover: '#F2F3F5',
@@ -18,7 +18,7 @@ const light = {
 	strokeDark: '#6C727A',
 	strokeExtraDark: '#2F343D',
 	strokeExtraLightHighlight: '#D1EBFE',
-	strokeHighlight: '#156FF5',
+	strokeHighlight: '#005D0D',
 	strokeExtraLightError: '#FFC1C9',
 	strokeError: '#EC0D2A',
 
@@ -60,9 +60,9 @@ const light = {
 	userPresenceOffline: '#6C727A',
 	userPresenceDisabled: '#F38C39',
 
-	buttonBackgroundPrimaryDefault: '#156FF5',
+	buttonBackgroundPrimaryDefault: '#005D0D',
 	buttonBackgroundPrimaryPress: '#10529E',
-	buttonBackgroundPrimaryDisabled: '#D1EBFE',
+	buttonBackgroundPrimaryDisabled: '#8AA38C',
 
 	buttonBackgroundSecondaryDefault: '#E4E7EA',
 	buttonBackgroundSecondaryPress: '#9EA2A8',

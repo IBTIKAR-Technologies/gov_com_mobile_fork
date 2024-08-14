@@ -1,12 +1,16 @@
 import React from 'react';
-import { I18nManager } from 'react-native';
+import { I18nManager, TouchableOpacity } from 'react-native';
 import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer, useNavigationState } from '@react-navigation/native';
 
+import Messages from '../svgs/Messages';
 import { ThemeContext } from '../theme';
 import { ModalAnimation, StackAnimation, defaultHeader, themedHeader } from '../lib/methods/helpers/navigation';
-import Sidebar from '../views/SidebarView';
-// Chats Stack
+import { CustomIcon } from '../containers/CustomIcon';
+import { themes } from '../lib/constants';
+
+// Import necessary components and views
 import RoomView from '../views/RoomView';
 import RoomsListView from '../views/RoomsListView';
 import RoomActionsView from '../views/RoomActionsView';
@@ -32,14 +36,10 @@ import MarkdownTableView from '../views/MarkdownTableView';
 import ReadReceiptsView from '../views/ReadReceiptView';
 import CannedResponsesListView from '../views/CannedResponsesListView';
 import CannedResponseDetail from '../views/CannedResponseDetail';
-import { themes } from '../lib/constants';
-// Profile Stack
 import ProfileView from '../views/ProfileView';
 import UserPreferencesView from '../views/UserPreferencesView';
 import UserNotificationPrefView from '../views/UserNotificationPreferencesView';
-// Display Preferences View
 import DisplayPrefsView from '../views/DisplayPrefsView';
-// Settings Stack
 import SettingsView from '../views/SettingsView';
 import SecurityPrivacyView from '../views/SecurityPrivacyView';
 import PushTroubleshootView from '../views/PushTroubleshootView';
@@ -49,17 +49,12 @@ import ThemeView from '../views/ThemeView';
 import DefaultBrowserView from '../views/DefaultBrowserView';
 import ScreenLockConfigView from '../views/ScreenLockConfigView';
 import MediaAutoDownloadView from '../views/MediaAutoDownloadView';
-// Admin Stack
 import AdminPanelView from '../views/AdminPanelView';
-// NewMessage Stack
 import NewMessageView from '../views/NewMessageView';
 import CreateChannelView from '../views/CreateChannelView';
-// E2ESaveYourPassword Stack
 import E2ESaveYourPasswordView from '../views/E2ESaveYourPasswordView';
 import E2EHowItWorksView from '../views/E2EHowItWorksView';
-// E2EEnterYourPassword Stack
 import E2EEnterYourPasswordView from '../views/E2EEnterYourPasswordView';
-// InsideStackNavigator
 import AttachmentView from '../views/AttachmentView';
 import ModalBlockView from '../views/ModalBlockView';
 import JitsiMeetView from '../views/JitsiMeetView';
@@ -87,18 +82,20 @@ import {
 } from './types';
 import { isIOS } from '../lib/methods/helpers';
 import { TNavigation } from './stackType';
+import UserInfo from '../views/ReportUserView/UserInfo';
+import i18n from '../i18n';
+
+import { BottomTabBar } from '@react-navigation/bottom-tabs';
 
 // ChatsStackNavigator
 const ChatsStack = createStackNavigator<ChatsStackParamList & TNavigation>();
 const ChatsStackNavigator = () => {
 	const { theme } = React.useContext(ThemeContext);
 	return (
-		<ChatsStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
+		<ChatsStack.Navigator screenOptions={{ ...StackAnimation } as StackNavigationOptions}>
 			<ChatsStack.Screen name='RoomsListView' component={RoomsListView} />
 			<ChatsStack.Screen name='RoomView' component={RoomView} />
 			<ChatsStack.Screen name='RoomActionsView' component={RoomActionsView} options={RoomActionsView.navigationOptions} />
-			{/* @ts-ignore */}
 			<ChatsStack.Screen name='SelectListView' component={SelectListView} options={SelectListView.navigationOptions} />
 			<ChatsStack.Screen name='RoomInfoView' component={RoomInfoView} />
 			<ChatsStack.Screen name='ReportUserView' component={ReportUserView} />
@@ -106,28 +103,22 @@ const ChatsStackNavigator = () => {
 			<ChatsStack.Screen name='RoomInfoEditView' component={RoomInfoEditView} options={RoomInfoEditView.navigationOptions} />
 			<ChatsStack.Screen name='ChangeAvatarView' component={ChangeAvatarView} />
 			<ChatsStack.Screen name='RoomMembersView' component={RoomMembersView} />
-			{/* @ts-ignore */}
 			<ChatsStack.Screen name='DiscussionsView' component={DiscussionsView} />
 			<ChatsStack.Screen
 				name='SearchMessagesView'
-				// @ts-ignore
 				component={SearchMessagesView}
 				options={SearchMessagesView.navigationOptions}
 			/>
 			<ChatsStack.Screen name='SelectedUsersView' component={SelectedUsersView} />
-			{/* @ts-ignore */}
 			<ChatsStack.Screen name='InviteUsersView' component={InviteUsersView} />
 			<ChatsStack.Screen name='InviteUsersEditView' component={InviteUsersEditView} />
 			<ChatsStack.Screen name='MessagesView' component={MessagesView} />
 			<ChatsStack.Screen name='AutoTranslateView' component={AutoTranslateView} />
-			{/* @ts-ignore */}
 			<ChatsStack.Screen name='DirectoryView' component={DirectoryView} options={DirectoryView.navigationOptions} />
 			<ChatsStack.Screen name='NotificationPrefView' component={NotificationPrefView} />
 			<ChatsStack.Screen name='PushTroubleshootView' component={PushTroubleshootView} />
 			<ChatsStack.Screen name='ForwardLivechatView' component={ForwardLivechatView} />
-			{/* @ts-ignore */}
 			<ChatsStack.Screen name='CloseLivechatView' component={CloseLivechatView} />
-			{/* @ts-ignore */}
 			<ChatsStack.Screen name='LivechatEditView' component={LivechatEditView} options={LivechatEditView.navigationOptions} />
 			<ChatsStack.Screen name='PickerView' component={PickerView} />
 			{/* @ts-ignore */}
@@ -138,7 +129,6 @@ const ChatsStackNavigator = () => {
 			<ChatsStack.Screen name='AddExistingChannelView' component={AddExistingChannelView} />
 			{/* @ts-ignore */}
 			<ChatsStack.Screen name='MarkdownTableView' component={MarkdownTableView} />
-			{/* @ts-ignore */}
 			<ChatsStack.Screen name='ReadReceiptsView' component={ReadReceiptsView} options={ReadReceiptsView.navigationOptions} />
 			<ChatsStack.Screen name='QueueListView' component={QueueListView} />
 			<ChatsStack.Screen name='CannedResponsesListView' component={CannedResponsesListView} />
@@ -153,21 +143,22 @@ const ChatsStackNavigator = () => {
 };
 
 // ProfileStackNavigator
-const ProfileStack = createStackNavigator<ProfileStackParamList & TNavigation>();
-const ProfileStackNavigator = () => {
-	const { theme } = React.useContext(ThemeContext);
-	return (
-		<ProfileStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
-			<ProfileStack.Screen name='ProfileView' component={ProfileView} options={ProfileView.navigationOptions} />
-			<ProfileStack.Screen name='UserPreferencesView' component={UserPreferencesView} />
-			<ProfileStack.Screen name='ChangeAvatarView' component={ChangeAvatarView} />
-			<ProfileStack.Screen name='UserNotificationPrefView' component={UserNotificationPrefView} />
-			<ProfileStack.Screen name='PushTroubleshootView' component={PushTroubleshootView} />
-			<ProfileStack.Screen name='PickerView' component={PickerView} />
-		</ProfileStack.Navigator>
-	);
-};
+// const ProfileStack = createStackNavigator<ProfileStackParamList & TNavigation>();
+// const ProfileStackNavigator = () => {
+// 	const { theme } = React.useContext(ThemeContext);
+// 	return (
+// 		<ProfileStack.Navigator
+// 			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
+// 		>
+// 			<ProfileStack.Screen name='ProfileView' component={ProfileView} options={ProfileView.navigationOptions} />
+// 			<ProfileStack.Screen name='UserPreferencesView' component={UserPreferencesView} />
+// 			<ProfileStack.Screen name='ChangeAvatarView' component={ChangeAvatarView} />
+// 			<ProfileStack.Screen name='UserNotificationPrefView' component={UserNotificationPrefView} />
+// 			<ProfileStack.Screen name='PushTroubleshootView' component={PushTroubleshootView} />
+// 			<ProfileStack.Screen name='PickerView' component={PickerView} />
+// 		</ProfileStack.Navigator>
+// 	);
+// };
 
 // SettingsStackNavigator
 const SettingsStack = createStackNavigator<SettingsStackParamList>();
@@ -176,8 +167,24 @@ const SettingsStackNavigator = () => {
 
 	return (
 		<SettingsStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
-			<SettingsStack.Screen name='SettingsView' component={SettingsView} />
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
+		>
+			<SettingsStack.Screen
+				options={{
+					title: i18n.t('SettingsView'),
+					headerStyle: {
+						backgroundColor: '#005D0D'
+					},
+					headerTitleStyle: {
+						color: 'white',
+						textAlign: 'center'
+					}
+				}}
+				name='SettingsView'
+				component={SettingsView}
+			/>
+			<SettingsStack.Screen name='UserInfo' component={UserInfo} />
+			{/* <SettingsStack.Screen name='Profile' component={ProfileStackNavigator} options={{ tabBarLabel: 'Profile' }} /> */}
 			<SettingsStack.Screen name='SecurityPrivacyView' component={SecurityPrivacyView} />
 			<SettingsStack.Screen name='PushTroubleshootView' component={PushTroubleshootView} />
 			<SettingsStack.Screen name='E2EEncryptionSecurityView' component={E2EEncryptionSecurityView} />
@@ -187,7 +194,6 @@ const SettingsStackNavigator = () => {
 			<SettingsStack.Screen name='MediaAutoDownloadView' component={MediaAutoDownloadView} />
 			<SettingsStack.Screen
 				name='ScreenLockConfigView'
-				// @ts-ignore
 				component={ScreenLockConfigView}
 				options={ScreenLockConfigView.navigationOptions}
 			/>
@@ -202,7 +208,8 @@ const AdminPanelStackNavigator = () => {
 
 	return (
 		<AdminPanelStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
+		>
 			<AdminPanelStack.Screen name='AdminPanelView' component={AdminPanelView} />
 		</AdminPanelStack.Navigator>
 	);
@@ -215,37 +222,12 @@ const DisplayPrefStackNavigator = () => {
 
 	return (
 		<DisplayPrefStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
+		>
 			<DisplayPrefStack.Screen name='DisplayPrefsView' component={DisplayPrefsView} />
 		</DisplayPrefStack.Navigator>
 	);
 };
-
-// DrawerNavigator
-const Drawer = createDrawerNavigator<DrawerParamList>();
-const DrawerNavigator = () => {
-	const { theme } = React.useContext(ThemeContext);
-
-	return (
-		<Drawer.Navigator
-			// @ts-ignore
-			drawerContent={({ navigation, state }) => <Sidebar navigation={navigation} state={state} />}
-			screenOptions={{
-				swipeEnabled: false,
-				headerShown: false,
-				drawerPosition: I18nManager.isRTL ? 'right' : 'left',
-				drawerType: 'slide',
-				overlayColor: `rgba(0,0,0,${themes[theme].backdropOpacity})`
-			}}>
-			<Drawer.Screen name='ChatsStackNavigator' component={ChatsStackNavigator} />
-			<Drawer.Screen name='ProfileStackNavigator' component={ProfileStackNavigator} />
-			<Drawer.Screen name='SettingsStackNavigator' component={SettingsStackNavigator} />
-			<Drawer.Screen name='AdminPanelStackNavigator' component={AdminPanelStackNavigator} />
-			<Drawer.Screen name='DisplayPrefStackNavigator' component={DisplayPrefStackNavigator} />
-		</Drawer.Navigator>
-	);
-};
-
 // NewMessageStackNavigator
 const NewMessageStack = createStackNavigator<NewMessageStackParamList>();
 const NewMessageStackNavigator = () => {
@@ -253,11 +235,11 @@ const NewMessageStackNavigator = () => {
 
 	return (
 		<NewMessageStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
+		>
 			<NewMessageStack.Screen name='NewMessageView' component={NewMessageView} />
 			<NewMessageStack.Screen name='SelectedUsersViewCreateChannel' component={SelectedUsersView} />
 			<NewMessageStack.Screen name='CreateChannelView' component={CreateChannelView} />
-			{/* @ts-ignore */}
 			<NewMessageStack.Screen name='CreateDiscussionView' component={CreateDiscussionView} />
 			<NewMessageStack.Screen name='ForwardMessageView' component={ForwardMessageView} />
 		</NewMessageStack.Navigator>
@@ -271,7 +253,8 @@ const E2ESaveYourPasswordStackNavigator = () => {
 
 	return (
 		<E2ESaveYourPasswordStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
+		>
 			<E2ESaveYourPasswordStack.Screen name='E2ESaveYourPasswordView' component={E2ESaveYourPasswordView} />
 			<E2ESaveYourPasswordStack.Screen name='E2EHowItWorksView' component={E2EHowItWorksView} />
 		</E2ESaveYourPasswordStack.Navigator>
@@ -285,21 +268,80 @@ const E2EEnterYourPasswordStackNavigator = () => {
 
 	return (
 		<E2EEnterYourPasswordStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
+		>
 			<E2EEnterYourPasswordStack.Screen name='E2EEnterYourPasswordView' component={E2EEnterYourPasswordView} />
 		</E2EEnterYourPasswordStack.Navigator>
 	);
 };
 
-// InsideStackNavigator
-const InsideStack = createStackNavigator<InsideStackParamList & TNavigation>();
-const InsideStackNavigator = () => {
+const CustomTabBar = props => {
+	const state = useNavigationState(state => state);
+	const findCurrentRouteName = state => {
+		if (!state || !state.routes || state.routes.length === 0) {
+			return null;
+		}
+		const route = state.routes[state.index];
+		if (route.state) {
+			return findCurrentRouteName(route.state);
+		}
+		return route.name;
+	};
+
+	const currentRouteName = findCurrentRouteName(state);
+	console.log('Current Route NAme : ', currentRouteName);
+	if (currentRouteName !== 'RoomsListView' && currentRouteName !== 'Settings' && currentRouteName !== 'BottomTabNavigator') {
+		return null;
+	}
+
+	return <BottomTabBar {...props} />;
+};
+
+const Tab = createBottomTabNavigator<DrawerParamList>();
+
+const BottomTabNavigator = ({ isMasterDetail }) => {
 	const { theme } = React.useContext(ThemeContext);
 
 	return (
+		<Tab.Navigator
+			tabBar={props => <CustomTabBar {...props} />}
+			screenOptions={({ route }) => ({
+				tabBarIcon: ({ color, size }) => {
+					let iconName;
+					if (route.name === 'Messages') {
+						return <Messages color={color} />;
+					}
+					if (route.name === 'Profile') {
+						iconName = 'user';
+					} else if (route.name === 'Settings') {
+						iconName = 'administration';
+					} else if (route.name === 'Display') {
+						iconName = 'sort';
+					} else if (route.name === 'Admin') {
+						iconName = 'settings';
+					}
+					return <CustomIcon name={iconName} size={size} color={color} />;
+				},
+				tabBarActiveTintColor: themes[theme].surfaceRoom,
+				tabBarInactiveTintColor: themes[theme].auxiliaryText,
+				tabBarLabel: route.name,
+				headerShown: false
+			})}
+		>
+			<Tab.Screen name='Messages' component={ChatsStackNavigator} options={{ tabBarLabel: i18n.t('Messages') }} />
+			<Tab.Screen name='Settings' component={SettingsStackNavigator} options={{ tabBarLabel: i18n.t('Settings') }} />
+			{isMasterDetail && <Tab.Screen name='Admin' component={AdminPanelStackNavigator} options={{ tabBarLabel: 'Admin' }} />}
+		</Tab.Navigator>
+	);
+};
+const InsideStack = createStackNavigator<InsideStackParamList & TNavigation>();
+const InsideStackNavigator = () => {
+	const { theme } = React.useContext(ThemeContext);
+	return (
 		<InsideStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...ModalAnimation, presentation: 'transparentModal' }}>
-			<InsideStack.Screen name='DrawerNavigator' component={DrawerNavigator} options={{ headerShown: false }} />
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...ModalAnimation, presentation: 'transparentModal' }}
+		>
+			<InsideStack.Screen name='BottomTabNavigator' component={BottomTabNavigator} options={{ headerShown: false }} />
 			<InsideStack.Screen name='NewMessageStackNavigator' component={NewMessageStackNavigator} options={{ headerShown: false }} />
 			<InsideStack.Screen
 				name='E2ESaveYourPasswordStackNavigator'
@@ -313,10 +355,9 @@ const InsideStackNavigator = () => {
 			/>
 			<InsideStack.Screen name='AttachmentView' component={AttachmentView} />
 			<InsideStack.Screen name='StatusView' component={StatusView} />
-			{/* @ts-ignore */}
 			<InsideStack.Screen name='ShareView' component={ShareView} />
-			{/* @ts-ignore */}
 			<InsideStack.Screen name='ModalBlockView' component={ModalBlockView} options={ModalBlockView.navigationOptions} />
+			<InsideStack.Screen name='ProfileView' component={ProfileView} />
 		</InsideStack.Navigator>
 	);
 };

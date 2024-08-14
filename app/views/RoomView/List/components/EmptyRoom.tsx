@@ -1,7 +1,8 @@
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 
-import { useTheme } from '../../../../theme';
+import i18n from '../../../../i18n';
+import Lock from '../../../../svgs/Lock';
 
 const styles = StyleSheet.create({
 	image: {
@@ -12,9 +13,42 @@ const styles = StyleSheet.create({
 });
 
 export const EmptyRoom = React.memo(({ length, rid }: { length: number; rid: string }) => {
-	const { theme } = useTheme();
 	if (length === 0 || !rid) {
-		return <ImageBackground source={{ uri: `message_empty_${theme}` }} style={styles.image} />;
+		return (
+			<>
+				<ImageBackground source={require('../../../../static/images/message_empty_light.png')} style={styles.image} />
+				<View
+					style={{
+						justifyContent: 'center',
+						alignItems: 'center'
+					}}
+				>
+					<View
+						style={{
+							marginTop: 40,
+							backgroundColor: '#dcfce7',
+							paddingHorizontal: 20,
+							paddingVertical: 10,
+							borderRadius: 20,
+							flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center'
+						}}
+					>
+						<Lock fill='#dcfce7' stroke='#16a34a' />
+						<Text
+							style={{
+								textAlign: 'center',
+								paddingHorizontal: 5,
+								color: '#16a34a'
+							}}
+						>
+							{i18n.t('End_to_end')}
+						</Text>
+					</View>
+				</View>
+			</>
+		);
 	}
 	return null;
 });

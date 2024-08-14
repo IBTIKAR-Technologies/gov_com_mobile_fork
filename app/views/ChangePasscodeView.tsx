@@ -32,6 +32,7 @@ const ChangePasscodeView = React.memo(() => {
 	const [visible, setVisible] = useState(false);
 	const [data, setData] = useState<Partial<IArgs>>({});
 
+
 	useDeepCompareEffect(() => {
 		if (!isEmpty(data)) {
 			setVisible(true);

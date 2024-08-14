@@ -144,13 +144,13 @@ export const RecordAudio = (): ReactElement | null => {
 	return (
 		<View style={styles.recording}>
 			<View style={styles.duration}>
-				<CustomIcon name='microphone' size={24} color={colors.fontDanger} />
-				<Duration ref={durationRef} />
+				<CustomIcon name='microphone' size={18} color={colors.fontDanger} />
+				<Text style={[styles.recordingNoteText, { marginHorizontal: 2 }]}>{i18n.t('Recording_audio_in_progress')}</Text>
 			</View>
 			<View style={styles.buttons}>
 				<CancelButton onPress={cancelRecording} />
 				<View style={styles.recordingNote}>
-					<Text style={styles.recordingNoteText}>{i18n.t('Recording_audio_in_progress')}</Text>
+					<Duration ref={durationRef} />
 				</View>
 				<ReviewButton onPress={goReview} />
 			</View>

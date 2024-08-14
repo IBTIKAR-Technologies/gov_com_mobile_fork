@@ -43,7 +43,7 @@ interface IShareViewState {
 	attachments: IShareAttachment[];
 	text: string;
 	room: TSubscriptionModel;
-	thread: TThreadModel | string;
+	thread: TThreadModel;
 	maxFileSize?: number;
 	mediaAllowList?: string;
 	selectedMessages: string[];
@@ -112,16 +112,6 @@ class ShareView extends Component<IShareViewProps, IShareViewState> {
 			const text = this.messageComposerRef.current?.getText();
 			this.finishShareView(text, this.state.selectedMessages);
 		}
-	};
-
-	getThreadId = (thread: TThreadModel | string | undefined) => {
-		let threadId = undefined;
-		if (typeof thread === 'object') {
-			threadId = thread?.id;
-		} else if (typeof thread === 'string') {
-			threadId = thread;
-		}
-		return threadId;
 	};
 
 	setHeader = () => {
@@ -262,41 +252,31 @@ class ShareView extends Component<IShareViewProps, IShareViewState> {
 			// Send attachment
 			if (attachments.length) {
 				await Promise.all(
-					attachments.map(({ filename: name, mime: type, description, size, path, canUpload, height, width, exif }) => {
-						if (!canUpload) {
-							return Promise.resolve();
+					attachments.map(({ filename: name, mime: type, description, size, path, canUpload }) => {
+						if (canUpload) {
+							return sendFileMessage(
+								room.rid,
+								{
+									name,
+									description,
+									size,
+									type,
+									path,
+									store: 'Uploads',
+									msg
+								},
+								thread?.id,
+								server,
+								{ id: user.id, token: user.token }
+							);
 						}
-
-						if (exif?.Orientation && ['5', '6', '7', '8'].includes(exif?.Orientation)) {
-							[width, height] = [height, width];
-						}
-
-						return sendFileMessage(
-							room.rid,
-							{
-								rid: room.rid,
-								name,
-								description,
-								size,
-								type,
-								path,
-								msg,
-								height,
-								width
-							},
-							this.getThreadId(thread),
-							server,
-							{ id: user.id, token: user.token }
-						);
+						return Promise.resolve();
 					})
 				);
 
 				// Send text message
 			} else if (text.length) {
-				await sendMessage(room.rid, text, this.getThreadId(thread), {
-					id: user.id,
-					token: user.token
-				} as IUser);
+				await sendMessage(room.rid, text, thread?.id, { id: user.id, token: user.token } as IUser);
 			}
 		} catch {
 			if (!this.isShareExtension) {
@@ -364,7 +344,7 @@ class ShareView extends Component<IShareViewProps, IShareViewState> {
 					value={{
 						rid: room.rid,
 						t: room.t,
-						tmid: this.getThreadId(thread),
+						tmid: thread.id,
 						sharing: true,
 						action: route.params?.action,
 						selectedMessages,

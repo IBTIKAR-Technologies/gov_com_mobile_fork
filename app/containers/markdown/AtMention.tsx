@@ -27,7 +27,8 @@ const AtMention = React.memo(({ mention, mentions, username, navToRoomInfo, styl
 						color: themes[theme].badgeBackgroundLevel3
 					},
 					...style
-				]}>
+				]}
+			>
 				{mention}
 			</Text>
 		);

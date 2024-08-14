@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
 	marginRight: {
 		marginRight: 14
 	},
+	marginLeft: {
+		marginLeft: 14
+	},
 	marginHorizontal: {
 		marginHorizontal: 14
 	}
@@ -39,7 +42,17 @@ const DateSeparator = ({ ts, unread }: { ts: Date | string | null; unread: boole
 	if (ts && unread) {
 		return (
 			<View style={styles.container}>
-				<Text style={[styles.text, unreadText]}>{I18n.t('unread_messages')}</Text>
+				<Text
+					style={[
+						styles.text,
+						unreadText,
+						{
+							textAlign: 'center'
+						}
+					]}
+				>
+					{I18n.t('unread_messages')}
+				</Text>
 				<View style={[styles.line, unreadLine, styles.marginHorizontal]} />
 				<Text style={[styles.text, unreadText]}>{date}</Text>
 			</View>
@@ -56,7 +69,24 @@ const DateSeparator = ({ ts, unread }: { ts: Date | string | null; unread: boole
 	}
 	return (
 		<View style={styles.container}>
-			<Text style={[styles.text, unreadText, styles.marginRight]}>{I18n.t('unread_messages')}</Text>
+			<View style={[styles.line, unreadLine]} />
+			<Text
+				style={[
+					styles.text,
+					unreadText,
+					styles.marginRight,
+					styles.marginLeft,
+					{
+						backgroundColor: '#ef4444',
+						color: 'white',
+						paddingHorizontal: 15,
+						paddingVertical: 5,
+						borderRadius: 10
+					}
+				]}
+			>
+				{I18n.t('unread_messages')}
+			</Text>
 			<View style={[styles.line, unreadLine]} />
 		</View>
 	);

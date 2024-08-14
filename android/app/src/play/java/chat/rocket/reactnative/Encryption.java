@@ -1,4 +1,4 @@
-package chat.rocket.reactnative;
+package mr.gov.mtnima.govcom;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

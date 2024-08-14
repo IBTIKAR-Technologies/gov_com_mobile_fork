@@ -27,7 +27,7 @@ const Avatar = React.memo(
 		serverVersion,
 		text,
 		size = 25,
-		borderRadius = 4,
+		borderRadius = 100,
 		type = SubscriptionType.DIRECT,
 		avatarExternalProviderUrl,
 		roomAvatarExternalProviderUrl,

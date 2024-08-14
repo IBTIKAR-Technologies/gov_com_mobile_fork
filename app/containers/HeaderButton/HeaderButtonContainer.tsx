@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 
+const width = Dimensions.get('screen').width;
 interface IHeaderButtonContainer {
 	children?: React.ReactElement | (React.ReactElement | null)[] | null;
 	left?: boolean;
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
 		marginLeft: 5
 	},
 	right: {
-		marginRight: 5
+		marginRight: width * 0.05
 	}
 });
 

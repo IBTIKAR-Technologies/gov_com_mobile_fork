@@ -54,8 +54,6 @@ import { ILivechatTag } from '../../definitions/ILivechatTag';
 import CallSection from './components/CallSection';
 import { TNavigation } from '../../stacks/stackType';
 import Switch from '../../containers/Switch';
-import * as EncryptionUtils from '../../lib/encryption/utils';
-import { toggleRoomE2EE } from '../../lib/encryption/helpers/toggleRoomE2EE';
 
 type StackType = ChatsStackParamList & TNavigation;
 
@@ -102,7 +100,6 @@ interface IRoomActionsViewState {
 	canCreateTeam: boolean;
 	canAddChannelToTeam: boolean;
 	canConvertTeam: boolean;
-	hasE2EEWarning: boolean;
 	loading: boolean;
 }
 
@@ -154,20 +151,13 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 			canCreateTeam: false,
 			canAddChannelToTeam: false,
 			canConvertTeam: false,
-			hasE2EEWarning: false,
 			loading: false
 		};
 		if (room && room.observe && room.rid) {
-			const { encryptionEnabled } = this.props;
 			this.roomObservable = room.observe();
 			this.subscription = this.roomObservable.subscribe(changes => {
 				if (this.mounted) {
-					const hasE2EEWarning = EncryptionUtils.hasE2EEWarning({
-						encryptionEnabled,
-						E2EKey: room.E2EKey,
-						roomEncrypted: room.encrypted
-					});
-					this.setState({ room: changes, membersCount: changes.usersCount, hasE2EEWarning });
+					this.setState({ room: changes, membersCount: changes.usersCount });
 				} else {
 					// @ts-ignore
 					this.state.room = changes;
@@ -181,7 +171,6 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 	async componentDidMount() {
 		this.mounted = true;
 		const { room, member } = this.state;
-		const { encryptionEnabled } = this.props;
 		if (room.rid) {
 			if (!room.id) {
 				if (room.t === SubscriptionType.OMNICHANNEL) {
@@ -225,11 +214,6 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 			const canCreateTeam = await this.canCreateTeam();
 			const canAddChannelToTeam = await this.canAddChannelToTeam();
 			const canConvertTeam = await this.canConvertTeam();
-			const hasE2EEWarning = EncryptionUtils.hasE2EEWarning({
-				encryptionEnabled,
-				E2EKey: room.E2EKey,
-				roomEncrypted: room.encrypted
-			});
 
 			this.setState({
 				canAutoTranslate,
@@ -238,8 +222,7 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 				canViewMembers,
 				canCreateTeam,
 				canAddChannelToTeam,
-				canConvertTeam,
-				hasE2EEWarning
+				canConvertTeam
 			});
 		}
 	}
@@ -286,7 +269,6 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 			// @ts-ignore
 			logEvent(events[`RA_GO_${route.replace('View', '').toUpperCase()}${params.name ? params.name.toUpperCase() : ''}`]);
 			const { navigation } = this.props;
-			// @ts-ignore
 			navigation.navigate(route, params);
 		}
 		if (event) {
@@ -363,7 +345,7 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 
 	renderEncryptedSwitch = () => {
 		const { room, canToggleEncryption, canEdit } = this.state;
-		const { rid, encrypted } = room;
+		const { encrypted } = room;
 		const { serverVersion } = this.props;
 		let hasPermission = false;
 		if (compareServerVersion(serverVersion, 'lowerThan', '3.11.0')) {
@@ -371,7 +353,7 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 		} else {
 			hasPermission = canToggleEncryption;
 		}
-		return <Switch value={encrypted} onValueChange={() => toggleRoomE2EE(rid)} disabled={!hasPermission} />;
+		return <Switch value={encrypted} onValueChange={this.toggleEncrypted} disabled={!hasPermission} />;
 	};
 
 	closeLivechat = async () => {
@@ -493,6 +475,49 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 			userId,
 			username
 		});
+	};
+
+	toggleEncrypted = async () => {
+		logEvent(events.RA_TOGGLE_ENCRYPTED);
+		const { room } = this.state;
+		const { rid } = room;
+		const db = database.active;
+
+		// Toggle encrypted value
+		const encrypted = !room.encrypted;
+		try {
+			// Instantly feedback to the user
+			await db.write(async () => {
+				await room.update(
+					protectedFunction((r: TSubscriptionModel) => {
+						r.encrypted = encrypted;
+					})
+				);
+			});
+
+			try {
+				// Send new room setting value to server
+				const { result } = await Services.saveRoomSettings(rid, { encrypted });
+				// If it was saved successfully
+				if (result) {
+					return;
+				}
+			} catch {
+				// do nothing
+			}
+
+			// If something goes wrong we go back to the previous value
+			await db.write(async () => {
+				await room.update(
+					protectedFunction((r: TSubscriptionModel) => {
+						r.encrypted = room.encrypted;
+					})
+				);
+			});
+		} catch (e) {
+			logEvent(events.RA_TOGGLE_ENCRYPTED_F);
+			log(e);
+		}
 	};
 
 	handleShare = () => {
@@ -767,14 +792,14 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 							}
 						})
 					}
-					style={{ backgroundColor: themes[theme].surfaceRoom }}
 					accessibilityLabel={I18n.t('Room_Info')}
 					enabled={!isGroupChatHandler}
-					testID='room-actions-info'>
+					testID='room-actions-info'
+				>
 					<View style={[styles.roomInfoContainer, { height: 72 * fontScale }]}>
 						<Avatar text={avatar} style={styles.avatar} size={50 * fontScale} type={t} rid={rid}>
 							{t === 'd' && member._id ? (
-								<View style={[sharedStyles.status, { backgroundColor: themes[theme].surfaceRoom }]}>
+								<View style={[sharedStyles.status]}>
 									<Status size={16} id={member._id} />
 								</View>
 							) : undefined}
@@ -831,7 +856,6 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 						testID='room-actions-encrypt'
 						left={() => <List.Icon name='encrypted' />}
 						right={this.renderEncryptedSwitch}
-						additionalAcessibilityLabel={!!room.encrypted}
 					/>
 					<List.Separator />
 				</List.Section>
@@ -887,36 +911,37 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 			);
 		}
 
-		if (t === 'p' || t === 'c') {
-			return (
-				<List.Section>
-					<List.Separator />
-					<List.Item
-						disabled={loading}
-						title='Leave'
-						onPress={() =>
-							this.onPressTouchable({
-								event: room.teamMain ? this.leaveTeam : this.leaveChannel
-							})
-						}
-						testID='room-actions-leave-channel'
-						left={() => <List.Icon name='logout' color={themes[theme].buttonBackgroundDangerDefault} />}
-						showActionIndicator
-						color={themes[theme].buttonBackgroundDangerDefault}
-					/>
-					<List.Separator />
-				</List.Section>
-			);
-		}
+		// if (t === 'p' || t === 'c') {
+		// 	return (
+		// 		<List.Section>
+		// 			<List.Separator />
+		// 			<List.Item
+		// 				disabled={loading}
+		// 				title='Leave'
+		// 				onPress={() =>
+		// 					this.onPressTouchable({
+		// 						event: room.teamMain ? this.leaveTeam : this.leaveChannel
+		// 					})
+		// 				}
+		// 				testID='room-actions-leave-channel'
+		// 				left={() => <List.Icon name='logout' color={themes[theme].buttonBackgroundDangerDefault} />}
+		// 				showActionIndicator
+		// 				color={themes[theme].buttonBackgroundDangerDefault}
+		// 			/>
+		// 			<List.Separator />
+		// 		</List.Section>
+		// 	);
+		// }
 
 		return null;
 	};
 
 	teamChannelActions = (t: string, room: ISubscription) => {
-		const { canEdit, canCreateTeam, canAddChannelToTeam, hasE2EEWarning } = this.state;
+		const { canEdit, canCreateTeam, canAddChannelToTeam } = this.state;
 		const canConvertToTeam = canEdit && canCreateTeam && !room.teamMain;
 		const canMoveToTeam = canEdit && canAddChannelToTeam && !room.teamId;
 
+		return null;
 		return (
 			<>
 				{['c', 'p'].includes(t) && canConvertToTeam ? (
@@ -931,7 +956,6 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 							testID='room-actions-convert-to-team'
 							left={() => <List.Icon name='teams' />}
 							showActionIndicator
-							disabled={hasE2EEWarning}
 						/>
 						<List.Separator />
 					</>
@@ -949,7 +973,6 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 							testID='room-actions-move-to-team'
 							left={() => <List.Icon name='channel-move-to-team' />}
 							showActionIndicator
-							disabled={hasE2EEWarning}
 						/>
 						<List.Separator />
 					</>
@@ -959,16 +982,17 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 	};
 
 	teamToChannelActions = (t: string, room: ISubscription) => {
-		const { canEdit, canConvertTeam, loading, hasE2EEWarning } = this.state;
+		const { canEdit, canConvertTeam, loading } = this.state;
 		const canConvertTeamToChannel = canEdit && canConvertTeam && !!room?.teamMain;
 
+		return null;
 		return (
 			<>
 				{['c', 'p'].includes(t) && canConvertTeamToChannel ? (
 					<>
 						<List.Item
 							title='Convert_to_Channel'
-							disabled={loading || hasE2EEWarning}
+							disabled={loading}
 							onPress={() =>
 								this.onPressTouchable({
 									event: this.convertTeamToChannel
@@ -1063,7 +1087,7 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 	};
 
 	render() {
-		const { room, membersCount, canViewMembers, joined, canAutoTranslate, hasE2EEWarning } = this.state;
+		const { room, membersCount, canViewMembers, joined, canAutoTranslate } = this.state;
 		const { isMasterDetail, navigation } = this.props;
 		const { rid, t, prid, teamId } = room;
 		const isGroupChatHandler = isGroupChat(room);
@@ -1073,8 +1097,8 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 				<StatusBar />
 				<List.Container testID='room-actions-scrollview'>
 					{this.renderRoomInfo()}
-					<CallSection rid={rid} disabled={hasE2EEWarning} />
-					{this.renderE2EEncryption()}
+					{/* <CallSection rid={rid} /> */}
+					{/* {this.renderE2EEncryption()} */}
 					<List.Section>
 						<List.Separator />
 
@@ -1082,7 +1106,7 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 							<>
 								<List.Item
 									title='Members'
-									subtitle={membersCount && membersCount > 0 ? `${membersCount} ${I18n.t('members')}` : undefined}
+									subtitle={membersCount && membersCount > 0 ? `${membersCount - 1} ${I18n.t('members')}` : undefined}
 									onPress={() => this.onPressTouchable({ route: 'RoomMembersView', params: { rid, room, joined: this.joined } })}
 									testID='room-actions-members'
 									left={() => <List.Icon name='team' />}
@@ -1093,7 +1117,7 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 							</>
 						) : null}
 
-						{['c', 'p', 'd'].includes(t) && !prid ? (
+						{/* {['c', 'p', 'd'].includes(t) && !prid ? (
 							<>
 								<List.Item
 									title='Discussions'
@@ -1109,11 +1133,10 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-discussions'
 									left={() => <List.Icon name='discussions' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
-						) : null}
+						) : null} */}
 						{teamId && isTeamRoom({ teamId, joined }) ? (
 							<>
 								<List.Item
@@ -1136,7 +1159,6 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-teams'
 									left={() => <List.Icon name='channel-public' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
@@ -1166,7 +1188,6 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-files'
 									left={() => <List.Icon name='attach' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
@@ -1185,13 +1206,12 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-mentioned'
 									left={() => <List.Icon name='mention' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
 						) : null}
 
-						{['c', 'p', 'd'].includes(t) ? (
+						{/* {['c', 'p', 'd'].includes(t) ? (
 							<>
 								<List.Item
 									title='Starred'
@@ -1204,13 +1224,12 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-starred'
 									left={() => <List.Icon name='star' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
-						) : null}
+						) : null} */}
 
-						{['c', 'p', 'd'].includes(t) ? (
+						{/* {['c', 'p', 'd'].includes(t) ? (
 							<>
 								<List.Item
 									title='Share'
@@ -1222,13 +1241,12 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-share'
 									left={() => <List.Icon name='share' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
-						) : null}
+						) : null} */}
 
-						{['c', 'p', 'd'].includes(t) ? (
+						{/* {['c', 'p', 'd'].includes(t) ? (
 							<>
 								<List.Item
 									title='Pinned'
@@ -1241,13 +1259,12 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-pinned'
 									left={() => <List.Icon name='pin' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
-						) : null}
+						) : null} */}
 
-						{['c', 'p', 'd'].includes(t) && canAutoTranslate ? (
+						{/* {['c', 'p', 'd'].includes(t) && canAutoTranslate ? (
 							<>
 								<List.Item
 									title='Auto_Translate'
@@ -1260,13 +1277,12 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-auto-translate'
 									left={() => <List.Icon name='language' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
-						) : null}
+						) : null} */}
 
-						{['c', 'p', 'd'].includes(t) && joined ? (
+						{/* {['c', 'p', 'd'].includes(t) && joined ? (
 							<>
 								<List.Item
 									title='Notifications'
@@ -1279,11 +1295,10 @@ class RoomActionsView extends React.Component<IRoomActionsViewProps, IRoomAction
 									testID='room-actions-notifications'
 									left={() => <List.Icon name='notification' />}
 									showActionIndicator
-									disabled={hasE2EEWarning}
 								/>
 								<List.Separator />
 							</>
-						) : null}
+						) : null} */}
 
 						{this.teamChannelActions(t, room)}
 						{this.teamToChannelActions(t, room)}

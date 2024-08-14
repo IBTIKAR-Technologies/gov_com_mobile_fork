@@ -14,14 +14,14 @@ interface IStatusBar {
 }
 
 const StatusBar = ({ barStyle, backgroundColor }: IStatusBar) => {
-	const { theme, colors } = useTheme();
+	const { theme } = useTheme();
 	if (!barStyle) {
 		barStyle = 'light-content';
 		if (theme === 'light') {
 			barStyle = 'dark-content';
 		}
 	}
-	return <StatusBarRN backgroundColor={backgroundColor ?? colors.surfaceNeutral} barStyle={barStyle} animated />;
+	return <StatusBarRN backgroundColor={backgroundColor ?? '#005D0D'} barStyle={barStyle} animated />;
 };
 
 export default StatusBar;

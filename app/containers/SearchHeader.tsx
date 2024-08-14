@@ -32,7 +32,7 @@ const SearchHeader = ({ onSearchChangeText, testID }: ISearchHeaderProps): JSX.E
 		<View style={styles.container}>
 			<TextInput
 				autoFocus
-				style={[styles.title, isLight && { color: themes[theme].fontTitlesLabels }]}
+				style={[styles.title, isLight && { color: 'white' }]}
 				placeholder={I18n.t('Search')}
 				onChangeText={onSearchChangeText}
 				testID={testID}

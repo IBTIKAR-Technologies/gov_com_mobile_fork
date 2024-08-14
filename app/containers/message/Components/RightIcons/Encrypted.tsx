@@ -10,6 +10,7 @@ import { E2E_MESSAGE_TYPE } from '../../../../lib/constants';
 const Encrypted = React.memo(({ type }: { type: string }) => {
 	const { onEncryptedPress } = useContext(MessageContext);
 
+	return null;
 	if (type !== E2E_MESSAGE_TYPE) {
 		return null;
 	}

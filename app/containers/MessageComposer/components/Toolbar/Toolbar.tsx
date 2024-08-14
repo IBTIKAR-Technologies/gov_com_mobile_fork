@@ -29,7 +29,8 @@ export const Toolbar = (): ReactElement | null => {
 
 	return (
 		<Container>
-			{showMarkdownToolbar ? <Markdown /> : <Default />}
+			{/* {showMarkdownToolbar ? <Markdown /> : <Default />} */}
+			<Default />
 			<EmptySpace />
 			<CancelEdit />
 			<MicOrSendButton />

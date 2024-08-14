@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 import { useTheme } from '../../../../theme';
-import { CustomIcon } from '../../../CustomIcon';
 import { hitSlop } from '../Buttons';
+import SendArrowIcon from '../../../../svgs/SendArrowIcon';
 
 export const ReviewButton = ({ onPress }: { onPress: Function }): ReactElement => {
 	const { colors } = useTheme();
@@ -17,9 +17,10 @@ export const ReviewButton = ({ onPress }: { onPress: Function }): ReactElement =
 				}
 			]}
 			onPress={() => onPress()}
-			hitSlop={hitSlop}>
+			hitSlop={hitSlop}
+		>
 			<View accessible accessibilityLabel={'Cancel_recording'} accessibilityRole='button'>
-				<CustomIcon name={'arrow-right'} size={24} color={colors.fontWhite} />
+				<SendArrowIcon />
 			</View>
 		</BorderlessButton>
 	);

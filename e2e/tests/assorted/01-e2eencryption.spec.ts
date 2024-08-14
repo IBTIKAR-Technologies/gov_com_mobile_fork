@@ -5,14 +5,14 @@ import {
 	login,
 	sleep,
 	tapBack,
+	searchRoom,
 	logout,
 	platformTypes,
 	TTextMatcher,
 	tapAndWaitFor,
 	expectValidRegisterOrRetry,
 	mockMessage,
-	tryTapping,
-	navigateToRoom
+	tryTapping
 } from '../../helpers/app';
 import data from '../../data';
 import { createRandomUser, deleteCreatedUsers, IDeleteCreateUser, ITestUser } from '../../helpers/data_setup';
@@ -39,6 +39,14 @@ const checkBanner = async () => {
 		.toExist()
 		.withTimeout(10000);
 };
+
+async function navigateToRoom(roomName: string) {
+	await searchRoom(`${roomName}`);
+	await element(by.id(`rooms-list-view-item-${roomName}`)).tap();
+	await waitFor(element(by.id('room-view')))
+		.toBeVisible()
+		.withTimeout(5000);
+}
 
 async function waitForToast() {
 	await sleep(300);
@@ -290,9 +298,6 @@ describe('E2E Encryption', () => {
 				await waitFor(element(by[textMatcher](mockedMessageText)).atIndex(0))
 					.not.toExist()
 					.withTimeout(2000);
-				// await waitFor(element(by.id('room-view-encrypted-room')))
-				// 	.toBeVisible()
-				// 	.withTimeout(2000);
 				await expect(element(by.label('Encrypted message')).atIndex(0)).toExist();
 			});
 
@@ -301,7 +306,7 @@ describe('E2E Encryption', () => {
 				await waitFor(element(by.id('rooms-list-view')))
 					.toBeVisible()
 					.withTimeout(2000);
-				// TODO: assert 'Enter E2EE Password'
+				// TODO: assert 'Enter Your E2E Password'
 				await waitFor(element(by.id('listheader-encryption')))
 					.toBeVisible()
 					.withTimeout(2000);
@@ -369,8 +374,8 @@ describe('E2E Encryption', () => {
 
 		it('should add server and create new user', async () => {
 			await sleep(5000);
-			await element(by.id('rooms-list-header-servers-list-button')).tap();
-			await waitFor(element(by.id('rooms-list-header-servers-list')))
+			await element(by.id('rooms-list-header-server-dropdown-button')).tap();
+			await waitFor(element(by.id('rooms-list-header-server-dropdown')))
 				.toBeVisible()
 				.withTimeout(5000);
 			await element(by.id('rooms-list-header-server-add')).tap();
@@ -403,8 +408,8 @@ describe('E2E Encryption', () => {
 		});
 
 		it('should change back', async () => {
-			await element(by.id('rooms-list-header-servers-list-button')).tap();
-			await waitFor(element(by.id('rooms-list-header-servers-list')))
+			await element(by.id('rooms-list-header-server-dropdown-button')).tap();
+			await waitFor(element(by.id('rooms-list-header-server-dropdown')))
 				.toBeVisible()
 				.withTimeout(5000);
 			await element(by.id(`rooms-list-header-server-${data.server}`)).tap();
@@ -426,6 +431,4 @@ describe('E2E Encryption', () => {
 			await checkBanner();
 		});
 	});
-
-	// TODO: missing request e2ee room key
 });

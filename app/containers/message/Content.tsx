@@ -41,6 +41,8 @@ const Content = React.memo(
 		const isPreview = props.tmid && !props.isThreadRoom;
 		let content = null;
 
+		console.log('props', props);
+
 		if (props.isEncrypted) {
 			content = (
 				<Text
@@ -76,7 +78,26 @@ const Content = React.memo(
 			content = <Text style={[styles.textInfo, { color: themes[theme].fontSecondaryInfo }]}>{I18n.t('Message_Ignored')}</Text>;
 		}
 
-		return <View style={props.isTemp && styles.temp}>{content}</View>;
+		const itsMe = props.author?._id === user.id;
+
+		return (
+			<View
+				style={[
+					props.isTemp && styles.temp,
+					{
+						backgroundColor: itsMe ? '#d1fae5' : 'white',
+						borderRadius: 15,
+						borderTopLeftRadius: itsMe ? 15 : 0,
+						borderTopRightRadius: itsMe ? 0 : 15,
+						paddingVertical: 7,
+						paddingHorizontal: 15,
+						alignSelf: itsMe ? 'flex-end' : 'flex-start'
+					}
+				]}
+			>
+				{content}
+			</View>
+		);
 	},
 	(prevProps, nextProps) => {
 		if (prevProps.isTemp !== nextProps.isTemp) {

@@ -9,8 +9,10 @@ import log from '../../methods/helpers/log';
 import { handleAndroidBltPermission } from '../../methods/videoConf';
 import { Services } from '../../services';
 import { useAppSelector } from '../useAppSelector';
-import StartACallActionSheet from './StartACallActionSheet';
 import { useVideoConfCall } from './useVideoConfCall';
+import { initVideoCall } from '../../../actions/videoConf';
+import { useDispatch } from 'react-redux';
+import useUserData from '../useUserData';
 
 const availabilityErrors = {
 	NOT_CONFIGURED: 'video-conf-provider-not-configured',
@@ -27,17 +29,16 @@ const handleErrors = (isAdmin: boolean, error: keyof typeof availabilityErrors) 
 
 export const useVideoConf = (
 	rid: string
-): { showInitCallActionSheet: () => Promise<void>; callEnabled: boolean; disabledTooltip?: boolean } => {
+): { startCallImmediately: () => Promise<void>; callEnabled: boolean; disabledTooltip?: boolean } => {
 	const user = useAppSelector(state => getUserSelector(state));
 	const serverVersion = useAppSelector(state => state.server.version);
 
 	const { callEnabled, disabledTooltip, roomType } = useVideoConfCall(rid);
 
 	const [permission, requestPermission] = Camera.useCameraPermissions();
-	const { showActionSheet } = useActionSheet();
 
 	const isServer5OrNewer = useMemo(() => compareServerVersion(serverVersion, 'greaterThanOrEqualTo', '5.0.0'), [serverVersion]);
-
+	const dispatch = useDispatch();
 	const canInitAnCall = async (): Promise<boolean> => {
 		if (!callEnabled) return false;
 
@@ -54,15 +55,13 @@ export const useVideoConf = (
 		return true;
 	};
 
-	const showInitCallActionSheet = async () => {
+	const usr = useUserData(rid);
+	const startCallImmediately = async () => {
 		try {
+			console.log('call error ');
 			const canInit = await canInitAnCall();
+			console.log(canInit);
 			if (canInit) {
-				showActionSheet({
-					children: <StartACallActionSheet rid={rid} roomType={roomType} />,
-					snaps: [480]
-				});
-
 				if (!permission?.granted) {
 					try {
 						await requestPermission();
@@ -71,11 +70,13 @@ export const useVideoConf = (
 						log(error);
 					}
 				}
+				initVideoCall(rid);
+				dispatch(initVideoCall({ direct: usr.direct, rid, uid: usr.uid }));
 			}
 		} catch (error) {
 			log(error);
 		}
 	};
 
-	return { showInitCallActionSheet, callEnabled, disabledTooltip };
+	return { startCallImmediately, callEnabled, disabledTooltip };
 };

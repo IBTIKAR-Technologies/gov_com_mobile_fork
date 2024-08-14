@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import i18n from '../../../../i18n';
 import useStyle from './styles';
 import AvatarContainer from '../../../Avatar';
 
@@ -21,7 +20,7 @@ export const CallParticipants = ({ users }: { users: TCallUsers }): React.ReactE
 					<Text style={style.plusUsersText}>{users.length > 9 ? '+9' : `+${users.length}`}</Text>
 				</View>
 			) : null}
-			<Text style={style.joined}>{i18n.t('Joined')}</Text>
+			{/* <Text style={style.joined}>{i18n.t('Joined')}</Text> */}
 		</>
 	);
 };

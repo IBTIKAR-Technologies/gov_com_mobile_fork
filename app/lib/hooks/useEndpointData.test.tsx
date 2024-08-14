@@ -8,7 +8,7 @@ import sdk from '../services/sdk';
 
 const url = 'chat.getMessage';
 
-const message = {
+export const message = {
 	_id: '9tYkmJ67wMwmvQouD',
 	t: 'uj',
 	rid: 'GENERAL',

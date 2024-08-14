@@ -1,5 +1,5 @@
 {
-	"Simulator Target Bundle": "chat.rocket.reactnative",
+	"Simulator Target Bundle": "mr.gov.mtnima.govcom",
 	"aps": {
 		"alert": {
 			"title": "Hey!",

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
 import styles from './styles';
@@ -13,8 +13,6 @@ import Tag from './Tag';
 import I18n from '../../i18n';
 import { DisplayMode } from '../../lib/constants';
 import { IRoomItemProps } from './interfaces';
-import { formatLastMessage } from '../../lib/methods/formatLastMessage';
-import { capitalize } from '../../lib/methods/helpers';
 
 const RoomItem = ({
 	rid,
@@ -32,6 +30,7 @@ const RoomItem = ({
 	isGroupChat,
 	isRead,
 	date,
+	accessibilityLabel,
 	favorite,
 	lastMessage,
 	alert,
@@ -56,11 +55,8 @@ const RoomItem = ({
 	sourceType,
 	hideMentionStatus
 }: IRoomItemProps) => {
-	const memoizedMessage = useMemo(
-		() => formatLastMessage({ lastMessage, username, useRealName, showLastMessage, alert, type }),
-		[lastMessage, username, useRealName, showLastMessage, alert, type]
-	);
-	const accessibilityLabel = useMemo(() => `${name} ${capitalize(date)} ${memoizedMessage}`, [name, date, memoizedMessage]);
+	console.log('lastMessage', name);
+
 	return (
 		<Touchable
 			onPress={onPress}
@@ -76,7 +72,8 @@ const RoomItem = ({
 			type={type}
 			isFocused={!!isFocused}
 			swipeEnabled={swipeEnabled}
-			displayMode={displayMode}>
+			displayMode={displayMode}
+		>
 			<Wrapper
 				accessibilityLabel={accessibilityLabel}
 				avatar={avatar}
@@ -90,7 +87,8 @@ const RoomItem = ({
 				displayMode={displayMode}
 				showAvatar={showAvatar}
 				showLastMessage={!!showLastMessage}
-				sourceType={sourceType}>
+				sourceType={sourceType}
+			>
 				{showLastMessage && displayMode === DisplayMode.Expanded ? (
 					<>
 						<View style={styles.titleContainer}>
@@ -127,6 +125,7 @@ const RoomItem = ({
 								tunreadGroup={tunreadGroup}
 								hideMentionStatus={hideMentionStatus}
 								hideUnreadStatus={hideUnreadStatus}
+								alert={alert}
 							/>
 						</View>
 					</>

@@ -3,7 +3,10 @@ import { StyleSheet, Text } from 'react-native';
 import { Bold as BoldProps } from '@rocket.chat/message-parser';
 
 import sharedStyles from '../../../views/Styles';
-import { Strike, Italic, Plain, Link } from './components';
+import Strike from './Strike';
+import Italic from './Italic';
+import Plain from './Plain';
+import Link from './Link';
 
 interface IBoldProps {
 	value: BoldProps['value'];

@@ -3,10 +3,9 @@ import { Base64 } from 'js-base64';
 import SimpleCrypto from 'react-native-simple-crypto';
 import ByteBuffer from 'bytebuffer';
 import parse from 'url-parse';
-import { sha256 } from 'js-sha256';
 
 import getSingleMessage from '../methods/getSingleMessage';
-import { IAttachment, IMessage, IUpload, TSendFileMessageFileInfo, IUser, IServerAttachment } from '../../definitions';
+import { IMessage, IUser } from '../../definitions';
 import Deferred from './helpers/deferred';
 import { debounce } from '../methods/helpers';
 import database from '../database';
@@ -16,10 +15,6 @@ import {
 	bufferToB64,
 	bufferToB64URI,
 	bufferToUtf8,
-	encryptAESCTR,
-	exportAESCTR,
-	generateAESCTRKey,
-	getFileExtension,
 	joinVectorData,
 	splitVectorData,
 	toString,
@@ -33,7 +28,6 @@ import { mapMessageFromAPI } from './helpers/mapMessageFromApi';
 import { mapMessageFromDB } from './helpers/mapMessageFromDB';
 import { createQuoteAttachment } from './helpers/createQuoteAttachment';
 import { getMessageById } from '../database/services/Message';
-import { TEncryptFileResult, TGetContent } from './definitions';
 
 export default class EncryptionRoom {
 	ready: boolean;
@@ -183,14 +177,10 @@ export default class EncryptionRoom {
 
 	// Create an encrypted key for this room based on users
 	encryptRoomKey = async () => {
-		try {
-			const result = await Services.e2eGetUsersOfRoomWithoutKey(this.roomId);
-			if (result.success) {
-				const { users } = result;
-				await Promise.all(users.map(user => this.encryptRoomKeyForUser(user)));
-			}
-		} catch (e) {
-			log(e);
+		const result = await Services.e2eGetUsersOfRoomWithoutKey(this.roomId);
+		if (result.success) {
+			const { users } = result;
+			await Promise.all(users.map(user => this.encryptRoomKeyForUser(user)));
 		}
 	};
 
@@ -244,168 +234,17 @@ export default class EncryptionRoom {
 				...message,
 				t: E2E_MESSAGE_TYPE,
 				e2e: E2E_STATUS.PENDING,
-				msg,
-				content: {
-					algorithm: 'rc.v1.aes-sha2' as const,
-					ciphertext: await this.encryptText(
-						EJSON.stringify({
-							msg: message.msg
-						})
-					)
-				}
+				msg
 			};
 		} catch {
 			// Do nothing
 		}
 
 		return message;
-	};
-
-	// Encrypt upload
-	encryptUpload = async (message: IUpload) => {
-		if (!this.ready) {
-			return message;
-		}
-
-		try {
-			let description = '';
-
-			if (message.description) {
-				description = await this.encryptText(EJSON.stringify({ text: message.description }));
-			}
-
-			return {
-				...message,
-				t: E2E_MESSAGE_TYPE,
-				e2e: E2E_STATUS.PENDING,
-				description
-			};
-		} catch {
-			// Do nothing
-		}
-
-		return message;
-	};
-
-	encryptFile = async (rid: string, file: TSendFileMessageFileInfo): TEncryptFileResult => {
-		const { path } = file;
-		const vector = await SimpleCrypto.utils.randomBytes(16);
-		const key = await generateAESCTRKey();
-		const exportedKey = await exportAESCTR(key);
-		const iv = bufferToB64(vector);
-		const checksum = await SimpleCrypto.utils.calculateFileChecksum(path);
-		const encryptedFile = await encryptAESCTR(path, exportedKey.k, iv);
-
-		const getContent: TGetContent = async (_id, fileUrl) => {
-			const attachments: IAttachment[] = [];
-			let att: IAttachment = {
-				title: file.name,
-				type: 'file',
-				description: file.description,
-				title_link: fileUrl,
-				title_link_download: true,
-				encryption: {
-					key: exportedKey,
-					iv: bufferToB64(vector)
-				},
-				hashes: {
-					sha256: checksum
-				}
-			};
-			if (file.type && /^image\/.+/.test(file.type)) {
-				att = {
-					...att,
-					image_url: fileUrl,
-					image_type: file.type,
-					image_size: file.size,
-					...(file.width &&
-						file.height && {
-							image_dimensions: {
-								width: file.width,
-								height: file.height
-							}
-						})
-				};
-			} else if (file.type && /^audio\/.+/.test(file.type)) {
-				att = {
-					...att,
-					audio_url: fileUrl,
-					audio_type: file.type,
-					audio_size: file.size
-				};
-			} else if (file.type && /^video\/.+/.test(file.type)) {
-				att = {
-					...att,
-					video_url: fileUrl,
-					video_type: file.type,
-					video_size: file.size
-				};
-			} else {
-				att = {
-					...att,
-					size: file.size,
-					format: getFileExtension(file.path)
-				};
-			}
-			attachments.push(att);
-
-			const files = [
-				{
-					_id,
-					name: file.name,
-					type: file.type,
-					size: file.size
-				}
-			];
-
-			const data = EJSON.stringify({
-				attachments,
-				files,
-				file: files[0]
-			});
-
-			return {
-				algorithm: 'rc.v1.aes-sha2',
-				ciphertext: await Encryption.encryptText(rid, data)
-			};
-		};
-
-		const fileContentData = {
-			type: file.type,
-			typeGroup: file.type?.split('/')[0],
-			name: file.name,
-			encryption: {
-				key: exportedKey,
-				iv
-			},
-			hashes: {
-				sha256: checksum
-			}
-		};
-
-		const fileContent = {
-			algorithm: 'rc.v1.aes-sha2' as const,
-			ciphertext: await Encryption.encryptText(rid, EJSON.stringify(fileContentData))
-		};
-
-		return {
-			file: {
-				...file,
-				type: 'file',
-				name: sha256(file.name ?? 'File message'),
-				path: encryptedFile
-			},
-			getContent,
-			fileContent
-		};
 	};
 
 	// Decrypt text
 	decryptText = async (msg: string | ArrayBuffer) => {
-		if (!msg) {
-			return null;
-		}
-
 		msg = b64ToBuffer(msg.slice(12) as string);
 		const [vector, cipherText] = splitVectorData(msg);
 
@@ -414,25 +253,6 @@ export default class EncryptionRoom {
 		const m = EJSON.parse(bufferToUtf8(decrypted));
 
 		return m.text;
-	};
-
-	decryptFileContent = async (data: IServerAttachment) => {
-		if (data.content?.algorithm === 'rc.v1.aes-sha2') {
-			const content = await this.decryptContent(data.content.ciphertext);
-			Object.assign(data, content);
-		}
-		return data;
-	};
-
-	decryptContent = async (contentBase64: string) => {
-		if (!contentBase64) {
-			return null;
-		}
-
-		const contentBuffer = b64ToBuffer(contentBase64.slice(12) as string);
-		const [vector, cipherText] = splitVectorData(contentBuffer);
-		const decrypted = await SimpleCrypto.AES.decrypt(cipherText, this.roomKey, vector);
-		return EJSON.parse(bufferToUtf8(decrypted));
 	};
 
 	// Decrypt messages
@@ -446,31 +266,19 @@ export default class EncryptionRoom {
 
 			// If message type is e2e and it's encrypted still
 			if (t === E2E_MESSAGE_TYPE && e2e !== E2E_STATUS.DONE) {
-				const { msg, tmsg } = message;
+				let { msg, tmsg } = message;
 				// Decrypt msg
-				if (msg) {
-					message.msg = await this.decryptText(msg);
-				}
+				msg = await this.decryptText(msg as string);
 
 				// Decrypt tmsg
 				if (tmsg) {
-					message.tmsg = await this.decryptText(tmsg);
-				}
-
-				if (message.content?.algorithm === 'rc.v1.aes-sha2') {
-					const content = await this.decryptContent(message.content.ciphertext);
-					message = {
-						...message,
-						...content,
-						attachments: content.attachments?.map((att: IAttachment) => ({
-							...att,
-							e2e: 'pending'
-						}))
-					};
+					tmsg = await this.decryptText(tmsg);
 				}
 
 				const decryptedMessage: IMessage = {
 					...message,
+					tmsg,
+					msg,
 					e2e: 'done'
 				};
 

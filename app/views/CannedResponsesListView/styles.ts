@@ -6,6 +6,15 @@ export default StyleSheet.create({
 	list: {
 		flex: 1
 	},
+	dropdownContainer: {
+		width: '100%',
+		position: 'absolute',
+		top: 0,
+		borderBottomWidth: StyleSheet.hairlineWidth
+	},
+	backdrop: {
+		...StyleSheet.absoluteFillObject
+	},
 	wrapCannedItem: {
 		minHeight: 117,
 		maxHeight: 141,

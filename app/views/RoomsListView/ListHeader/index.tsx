@@ -16,10 +16,11 @@ interface IRoomListHeader {
 	inquiryEnabled: boolean;
 	encryptionBanner: TEncryptionBanner;
 	user: IUser;
+	noSeperator?: boolean;
 }
 
 const ListHeader = React.memo(
-	({ searching, goEncryption, goQueue, queueSize, inquiryEnabled, encryptionBanner, user }: IRoomListHeader) => {
+	({ searching, goEncryption, goQueue, queueSize, inquiryEnabled, encryptionBanner, user, noSeperator }: IRoomListHeader) => {
 		const { theme } = useTheme();
 
 		if (searching) {
@@ -28,11 +29,13 @@ const ListHeader = React.memo(
 
 		return (
 			<>
-				{encryptionBanner ? (
+				{/* {encryptionBanner ? (
 					<>
 						<List.Item
 							title={
-								encryptionBanner === E2E_BANNER_TYPE.REQUEST_PASSWORD ? 'Enter_E2EE_Password' : 'Save_Your_Encryption_Password'
+								encryptionBanner === E2E_BANNER_TYPE.REQUEST_PASSWORD
+									? 'Enter_Your_E2E_Password'
+									: 'Save_Your_Encryption_Password'
 							}
 							left={() => <List.Icon name='encrypted' color={themes[theme].fontWhite} />}
 							underlayColor={themes[theme].strokeHighlight}
@@ -43,8 +46,8 @@ const ListHeader = React.memo(
 						/>
 						<List.Separator />
 					</>
-				) : null}
-				<List.Separator />
+				) : null} */}
+				{noSeperator ? null : <List.Separator />}
 				<OmnichannelStatus
 					searching={searching}
 					goQueue={goQueue}

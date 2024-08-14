@@ -1,4 +1,4 @@
-package chat.rocket.reactnative.share;
+package mr.gov.mtnima.govcom.share;
 
 import com.facebook.react.ReactActivity;
 

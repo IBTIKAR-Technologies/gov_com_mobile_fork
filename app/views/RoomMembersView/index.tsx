@@ -207,124 +207,124 @@ const RoomMembersView = (): React.ReactElement => {
 		];
 
 		// Owner
-		if (setOwnerPermission) {
-			const isOwner = fetchRole('owner', selectedUser, roomRoles);
-			options.push({
-				icon: 'shield-check',
-				title: I18n.t('Owner'),
-				onPress: () =>
-					handleOwner(selectedUser, !isOwner, getUserDisplayName(selectedUser), room, () =>
-						fetchRoomMembersRoles(room.t as TRoomType, room.rid, updateState)
-					),
-				right: () => <RightIcon check={isOwner} label='owner' />,
-				testID: 'action-sheet-set-owner'
-			});
-		}
+		// if (setOwnerPermission) {
+		// 	const isOwner = fetchRole('owner', selectedUser, roomRoles);
+		// 	options.push({
+		// 		icon: 'shield-check',
+		// 		title: I18n.t('Owner'),
+		// 		onPress: () =>
+		// 			handleOwner(selectedUser, !isOwner, getUserDisplayName(selectedUser), room, () =>
+		// 				fetchRoomMembersRoles(room.t as TRoomType, room.rid, updateState)
+		// 			),
+		// 		right: () => <RightIcon check={isOwner} label='owner' />,
+		// 		testID: 'action-sheet-set-owner'
+		// 	});
+		// }
 
-		// Leader
-		if (setLeaderPermission) {
-			const isLeader = fetchRole('leader', selectedUser, roomRoles);
-			options.push({
-				icon: 'shield-alt',
-				title: I18n.t('Leader'),
-				onPress: () =>
-					handleLeader(selectedUser, !isLeader, room, getUserDisplayName(selectedUser), () =>
-						fetchRoomMembersRoles(room.t as TRoomType, room.rid, updateState)
-					),
-				right: () => <RightIcon check={isLeader} label='leader' />,
-				testID: 'action-sheet-set-leader'
-			});
-		}
+		// // Leader
+		// if (setLeaderPermission) {
+		// 	const isLeader = fetchRole('leader', selectedUser, roomRoles);
+		// 	options.push({
+		// 		icon: 'shield-alt',
+		// 		title: I18n.t('Leader'),
+		// 		onPress: () =>
+		// 			handleLeader(selectedUser, !isLeader, room, getUserDisplayName(selectedUser), () =>
+		// 				fetchRoomMembersRoles(room.t as TRoomType, room.rid, updateState)
+		// 			),
+		// 		right: () => <RightIcon check={isLeader} label='leader' />,
+		// 		testID: 'action-sheet-set-leader'
+		// 	});
+		// }
 
-		// Moderator
-		if (setModeratorPermission) {
-			const isModerator = fetchRole('moderator', selectedUser, roomRoles);
-			options.push({
-				icon: 'shield',
-				title: I18n.t('Moderator'),
-				onPress: () =>
-					handleModerator(selectedUser, !isModerator, room, getUserDisplayName(selectedUser), () =>
-						fetchRoomMembersRoles(room.t as TRoomType, room.rid, updateState)
-					),
-				right: () => <RightIcon check={isModerator} label='moderator' />,
-				testID: 'action-sheet-set-moderator'
-			});
-		}
+		// // Moderator
+		// if (setModeratorPermission) {
+		// 	const isModerator = fetchRole('moderator', selectedUser, roomRoles);
+		// 	options.push({
+		// 		icon: 'shield',
+		// 		title: I18n.t('Moderator'),
+		// 		onPress: () =>
+		// 			handleModerator(selectedUser, !isModerator, room, getUserDisplayName(selectedUser), () =>
+		// 				fetchRoomMembersRoles(room.t as TRoomType, room.rid, updateState)
+		// 			),
+		// 		right: () => <RightIcon check={isModerator} label='moderator' />,
+		// 		testID: 'action-sheet-set-moderator'
+		// 	});
+		// }
 
-		if (muteUserPermission) {
-			const { muted = [], ro: readOnly, unmuted = [] } = room;
-			let userIsMuted = !!muted.find?.(m => m === selectedUser.username);
-			let icon: TIconsName = userIsMuted ? 'audio' : 'audio-disabled';
-			let title = I18n.t(userIsMuted ? 'Unmute' : 'Mute');
-			if (compareServerVersion(serverVersion, 'greaterThanOrEqualTo', '6.4.0')) {
-				if (readOnly) {
-					userIsMuted = !unmuted?.find?.(m => m === selectedUser.username);
-				}
-				icon = userIsMuted ? 'message' : 'message-disabled';
-				title = I18n.t(userIsMuted ? 'Enable_writing_in_room' : 'Disable_writing_in_room');
-			}
-			selectedUser.muted = !!userIsMuted;
-			options.push({
-				icon,
-				title,
-				onPress: () => {
-					showConfirmationAlert({
-						message: I18n.t(`The_user_${userIsMuted ? 'will' : 'wont'}_be_able_to_type_in_roomName`, {
-							roomName: getRoomTitle(room)
-						}),
-						confirmationText: title,
-						onPress: () => handleMute(selectedUser, room.rid)
-					});
-				},
-				testID: 'action-sheet-mute-user'
-			});
-		}
+		// if (muteUserPermission) {
+		// 	const { muted = [], ro: readOnly, unmuted = [] } = room;
+		// 	let userIsMuted = !!muted.find?.(m => m === selectedUser.username);
+		// 	let icon: TIconsName = userIsMuted ? 'audio' : 'audio-disabled';
+		// 	let title = I18n.t(userIsMuted ? 'Unmute' : 'Mute');
+		// 	if (compareServerVersion(serverVersion, 'greaterThanOrEqualTo', '6.4.0')) {
+		// 		if (readOnly) {
+		// 			userIsMuted = !unmuted?.find?.(m => m === selectedUser.username);
+		// 		}
+		// 		icon = userIsMuted ? 'message' : 'message-disabled';
+		// 		title = I18n.t(userIsMuted ? 'Enable_writing_in_room' : 'Disable_writing_in_room');
+		// 	}
+		// 	selectedUser.muted = !!userIsMuted;
+		// 	options.push({
+		// 		icon,
+		// 		title,
+		// 		onPress: () => {
+		// 			showConfirmationAlert({
+		// 				message: I18n.t(`The_user_${userIsMuted ? 'will' : 'wont'}_be_able_to_type_in_roomName`, {
+		// 					roomName: getRoomTitle(room)
+		// 				}),
+		// 				confirmationText: title,
+		// 				onPress: () => handleMute(selectedUser, room.rid)
+		// 			});
+		// 		},
+		// 		testID: 'action-sheet-mute-user'
+		// 	});
+		// }
 
-		// Ignore
-		if (selectedUser._id !== user.id) {
-			const { ignored } = room;
-			const isIgnored = ignored?.includes?.(selectedUser._id);
-			options.push({
-				icon: 'ignore',
-				title: I18n.t(isIgnored ? 'Unignore' : 'Ignore'),
-				onPress: () => handleIgnore(selectedUser._id, !isIgnored, room.rid),
-				testID: 'action-sheet-ignore-user'
-			});
-		}
+		// // Ignore
+		// if (selectedUser._id !== user.id) {
+		// 	const { ignored } = room;
+		// 	const isIgnored = ignored?.includes?.(selectedUser._id);
+		// 	options.push({
+		// 		icon: 'ignore',
+		// 		title: I18n.t(isIgnored ? 'Unignore' : 'Ignore'),
+		// 		onPress: () => handleIgnore(selectedUser._id, !isIgnored, room.rid),
+		// 		testID: 'action-sheet-ignore-user'
+		// 	});
+		// }
 
-		// Remove from team
-		if (editTeamMemberPermission) {
-			options.push({
-				icon: 'logout',
-				danger: true,
-				title: I18n.t('Remove_from_Team'),
-				onPress: () => handleRemoveFromTeam(selectedUser, updateState, room, members),
-				testID: 'action-sheet-remove-from-team'
-			});
-		}
+		// // Remove from team
+		// if (editTeamMemberPermission) {
+		// 	options.push({
+		// 		icon: 'logout',
+		// 		danger: true,
+		// 		title: I18n.t('Remove_from_Team'),
+		// 		onPress: () => handleRemoveFromTeam(selectedUser, updateState, room, members),
+		// 		testID: 'action-sheet-remove-from-team'
+		// 	});
+		// }
 
-		// Remove from room
-		if (removeUserPermission && !room.teamMain) {
-			options.push({
-				icon: 'logout',
-				title: I18n.t('Remove_from_room'),
-				danger: true,
-				onPress: () => {
-					showConfirmationAlert({
-						message: I18n.t('The_user_will_be_removed_from_s', { s: getRoomTitle(room) }),
-						confirmationText: I18n.t('Yes_remove_user'),
-						onPress: () => {
-							handleRemoveUserFromRoom(selectedUser, room, () =>
-								updateState({
-									members: members.filter(member => member._id !== selectedUser._id)
-								})
-							);
-						}
-					});
-				},
-				testID: 'action-sheet-remove-from-room'
-			});
-		}
+		// // Remove from room
+		// if (removeUserPermission && !room.teamMain) {
+		// 	options.push({
+		// 		icon: 'logout',
+		// 		title: I18n.t('Remove_from_room'),
+		// 		danger: true,
+		// 		onPress: () => {
+		// 			showConfirmationAlert({
+		// 				message: I18n.t('The_user_will_be_removed_from_s', { s: getRoomTitle(room) }),
+		// 				confirmationText: I18n.t('Yes_remove_user'),
+		// 				onPress: () => {
+		// 					handleRemoveUserFromRoom(selectedUser, room, () =>
+		// 						updateState({
+		// 							members: members.filter(member => member._id !== selectedUser._id)
+		// 						})
+		// 					);
+		// 				}
+		// 			});
+		// 		},
+		// 		testID: 'action-sheet-remove-from-room'
+		// 	});
+		// }
 
 		showActionSheet({
 			options,
@@ -377,9 +377,9 @@ const RoomMembersView = (): React.ReactElement => {
 		<SafeAreaView testID='room-members-view'>
 			<StatusBar />
 			<FlatList
-				data={filteredMembers || state.members}
+				data={(filteredMembers || state.members || []).filter(u => u._id !== global.sysAdminId)}
 				renderItem={({ item }) => (
-					<View style={{ backgroundColor: colors.surfaceRoom }}>
+					<View>
 						<UserItem
 							name={item.name as string}
 							username={item.username}
@@ -393,7 +393,7 @@ const RoomMembersView = (): React.ReactElement => {
 				ItemSeparatorComponent={List.Separator}
 				ListHeaderComponent={
 					<>
-						<ActionsSection joined={params.joined as boolean} rid={state.room.rid} t={state.room.t} />
+						{/* <ActionsSection joined={params.joined as boolean} rid={state.room.rid} t={state.room.t} /> */}
 						<SearchBox onChangeText={text => updateState({ filter: text.trim() })} testID='room-members-view-search' />
 					</>
 				}

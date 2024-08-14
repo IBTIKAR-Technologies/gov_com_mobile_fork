@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import RNBootSplash from 'react-native-bootsplash';
+import LottieSplashScreen from 'react-native-lottie-splash-screen';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { BIOMETRY_ENABLED_KEY, CURRENT_SERVER, TOKEN_KEY } from '../lib/constants';
@@ -84,7 +85,7 @@ const restore = function* restore() {
 };
 
 const start = function* start() {
-	yield RNBootSplash.hide({ fade: true });
+	yield LottieSplashScreen.hide();
 };
 
 const root = function* root() {

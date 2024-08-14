@@ -3,8 +3,9 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, BackHandler, Linking, SafeAreaView, StyleSheet, View } from 'react-native';
-import WebView, { WebViewNavigation } from 'react-native-webview';
+import WebView from 'react-native-webview';
 
+import i18n from '../../i18n';
 import { userAgent } from '../../lib/constants';
 import { useAppSelector } from '../../lib/hooks';
 import { isIOS } from '../../lib/methods/helpers';
@@ -65,8 +66,9 @@ const JitsiMeetView = (): React.ReactElement => {
 	}, [rid, videoConf]);
 
 	const onNavigationStateChange = useCallback(
-		(webViewState: WebViewNavigation) => {
+		webViewState => {
 			const roomId = getRoomIdFromJitsiCallUrl(url);
+			console.log('sjei  dk ', url);
 			if (webViewState.url.includes('auth-static')) {
 				setAuthModal(true);
 				return false;
@@ -105,7 +107,7 @@ const JitsiMeetView = (): React.ReactElement => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			{authModal && <JitsiAuthModal setAuthModal={setAuthModal} callUrl={callUrl} />}
+			{authModal && <JitsiAuthModal setAuthModal={setAuthModal} callUrl={`${callUrl}?language=${i18n.locale}`} />}
 			{cookiesSet ? (
 				<WebView
 					source={{
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
-	webviewContainer: { flex: 1, backgroundColor: 'rgb(62,62,62)' },
+	webviewContainer: { flex: 1, backgroundColor: '#d1fae5' },
 	loading: { alignItems: 'center', justifyContent: 'center' }
 });
 

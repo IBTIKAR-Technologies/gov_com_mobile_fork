@@ -219,10 +219,10 @@ export const MessageComposer = ({
 					<ComposerInput ref={composerInputComponentRef} inputRef={composerInputRef} />
 					<Right />
 				</View>
-				<Quotes />
+				{/* <Quotes /> */}
 				<Toolbar />
-				<EmojiSearchbar />
-				<SendThreadToChannel />
+				{/* <EmojiSearchbar /> */}
+				{/* <SendThreadToChannel /> */}
 				{children}
 			</View>
 		);

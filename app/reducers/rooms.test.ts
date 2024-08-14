@@ -1,11 +1,13 @@
 import {
 	closeSearchHeader,
+	closeServerDropdown,
 	openSearchHeader,
 	roomsFailure,
 	roomsRefresh,
 	roomsRequest,
 	roomsSuccess,
-	setSearch
+	setSearch,
+	toggleServerDropdown
 } from '../actions/rooms';
 import { mockedStore } from './mockedStore';
 import { initialState } from './rooms';
@@ -41,6 +43,18 @@ describe('test selectedUsers reducer', () => {
 		mockedStore.dispatch(setSearch('dog'));
 		const state = mockedStore.getState().rooms;
 		expect(state.searchText).toEqual('dog');
+	});
+
+	it('should return modified store after call closeServerDropdown', () => {
+		mockedStore.dispatch(closeServerDropdown());
+		const state = mockedStore.getState().rooms;
+		expect(state.closeServerDropdown).toEqual(!initialState.closeServerDropdown);
+	});
+
+	it('should return modified store after call toggleServerDropdown', () => {
+		mockedStore.dispatch(toggleServerDropdown());
+		const state = mockedStore.getState().rooms;
+		expect(state.showServerDropdown).toEqual(!initialState.showServerDropdown);
 	});
 
 	it('should return modified store after call openSearchHeader', () => {

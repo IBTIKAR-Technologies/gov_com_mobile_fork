@@ -9,11 +9,20 @@ export default StyleSheet.create({
 	list: {
 		width: '100%'
 	},
-	serversListContainerHeader: {
+	dropdownContainerHeader: {
 		height: 41,
 		borderBottomWidth: StyleSheet.hairlineWidth,
 		alignItems: 'center',
 		flexDirection: 'row'
+	},
+	dropdownContainer: {
+		width: '100%',
+		position: 'absolute',
+		top: 0,
+		borderBottomWidth: StyleSheet.hairlineWidth
+	},
+	backdrop: {
+		...StyleSheet.absoluteFillObject
 	},
 	groupTitleContainer: {
 		paddingHorizontal: 12,

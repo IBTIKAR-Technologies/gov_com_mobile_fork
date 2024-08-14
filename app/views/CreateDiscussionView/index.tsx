@@ -148,7 +148,8 @@ class CreateChannelView extends React.Component<ICreateChannelViewProps, ICreate
 			<KeyboardView
 				style={{ backgroundColor: themes[theme].surfaceHover }}
 				contentContainerStyle={styles.container}
-				keyboardVerticalOffset={128}>
+				keyboardVerticalOffset={128}
+			>
 				<StatusBar />
 				<SafeAreaView testID='create-discussion-view' style={styles.container}>
 					<ScrollView {...scrollPersistTaps}>
@@ -185,7 +186,6 @@ class CreateChannelView extends React.Component<ICreateChannelViewProps, ICreate
 									title='Encrypted'
 									testID='room-actions-encrypt'
 									right={() => <Switch value={encrypted} onValueChange={this.onEncryptedChange} />}
-									additionalAcessibilityLabel={encrypted}
 								/>
 							</>
 						) : null}

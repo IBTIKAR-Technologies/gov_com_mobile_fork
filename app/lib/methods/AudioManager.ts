@@ -1,13 +1,13 @@
-import { AVPlaybackStatus, Audio } from 'expo-av';
-import { Q } from '@nozbe/watermelondb';
+import {  AVPlaybackStatus,  Audio } from 'expo-av';
+import {  Q } from '@nozbe/watermelondb';
 import moment from 'moment';
 
-import { getMessageById } from '../database/services/Message';
+import {  getMessageById } from '../database/services/Message';
 import database from '../database';
-import { getFilePathAudio } from './getFilePathAudio';
-import { TMessageModel } from '../../definitions';
-import { AUDIO_MODE } from '../constants';
-import { emitter } from './helpers';
+import {  getFilePathAudio } from './getFilePathAudio';
+import {  TMessageModel } from '../../definitions';
+import {  AUDIO_MODE } from '../constants';
+import {  emitter } from './helpers';
 
 const getAudioKey = ({ msgId, rid, uri }: { msgId?: string; rid: string; uri: string }) => `${msgId}-${rid}-${uri}`;
 

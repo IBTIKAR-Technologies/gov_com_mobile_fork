@@ -317,8 +317,7 @@ async function login(credentials: ICredentials, isFromWebView = false): Promise<
 			enableMessageParserEarlyAdoption,
 			alsoSendThreadToChannel: result.me.settings?.preferences?.alsoSendThreadToChannel,
 			bio: result.me.bio,
-			nickname: result.me.nickname,
-			requirePasswordChange: result.me.requirePasswordChange
+			nickname: result.me.nickname
 		};
 		return user;
 	}

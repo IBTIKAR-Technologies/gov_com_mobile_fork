@@ -1,4 +1,4 @@
-package chat.rocket.reactnative;
+package mr.gov.mtnima.govcom;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.Callback;

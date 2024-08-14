@@ -28,7 +28,8 @@ export const AutocompletePreview = ({ item, onPress }: IAutocompleteItemProps) =
 			onPress={() => onPress(item)}
 			underlayColor={colors.buttonBackgroundPrimaryPress}
 			style={styles.previewItem}
-			rippleColor={colors.buttonBackgroundPrimaryPress}>
+			rippleColor={colors.buttonBackgroundPrimaryPress}
+		>
 			{content}
 		</RectButton>
 	);

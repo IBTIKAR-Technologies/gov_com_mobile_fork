@@ -7,6 +7,7 @@ import { themes } from '../../lib/constants';
 import Status from '../Status';
 import { useTheme } from '../../theme';
 import { TUserStatus, IOmnichannelSource } from '../../definitions';
+import Announce from '../../svgs/Announce';
 
 const styles = StyleSheet.create({
 	icon: {
@@ -50,7 +51,7 @@ const RoomTypeIcon = React.memo(
 		} else if (type === 'discussion') {
 			icon = 'discussions';
 		} else if (type === 'c') {
-			icon = 'channel-public';
+			return <Announce />;
 		} else if (type === 'd' && isGroupChat) {
 			icon = 'message';
 		}

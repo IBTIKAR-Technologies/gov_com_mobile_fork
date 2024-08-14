@@ -3,10 +3,17 @@ import { StyleSheet } from 'react-native';
 import { useTheme } from '../../../../theme';
 import sharedStyles from '../../../../views/Styles';
 
-export default function useStyle() {
+export default function useStyle(variant: string) {
 	const { colors } = useTheme();
 	const style = StyleSheet.create({
-		container: { height: 108, flex: 1, borderWidth: 1, borderRadius: 4, marginTop: 8, borderColor: colors.surfaceNeutral },
+		container: {
+			paddingVertical: 15,
+			flexShrink: 1,
+			borderWidth: 1,
+			borderRadius: 16,
+			marginTop: 8,
+			borderColor: colors.surfaceNeutral
+		},
 		callInfoContainer: { flex: 1, alignItems: 'center', paddingLeft: 16, flexDirection: 'row' },
 		infoContainerText: {
 			fontSize: 12,
@@ -22,11 +29,10 @@ export default function useStyle() {
 			borderRadius: 4
 		},
 		callToActionContainer: {
-			height: 48,
-			backgroundColor: colors.surfaceNeutral,
 			flexDirection: 'row',
 			alignItems: 'center',
-			paddingLeft: 16
+			paddingLeft: 16,
+			paddingVertical: 10
 		},
 		callToActionButtonText: {
 			fontSize: 12,
@@ -43,7 +49,7 @@ export default function useStyle() {
 			minWidth: 50,
 			alignItems: 'center',
 			justifyContent: 'center',
-			height: 32,
+			paddingVertical: 7,
 			borderRadius: 4,
 			marginRight: 8,
 			paddingHorizontal: 8

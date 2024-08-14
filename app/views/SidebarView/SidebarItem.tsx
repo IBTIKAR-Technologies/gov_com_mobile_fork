@@ -23,11 +23,14 @@ const Item = React.memo(({ left, right, text, onPress, testID, current, theme, t
 		testID={testID}
 		onPress={onPress}
 		style={[styles.item, current && { backgroundColor: themes[theme].strokeLight }]}
-		accessible
-		accessibilityLabel={text}>
+	>
 		<View style={styles.itemHorizontal}>{left}</View>
 		<View style={styles.itemCenter}>
-			<Text testID={`sidebar-custom-status-text-${text}`} style={[styles.itemText, { color: textColor || themes[theme].fontTitlesLabels }]} numberOfLines={1}>
+			<Text
+				style={[styles.itemText, { color: textColor || themes[theme].fontTitlesLabels }]}
+				numberOfLines={1}
+				accessibilityLabel={text}
+			>
 				{text}
 			</Text>
 		</View>

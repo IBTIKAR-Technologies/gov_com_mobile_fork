@@ -68,11 +68,11 @@ export const ActionsButton = () => {
 			);
 		}
 
-		options.push({
-			title: I18n.t('Create_Discussion'),
-			icon: 'discussions',
-			onPress: () => createDiscussion()
-		});
+		// options.push({
+		// 	title: I18n.t('Create_Discussion'),
+		// 	icon: 'discussions',
+		// 	onPress: () => createDiscussion()
+		// });
 
 		closeEmojiKeyboardAndAction(showActionSheet, { options });
 	};

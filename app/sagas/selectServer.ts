@@ -167,8 +167,7 @@ const handleSelectServer = function* handleSelectServer({ server, version, fetch
 					roles: userRecord.roles,
 					avatarETag: userRecord.avatarETag,
 					bio: userRecord.bio,
-					nickname: userRecord.nickname,
-					requirePasswordChange: userRecord.requirePasswordChange
+					nickname: userRecord.nickname
 				};
 			} else {
 				const token = UserPreferences.getString(`${TOKEN_KEY}-${userId}`);

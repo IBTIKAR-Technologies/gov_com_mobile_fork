@@ -44,6 +44,7 @@ export interface IUnreadBadge {
 
 const UnreadBadge = React.memo(
 	({
+		alert,
 		unread,
 		userMentions,
 		groupMentions,
@@ -55,18 +56,18 @@ const UnreadBadge = React.memo(
 		hideMentionStatus,
 		hideUnreadStatus
 	}: IUnreadBadge) => {
-		const { theme } = useTheme();
+		const { theme, colors } = useTheme();
 
-		if ((!unread || unread <= 0) && !tunread?.length) {
+		if ((!unread || unread <= 0) && !tunread?.length && !alert) {
 			return null;
 		}
 
-		if (hideUnreadStatus && hideMentionStatus) {
+		if (hideUnreadStatus && hideMentionStatus && !alert) {
 			return null;
 		}
 
 		// Return null when hideUnreadStatus is true and isn't a direct mention
-		if (hideUnreadStatus && !((userMentions && userMentions > 0) || tunreadUser?.length)) {
+		if (hideUnreadStatus && !((userMentions && userMentions > 0) || tunreadUser?.length) && !alert) {
 			return null;
 		}
 
@@ -80,9 +81,9 @@ const UnreadBadge = React.memo(
 			tunreadGroup
 		});
 
-		if (!backgroundColor) {
-			return null;
-		}
+		// if (!backgroundColor) {
+		// 	return null;
+		// }
 		let text: any = unread || tunread?.length;
 		if (small && text >= 100) {
 			text = '+99';
@@ -90,7 +91,7 @@ const UnreadBadge = React.memo(
 		if (!small && text >= 1000) {
 			text = '+999';
 		}
-		text = text.toString();
+		text = text?.toString();
 
 		let minWidth = 21;
 		if (small) {
@@ -101,10 +102,14 @@ const UnreadBadge = React.memo(
 			<View
 				style={[
 					small ? styles.unreadNumberContainerSmall : styles.unreadNumberContainerNormal,
-					{ backgroundColor, minWidth },
+					{ backgroundColor: colors.surfaceRoom, minWidth },
 					style
-				]}>
-				<Text style={[styles.unreadText, small && styles.textSmall, { color }]} numberOfLines={1}>
+				]}
+			>
+				<Text
+					style={[styles.unreadText, small && styles.textSmall, { color: text === '0' ? colors.surfaceRoom : color }]}
+					numberOfLines={1}
+				>
 					{text}
 				</Text>
 			</View>

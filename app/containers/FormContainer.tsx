@@ -7,7 +7,6 @@ import scrollPersistTaps from '../lib/methods/helpers/scrollPersistTaps';
 import KeyboardView from './KeyboardView';
 import { useTheme } from '../theme';
 import StatusBar from './StatusBar';
-import AppVersion from './AppVersion';
 import { isTablet } from '../lib/methods/helpers';
 import SafeAreaView from './SafeAreaView';
 
@@ -22,29 +21,38 @@ const styles = StyleSheet.create({
 	}
 });
 
-export const FormContainerInner = ({ children }: { children: (React.ReactElement | null)[] }) => (
-	<View style={[sharedStyles.container, isTablet && sharedStyles.tabletScreenContent]}>{children}</View>
+export const FormContainerInner = ({ children, style }: { style: any; children: (React.ReactElement | null)[] }) => (
+	<View style={[sharedStyles.container, isTablet && sharedStyles.tabletScreenContent, style || {}]}>{children}</View>
 );
 
-const FormContainer = ({ children, testID, ...props }: IFormContainer) => {
+const FormContainer = ({ children, testID, scrollViewStyle, transparent, ...props }: IFormContainer) => {
 	const { theme } = useTheme();
 
 	return (
 		<KeyboardView
-			style={{ backgroundColor: themes[theme].surfaceRoom }}
+			style={{ backgroundColor: transparent ? 'transparent' : themes[theme].surfaceRoom }}
 			contentContainerStyle={sharedStyles.container}
 			keyboardVerticalOffset={128}
 		>
 			<StatusBar />
 			<ScrollView
-				style={sharedStyles.container}
-				contentContainerStyle={[sharedStyles.containerScrollView, styles.scrollView]}
+				style={[sharedStyles.container, transparent ? { backgroundColor: 'transparent}' } : {}]}
+				contentContainerStyle={
+					scrollViewStyle
+						? [
+								sharedStyles.containerScrollView,
+								styles.scrollView,
+								scrollViewStyle,
+								transparent ? { backgroundColor: 'transparent' } : {}
+						  ]
+						: [sharedStyles.containerScrollView, styles.scrollView, transparent ? { backgroundColor: 'transparent}' } : {}]
+				}
 				{...scrollPersistTaps}
 				{...props}
 			>
-				<SafeAreaView testID={testID} style={{ backgroundColor: themes[theme].surfaceRoom }}>
+				<SafeAreaView testID={testID} style={{ backgroundColor: transparent ? 'transparent' : themes[theme].surfaceRoom }}>
 					{children}
-					<AppVersion theme={theme} />
+					{/* <AppVersion theme={theme} /> */}
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardView>

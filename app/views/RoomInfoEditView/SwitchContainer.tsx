@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { Text, TextStyle, View, ViewStyle } from 'react-native';
 
 import { TSupportedThemes } from '../../theme';
@@ -7,7 +7,6 @@ import styles from './styles';
 import Switch from '../../containers/Switch';
 
 interface ISwitchContainer {
-	children?: ReactElement | null;
 	value: boolean;
 	disabled?: boolean;
 	leftLabelPrimary: string;
@@ -48,7 +47,13 @@ const SwitchContainer: React.FC<ISwitchContainer> = React.memo(
 						</Text>
 					</View>
 				)}
-				<Switch style={styles.switch} onValueChange={onValueChange} value={value} disabled={disabled} testID={testID} />
+				<Switch
+					style={styles.switch}
+					onValueChange={onValueChange}
+					value={value}
+					disabled={disabled}
+					testID={testID}
+				/>
 				{rightLabelPrimary && (
 					<View style={[styles.switchLabelContainer, labelContainerStyle]}>
 						<Text style={[styles.switchLabelPrimary, { color: themes[theme].fontTitlesLabels }, leftLabelStyle]}>

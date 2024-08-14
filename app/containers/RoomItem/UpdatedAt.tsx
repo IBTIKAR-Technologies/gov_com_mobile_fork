@@ -23,12 +23,13 @@ const UpdatedAt = React.memo(({ date, hideUnreadStatus, alert }: IUpdatedAtProps
 					!hideUnreadStatus && [
 						styles.updateAlert,
 						{
-							color: colors.badgeBackgroundLevel2
+							color: colors.surfaceRoom
 						}
 					]
 			]}
 			ellipsizeMode='tail'
-			numberOfLines={1}>
+			numberOfLines={1}
+		>
 			{capitalize(date)}
 		</Text>
 	);

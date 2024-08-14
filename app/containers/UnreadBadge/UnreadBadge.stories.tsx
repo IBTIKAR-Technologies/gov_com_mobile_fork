@@ -16,7 +16,8 @@ const StoryTester = ({ children }: { children: React.ReactElement | React.ReactE
 			flexDirection: 'row',
 			alignItems: 'center',
 			justifyContent: 'space-evenly'
-		}}>
+		}}
+	>
 		{children}
 	</View>
 );

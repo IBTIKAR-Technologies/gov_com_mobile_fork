@@ -27,8 +27,10 @@ export const handleAndroidBltPermission = async (): Promise<void> => {
 };
 
 export const videoConfJoin = async (callId: string, cam?: boolean, mic?: boolean, fromPush?: boolean): Promise<void> => {
+	console.log('callIdvideoConfJoin', callId);
 	try {
 		const result = await Services.videoConferenceJoin(callId, cam, mic);
+		console.log('resultsssss', result);
 		if (result.success) {
 			const { url, providerName } = result;
 			if (providerName === 'jitsi') {
@@ -43,6 +45,6 @@ export const videoConfJoin = async (callId: string, cam?: boolean, mic?: boolean
 		} else {
 			showErrorAlert(i18n.t('error-init-video-conf'));
 		}
-		log(e);
+		console.log('videoConfJoin errr', e);
 	}
 };

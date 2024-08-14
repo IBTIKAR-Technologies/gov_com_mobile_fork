@@ -389,55 +389,55 @@ const MessageActions = React.memo(
 				}
 
 				// Quote
-				if (!isReadOnly && !videoConfBlock) {
-					options.push({
-						title: I18n.t('Quote'),
-						icon: 'quote',
-						onPress: () => handleQuote(message.id)
-					});
-				}
+				// if (!isReadOnly && !videoConfBlock) {
+				// 	options.push({
+				// 		title: I18n.t('Quote'),
+				// 		icon: 'quote',
+				// 		onPress: () => handleQuote(message.id)
+				// 	});
+				// }
 
 				// Reply
-				if (!isReadOnly && !tmid) {
-					options.push({
-						title: I18n.t('Reply_in_Thread'),
-						icon: 'threads',
-						onPress: () => handleReply(message.id)
-					});
-				}
+				// if (!isReadOnly && !tmid) {
+				// 	options.push({
+				// 		title: I18n.t('Reply_in_Thread'),
+				// 		icon: 'threads',
+				// 		onPress: () => handleReply(message.id)
+				// 	});
+				// }
 
 				// Reply in DM
-				if (room.t !== 'd' && room.t !== 'l' && !videoConfBlock) {
-					options.push({
-						title: I18n.t('Reply_in_direct_message'),
-						icon: 'arrow-back',
-						onPress: () => handleReplyInDM(message),
-						enabled: permissions.hasCreateDirectMessagePermission
-					});
-				}
+				// if (room.t !== 'd' && room.t !== 'l' && !videoConfBlock) {
+				// 	options.push({
+				// 		title: I18n.t('Reply_in_direct_message'),
+				// 		icon: 'arrow-back',
+				// 		onPress: () => handleReplyInDM(message),
+				// 		enabled: permissions.hasCreateDirectMessagePermission
+				// 	});
+				// }
 
 				// Create Discussion
-				options.push({
-					title: I18n.t('Start_a_Discussion'),
-					icon: 'discussions',
-					onPress: () => handleCreateDiscussion(message),
-					enabled: permissions.hasCreateDiscussionOtherUserPermission
-				});
+				// options.push({
+				// 	title: I18n.t('Start_a_Discussion'),
+				// 	icon: 'discussions',
+				// 	onPress: () => handleCreateDiscussion(message),
+				// 	enabled: permissions.hasCreateDiscussionOtherUserPermission
+				// });
 
-				if (compareServerVersion(serverVersion, 'greaterThanOrEqualTo', '6.2.0') && !videoConfBlock) {
-					options.push({
-						title: I18n.t('Forward'),
-						icon: 'arrow-forward',
-						onPress: () => handleShareMessage(message)
-					});
-				}
+				// if (compareServerVersion(serverVersion, 'greaterThanOrEqualTo', '6.2.0') && !videoConfBlock) {
+				// 	options.push({
+				// 		title: I18n.t('Forward'),
+				// 		icon: 'arrow-forward',
+				// 		onPress: () => handleShareMessage(message)
+				// 	});
+				// }
 
 				// Permalink
-				options.push({
-					title: I18n.t('Get_link'),
-					icon: 'link',
-					onPress: () => handlePermalink(message)
-				});
+				// options.push({
+				// 	title: I18n.t('Get_link'),
+				// 	icon: 'link',
+				// 	onPress: () => handlePermalink(message)
+				// });
 
 				// Copy
 				if (!videoConfBlock) {
@@ -449,41 +449,41 @@ const MessageActions = React.memo(
 				}
 
 				// Share
-				options.push({
-					title: I18n.t('Share'),
-					icon: 'share',
-					onPress: () => handleShare(message)
-				});
+				// options.push({
+				// 	title: I18n.t('Share'),
+				// 	icon: 'share',
+				// 	onPress: () => handleShare(message)
+				// });
 
 				// Edit
-				const isEditAllowed = allowEdit(message);
-				if (!videoConfBlock && (isOwn(message) || isEditAllowed)) {
-					options.push({
-						title: I18n.t('Edit'),
-						icon: 'edit',
-						onPress: () => handleEdit(message.id),
-						enabled: isEditAllowed
-					});
-				}
+				// const isEditAllowed = allowEdit(message);
+				// if (!videoConfBlock && (isOwn(message) || isEditAllowed)) {
+				// 	options.push({
+				// 		title: I18n.t('Edit'),
+				// 		icon: 'edit',
+				// 		onPress: () => handleEdit(message.id),
+				// 		enabled: isEditAllowed
+				// 	});
+				// }
 
 				// Pin
-				if (Message_AllowPinning && !videoConfBlock) {
-					options.push({
-						title: I18n.t(message.pinned ? 'Unpin' : 'Pin'),
-						icon: 'pin',
-						onPress: () => handlePin(message),
-						enabled: permissions?.hasPinPermission
-					});
-				}
+				// if (Message_AllowPinning && !videoConfBlock) {
+				// 	options.push({
+				// 		title: I18n.t(message.pinned ? 'Unpin' : 'Pin'),
+				// 		icon: 'pin',
+				// 		onPress: () => handlePin(message),
+				// 		enabled: permissions?.hasPinPermission
+				// 	});
+				// }
 
 				// Star
-				if (Message_AllowStarring && !videoConfBlock) {
-					options.push({
-						title: I18n.t(message.starred ? 'Unstar' : 'Star'),
-						icon: message.starred ? 'star-filled' : 'star',
-						onPress: () => handleStar(message)
-					});
-				}
+				// if (Message_AllowStarring && !videoConfBlock) {
+				// 	options.push({
+				// 		title: I18n.t(message.starred ? 'Unstar' : 'Star'),
+				// 		icon: message.starred ? 'star-filled' : 'star',
+				// 		onPress: () => handleStar(message)
+				// 	});
+				// }
 
 				// Mark as unread
 				if (message.u && message.u._id !== user.id) {

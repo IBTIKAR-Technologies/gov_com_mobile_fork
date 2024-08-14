@@ -18,7 +18,7 @@ export const Default = (): ReactElement | null => {
 					<Gap />
 				</>
 			)}
-			<BaseButton
+			{/* <BaseButton
 				onPress={openEmojiKeyboard}
 				testID='message-composer-open-emoji'
 				accessibilityLabel='Open_emoji_selector'
@@ -37,7 +37,7 @@ export const Default = (): ReactElement | null => {
 				testID='message-composer-mention'
 				accessibilityLabel='Open_mention_autocomplete'
 				icon='mention'
-			/>
+			/> */}
 		</>
 	);
 };

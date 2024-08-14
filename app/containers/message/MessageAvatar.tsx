@@ -17,10 +17,10 @@ const MessageAvatar = React.memo(({ isHeader, avatar, author, small, navToRoomIn
 			});
 		return (
 			<Avatar
-				style={small ? styles.avatarSmall : styles.avatar}
+				style={[small ? styles.avatarSmall : styles.avatar]}
 				text={avatar ? '' : author.username}
 				size={small ? 20 : 36}
-				borderRadius={4}
+				borderRadius={20}
 				onPress={onPress}
 				getCustomEmoji={getCustomEmoji}
 				avatar={avatar}

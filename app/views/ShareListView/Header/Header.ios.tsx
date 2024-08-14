@@ -44,7 +44,8 @@ const Header = React.memo(({ searching, onChangeSearchText, initSearch, cancelSe
 					borderColor: themes[theme].strokeLight,
 					backgroundColor: themes[theme].surfaceNeutral
 				}
-			]}>
+			]}
+		>
 			{!searching ? <HeaderButton.CancelModal onPress={ShareExtension.close} testID='share-extension-close' /> : null}
 			<SearchBox
 				value={text}

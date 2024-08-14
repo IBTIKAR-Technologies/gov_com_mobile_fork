@@ -35,8 +35,6 @@ const Item = ({ item, selected, onItemPress }: IItem) => {
 			right={() => (selected ? <List.Icon name='check' color={colors.badgeBackgroundLevel2} /> : null)}
 			onPress={onItemPress}
 			translateTitle={false}
-			additionalAcessibilityLabel={selected}
-			additionalAcessibilityLabelCheck
 		/>
 	);
 };

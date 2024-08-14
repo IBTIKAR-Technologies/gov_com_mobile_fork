@@ -71,7 +71,7 @@ const SecurityPrivacyView = ({ navigation }: ISecurityPrivacyViewProps): JSX.Ele
 			<List.Container testID='security-privacy-view-list'>
 				<List.Section>
 					<List.Separator />
-					{e2eEnabled ? (
+					{/* {e2eEnabled ? (
 						<>
 							<List.Item
 								title='E2E_Encryption'
@@ -81,7 +81,7 @@ const SecurityPrivacyView = ({ navigation }: ISecurityPrivacyViewProps): JSX.Ele
 							/>
 							<List.Separator />
 						</>
-					) : null}
+					) : null} */}
 					<List.Item
 						title='Screen_lock'
 						showActionIndicator
@@ -91,7 +91,7 @@ const SecurityPrivacyView = ({ navigation }: ISecurityPrivacyViewProps): JSX.Ele
 					<List.Separator />
 				</List.Section>
 
-				{!isFDroidBuild ? (
+				{/* {!isFDroidBuild ? (
 					<>
 						<List.Section>
 							<List.Separator />
@@ -99,20 +99,18 @@ const SecurityPrivacyView = ({ navigation }: ISecurityPrivacyViewProps): JSX.Ele
 								title='Log_analytics_events'
 								testID='security-privacy-view-analytics-events'
 								right={() => <Switch value={analyticsEventsState} onValueChange={toggleAnalyticsEvents} />}
-								additionalAcessibilityLabel={analyticsEventsState}
 							/>
 							<List.Separator />
 							<List.Item
 								title='Send_crash_report'
 								testID='security-privacy-view-crash-report'
 								right={() => <Switch value={crashReportState} onValueChange={toggleCrashReport} />}
-								additionalAcessibilityLabel={analyticsEventsState}
 							/>
 							<List.Separator />
 							<List.Info info='Crash_report_disclaimer' />
 						</List.Section>
 					</>
-				) : null}
+				) : null} */}
 			</List.Container>
 		</SafeAreaView>
 	);

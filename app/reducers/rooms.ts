@@ -7,6 +7,8 @@ export interface IRooms {
 	failure: boolean;
 	errorMessage: Record<string, any> | string;
 	searchText: string;
+	showServerDropdown: boolean;
+	closeServerDropdown: boolean;
 	showSearchHeader: boolean;
 }
 
@@ -16,6 +18,8 @@ export const initialState: IRooms = {
 	failure: false,
 	errorMessage: {},
 	searchText: '',
+	showServerDropdown: false,
+	closeServerDropdown: false,
 	showSearchHeader: false
 };
 
@@ -52,6 +56,16 @@ export default function rooms(state = initialState, action: IRoomsAction): IRoom
 			return {
 				...state,
 				searchText: action.searchText
+			};
+		case ROOMS.CLOSE_SERVER_DROPDOWN:
+			return {
+				...state,
+				closeServerDropdown: !state.closeServerDropdown
+			};
+		case ROOMS.TOGGLE_SERVER_DROPDOWN:
+			return {
+				...state,
+				showServerDropdown: !state.showServerDropdown
 			};
 		case ROOMS.OPEN_SEARCH_HEADER:
 			return {

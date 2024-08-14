@@ -9,7 +9,6 @@ import { useVideoConf } from '../../../lib/hooks/useVideoConf';
 import { useTheme } from '../../../theme';
 import styles from '../styles';
 import { compareServerVersion } from '../../../lib/methods/helpers';
-import { useE2EEWarning } from '../hooks';
 
 function BaseButton({
 	danger,
@@ -42,10 +41,10 @@ function BaseButton({
 }
 
 function CallButton({ rid, roomFromRid }: { rid: string; isDirect: boolean; roomFromRid: boolean }): React.ReactElement | null {
-	const { callEnabled, disabledTooltip, showInitCallActionSheet } = useVideoConf(rid);
+	const { callEnabled, disabledTooltip, startCallImmediately } = useVideoConf(rid);
 	return (
 		<BaseButton
-			onPress={showInitCallActionSheet}
+			onPress={startCallImmediately}
 			iconName='phone'
 			label={i18n.t('Call')}
 			enabled={!disabledTooltip}
@@ -90,7 +89,6 @@ export const RoomInfoButtons = ({
 	const isDirectFromSaved = isDirect && fromRid && room;
 	const isIgnored = room?.ignored?.includes?.(roomUserId || '');
 	const isBlocked = room?.blocker;
-	const hasE2EEWarning = useE2EEWarning(room);
 
 	const renderIgnoreUser = isDirectFromSaved && !isFromDm && !isDmWithMyself;
 	const renderBlockUser = !itsMe && isDirectFromSaved && isFromDm && !isDmWithMyself;
@@ -100,13 +98,13 @@ export const RoomInfoButtons = ({
 	return (
 		<View style={styles.roomButtonsContainer}>
 			<BaseButton onPress={handleCreateDirectMessage} label={i18n.t('Message')} iconName='message' />
-			{hasE2EEWarning ? null : <CallButton isDirect={isDirect} rid={rid} roomFromRid={!!roomFromRid} />}
-			<BaseButton
+			{/* <CallButton isDirect={isDirect} rid={rid} roomFromRid={!!roomFromRid} /> */}
+			{/* <BaseButton
 				onPress={handleIgnoreUser}
 				label={i18n.t(isIgnored ? 'Unignore' : 'Ignore')}
 				iconName='ignore'
 				showIcon={!!renderIgnoreUser}
-			/>
+			/> */}
 			<BaseButton
 				onPress={handleBlockUser}
 				label={i18n.t(`${isBlocked ? 'Unblock' : 'Block'}`)}

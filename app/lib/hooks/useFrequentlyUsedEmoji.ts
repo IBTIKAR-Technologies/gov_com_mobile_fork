@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { unstable_batchedUpdates } from 'react-native';
 import { Q } from '@nozbe/watermelondb';
 
 import database from '../database';
@@ -30,8 +31,11 @@ export const useFrequentlyUsedEmoji = (
 					.slice(0, DEFAULT_EMOJIS.length);
 			}
 
-			setFrequentlyUsed(frequentlyUsedEmojis);
-			setLoaded(true);
+			// TODO: remove once we update to React 18
+			unstable_batchedUpdates(() => {
+				setFrequentlyUsed(frequentlyUsedEmojis);
+				setLoaded(true);
+			});
 		};
 		getFrequentlyUsedEmojis();
 	}, []);

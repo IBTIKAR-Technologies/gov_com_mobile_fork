@@ -2,7 +2,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import CookieManager from '@react-native-cookies/cookies';
 import { useNavigation } from '@react-navigation/native';
 import React, { useLayoutEffect } from 'react';
-import { Linking, Share } from 'react-native';
+import { Linking, Share, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useDispatch } from 'react-redux';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -44,17 +44,17 @@ const SettingsView = (): React.ReactElement => {
 	const userId = useAppSelector(state => getUserSelector(state).id);
 	const { server, version } = useAppSelector(state => state.server);
 
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			headerLeft: () =>
-				isMasterDetail ? (
-					<HeaderButton.CloseModal navigation={navigation} testID='settings-view-close' />
-				) : (
-					<HeaderButton.Drawer navigation={navigation} testID='settings-view-drawer' />
-				),
-			title: I18n.t('Settings')
-		});
-	}, [navigation, isMasterDetail]);
+	// useLayoutEffect(() => {
+	// 	navigation.setOptions({
+	// 		headerLeft: () =>
+	// 			isMasterDetail ? (
+	// 				<HeaderButton.CloseModal navigation={navigation} testID='settings-view-close' />
+	// 			) : (
+	// 				<HeaderButton.Drawer navigation={navigation} testID='settings-view-drawer' />
+	// 			),
+	// 		title: I18n.t('Settings')
+	// 	});
+	// }, [navigation, isMasterDetail]);
 
 	const checkCookiesAndLogout = async () => {
 		const db = database.servers;
@@ -124,7 +124,7 @@ const SettingsView = (): React.ReactElement => {
 			device: ${getDeviceModel}
 		`);
 		try {
-			await Linking.openURL(`mailto:${email}?subject=${subject}&body=${description}`);
+			await Linking.openURL(`tel:47004200`);
 		} catch (e) {
 			logEvent(events.SE_CONTACT_US_F);
 			showErrorAlert(I18n.t('error-email-send-failed', { message: 'support@rocket.chat' }));
@@ -157,7 +157,7 @@ const SettingsView = (): React.ReactElement => {
 
 	const copyAppVersion = () => {
 		logEvent(events.SE_COPY_APP_VERSION, { appVersion: getReadableVersion });
-		saveToClipboard(getReadableVersion);
+		saveToClipboard('0.9.1');
 	};
 
 	const onPressLicense = () => {
@@ -201,13 +201,13 @@ const SettingsView = (): React.ReactElement => {
 						showActionIndicator
 						testID='settings-view-language'
 					/>
-					<List.Separator />
-					{!isFDroidBuild ? (
+					{/* <List.Separator /> */}
+					{/* {!isFDroidBuild ? (
 						<>
 							<List.Item title='Review_this_app' showActionIndicator onPress={onReviewPress} testID='settings-view-review-app' />
 						</>
-					) : null}
-					<List.Separator />
+					) : null} */}
+					{/* <List.Separator />
 					<List.Item title='Share_this_app' showActionIndicator onPress={shareApp} testID='settings-view-share-app' />
 					<List.Separator />
 					<List.Item
@@ -215,14 +215,14 @@ const SettingsView = (): React.ReactElement => {
 						showActionIndicator
 						onPress={() => navigateToScreen('DefaultBrowserView')}
 						testID='settings-view-default-browser'
-					/>
-					<List.Separator />
+					/> */}
+					{/* <List.Separator />
 					<List.Item
 						title='Theme'
 						showActionIndicator
 						onPress={() => navigateToScreen('ThemeView')}
 						testID='settings-view-theme'
-					/>
+					/> */}
 					<List.Separator />
 					<List.Item
 						title='Media_auto_download'
@@ -241,16 +241,16 @@ const SettingsView = (): React.ReactElement => {
 				</List.Section>
 
 				<List.Section>
-					<List.Separator />
-					<List.Item title='License' onPress={onPressLicense} showActionIndicator testID='settings-view-license' />
+					{/* <List.Separator />
+					<List.Item title='License' onPress={onPressLicense} showActionIndicator testID='settings-view-license' /> */}
 					<List.Separator />
 					<List.Item
-						title={I18n.t('Version_no', { version: getReadableVersion })}
+						title={I18n.t('Version_no', { version: '0.9.1' })}
 						onPress={copyAppVersion}
 						testID='settings-view-version'
 						translateTitle={false}
 					/>
-					<List.Separator />
+					{/* <List.Separator />
 					<List.Item
 						title={I18n.t('Server_version', { version })}
 						onPress={copyServerVersion}
@@ -258,7 +258,7 @@ const SettingsView = (): React.ReactElement => {
 						testID='settings-view-server-version'
 						translateTitle={false}
 						translateSubtitle={false}
-					/>
+					/> */}
 					<List.Separator />
 				</List.Section>
 
@@ -287,3 +287,15 @@ const SettingsView = (): React.ReactElement => {
 };
 
 export default SettingsView;
+const styles = StyleSheet.create({
+	logoutBackground: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#f0f0f0' // Custom background color
+	},
+	logoutMessage: {
+		fontSize: 18,
+		color: '#333' // Custom text color
+	}
+});

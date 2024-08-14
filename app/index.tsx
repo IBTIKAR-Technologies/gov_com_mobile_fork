@@ -1,14 +1,18 @@
 import React from 'react';
-import { Dimensions, EmitterSubscription, Linking } from 'react-native';
+import { Dimensions, Linking } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Orientation from 'react-native-orientation-locker';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import RNScreens from 'react-native-screens';
 import { Provider } from 'react-redux';
 import Clipboard from '@react-native-clipboard/clipboard';
+import RNCallKeep from 'react-native-callkeep';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { acceptCall, cancelCall } from './actions/videoConf';
 import AppContainer from './AppContainer';
 import { appInit, appInitLocalSettings, setMasterDetail as setMasterDetailAction } from './actions/app';
-import { deepLinkingOpen } from './actions/deepLinking';
+import { deepLinkingClickCallPush, deepLinkingOpen } from './actions/deepLinking';
 import { ActionSheetProvider } from './containers/ActionSheet';
 import InAppNotification from './containers/InAppNotification';
 import Loading from './containers/Loading';
@@ -72,7 +76,6 @@ const parseDeepLinking = (url: string) => {
 
 export default class Root extends React.Component<{}, IState> {
 	private listenerTimeout!: any;
-	private dimensionsListener?: EmitterSubscription;
 
 	constructor(props: any) {
 		super(props);
@@ -92,6 +95,9 @@ export default class Root extends React.Component<{}, IState> {
 		};
 		if (isTablet) {
 			this.initTablet();
+			Orientation.unlockAllOrientations();
+		} else {
+			Orientation.lockToPortrait();
 		}
 		setNativeTheme(theme);
 	}
@@ -105,14 +111,16 @@ export default class Root extends React.Component<{}, IState> {
 				}
 			});
 		}, 5000);
-		this.dimensionsListener = Dimensions.addEventListener('change', this.onDimensionsChange);
+		Dimensions.addEventListener('change', this.onDimensionsChange);
 	}
 
 	componentWillUnmount() {
 		clearTimeout(this.listenerTimeout);
-		this.dimensionsListener?.remove?.();
+		Dimensions.removeEventListener('change', this.onDimensionsChange);
 
 		unsubscribeTheme();
+		RNCallKeep.removeEventListener('answerCall');
+		RNCallKeep.removeEventListener('endCall');
 	}
 
 	init = async () => {
@@ -204,7 +212,8 @@ export default class Root extends React.Component<{}, IState> {
 							themePreferences,
 							setTheme: this.setTheme,
 							colors: colors[theme]
-						}}>
+						}}
+					>
 						<DimensionsContext.Provider
 							value={{
 								width,
@@ -212,8 +221,9 @@ export default class Root extends React.Component<{}, IState> {
 								scale,
 								fontScale,
 								setDimensions: this.setDimensions
-							}}>
-							<GestureHandlerRootView>
+							}}
+						>
+							<GestureHandlerRootView style={{ flex: 1 }}>
 								<ActionSheetProvider>
 									<AppContainer />
 									<TwoFactor />

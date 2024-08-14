@@ -1,10 +1,9 @@
 import firebaseAnalytics from '@react-native-firebase/analytics';
 
-import { isFDroidBuild } from '../../../constants/environment';
+import { isFDroidBuild } from '../../../constants';
 import events from './events';
 
 const analytics = firebaseAnalytics || '';
-let bugsnag: any = '';
 let crashlytics: any;
 let reportCrashErrors = true;
 let reportAnalyticsEvents = true;
@@ -13,23 +12,10 @@ export const getReportCrashErrorsValue = (): boolean => reportCrashErrors;
 export const getReportAnalyticsEventsValue = (): boolean => reportAnalyticsEvents;
 
 if (!isFDroidBuild) {
-	bugsnag = require('@bugsnag/react-native').default;
-	bugsnag.start({
-		onBreadcrumb() {
-			return reportAnalyticsEvents;
-		},
-		onError(error: { breadcrumbs: string[] }) {
-			if (!reportAnalyticsEvents) {
-				error.breadcrumbs = [];
-			}
-			return reportCrashErrors;
-		}
-	});
 	crashlytics = require('@react-native-firebase/crashlytics').default;
 }
 
 export { analytics };
-export const loggerConfig = bugsnag.config;
 export { events };
 
 let metadata = {};
@@ -44,7 +30,6 @@ export const logEvent = (eventName: string, payload?: { [key: string]: any }): v
 	try {
 		if (!isFDroidBuild) {
 			analytics().logEvent(eventName, payload);
-			bugsnag.leaveBreadcrumb(eventName, payload);
 		}
 	} catch {
 		// Do nothing
@@ -54,7 +39,6 @@ export const logEvent = (eventName: string, payload?: { [key: string]: any }): v
 export const setCurrentScreen = (currentScreen: string): void => {
 	if (!isFDroidBuild) {
 		analytics().logScreenView({ screen_class: currentScreen, screen_name: currentScreen });
-		bugsnag.leaveBreadcrumb(currentScreen, { type: 'navigation' });
 	}
 };
 
@@ -69,10 +53,7 @@ export const toggleAnalyticsEventsReport = (value: boolean): boolean => {
 };
 
 export default (e: any): void => {
-	if (e instanceof Error && bugsnag && e.message !== 'Aborted' && !__DEV__) {
-		bugsnag.notify(e, (event: { addMetadata: (arg0: string, arg1: {}) => void }) => {
-			event.addMetadata('details', { ...metadata });
-		});
+	if (e instanceof Error && e.message !== 'Aborted' && !__DEV__) {
 		if (!isFDroidBuild) {
 			crashlytics().recordError(e);
 		}

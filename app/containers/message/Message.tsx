@@ -1,5 +1,5 @@
-import React, { useContext, useMemo } from 'react';
-import { View } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 
 import MessageContext from './Context';
@@ -7,7 +7,7 @@ import User from './User';
 import styles from './styles';
 import RepliedThread from './RepliedThread';
 import MessageAvatar from './MessageAvatar';
-import Attachments from './Components/Attachments';
+import Attachments from './Attachments';
 import Urls from './Urls';
 import Thread from './Thread';
 import Blocks from './Blocks';
@@ -20,8 +20,6 @@ import { themes } from '../../lib/constants';
 import { IMessage, IMessageInner, IMessageTouchable } from './interfaces';
 import { useTheme } from '../../theme';
 import RightIcons from './Components/RightIcons';
-import i18n from '../../i18n';
-import { getInfoMessage } from './utils';
 
 const MessageInner = React.memo((props: IMessageInner) => {
 	if (props.isPreview) {
@@ -84,6 +82,8 @@ const MessageInner = React.memo((props: IMessageInner) => {
 MessageInner.displayName = 'MessageInner';
 
 const Message = React.memo((props: IMessage) => {
+	const { user } = useContext(MessageContext);
+	const itsMe = props.author?._id === user?.id;
 	if (props.isThreadReply || props.isThreadSequential || props.isInfo || props.isIgnored) {
 		const thread = props.isThreadReply ? <RepliedThread {...props} /> : null;
 		return (
@@ -105,11 +105,11 @@ const Message = React.memo((props: IMessage) => {
 	}
 
 	return (
-		<View style={[styles.container, props.style]}>
-			<View style={styles.flex}>
-				<MessageAvatar {...props} />
-				<View style={[styles.messageContent, props.isHeader && styles.messageContentWithHeader]}>
-					<MessageInner {...props} />
+		<View style={[styles.container, props.style, { marginTop: props.isHeader ? 15 : 0 }]}>
+			<View style={[styles.flex, { flexDirection: itsMe ? 'row-reverse' : 'row' }]}>
+				{itsMe ? null : <MessageAvatar {...props} />}
+				<View style={[styles.messageContent, props.isHeader && !itsMe ? styles.messageContentWithHeader : {}]}>
+					<MessageInner {...props} itsMe={itsMe} />
 				</View>
 				{!props.isHeader ? (
 					<RightIcons
@@ -119,7 +119,6 @@ const Message = React.memo((props: IMessage) => {
 						hasError={props.hasError}
 						isReadReceiptEnabled={props.isReadReceiptEnabled}
 						unread={props.unread}
-						pinned={props.pinned}
 						isTranslated={props.isTranslated}
 					/>
 				) : null}
@@ -141,28 +140,6 @@ const MessageTouchable = React.memo((props: IMessageTouchable & IMessage) => {
 		backgroundColor = themes[theme].surfaceNeutral;
 	}
 
-	// temp accessibilityLabel
-	const accessibilityLabel = useMemo(() => {
-		let label = '';
-		label = props.isInfo ? (props.msg as string) : `${props.tmid ? `thread message ${props.msg}` : props.msg}`;
-		if (props.isThreadReply) {
-			label = `replying to ${props.tmid ? `thread message ${props.msg}` : props}`;
-		}
-		if (props.isThreadSequential) {
-			label = `thread message ${props.msg}`;
-		}
-		if (props.isEncrypted) {
-			label = i18n.t('Encrypted_message');
-		}
-		if (props.isInfo) {
-			// @ts-ignore
-			label = getInfoMessage({ ...props });
-		}
-		const hour = props.ts ? new Date(props.ts).toLocaleTimeString() : '';
-		const user = props.useRealName ? props.author?.name : props.author?.username || '';
-		return `${user} ${hour} ${label}`;
-	}, []);
-
 	if (props.hasError) {
 		return (
 			<View>
@@ -176,8 +153,9 @@ const MessageTouchable = React.memo((props: IMessageTouchable & IMessage) => {
 			onLongPress={onLongPress}
 			onPress={onPress}
 			disabled={(props.isInfo && !props.isThreadReply) || props.archived || props.isTemp || props.type === 'jitsi_call_started'}
-			style={{ backgroundColor }}>
-			<View accessible accessibilityLabel={accessibilityLabel}>
+			style={{ backgroundColor }}
+		>
+			<View>
 				<Message {...props} />
 			</View>
 		</Touchable>

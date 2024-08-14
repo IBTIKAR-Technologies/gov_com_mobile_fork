@@ -89,12 +89,6 @@ const testsForTheme = theme => {
 	});
 };
 
-describe('getUnreadStyle light theme', () => {
-	testsForTheme('light');
-});
-describe('getUnreadStyle dark theme', () => {
-	testsForTheme('dark');
-});
-describe('getUnreadStyle black theme', () => {
-	testsForTheme('black');
-});
+describe('getUnreadStyle light theme', () => testsForTheme('light'));
+describe('getUnreadStyle dark theme', () => testsForTheme('dark'));
+describe('getUnreadStyle black theme', () => testsForTheme('black'));

@@ -35,7 +35,8 @@ export default function DeviceNotificationSettings(): React.ReactElement {
 	return (
 		<CustomListSection
 			title='Device_notification_settings'
-			statusColor={!deviceNotificationEnabled ? colors.userPresenceBusy : colors.userPresenceOnline}>
+			statusColor={!deviceNotificationEnabled ? colors.userPresenceBusy : colors.userPresenceOnline}
+		>
 			<List.Separator />
 			<List.Item
 				title={!deviceNotificationEnabled ? 'Allow_push_notifications_for_rocket_chat' : 'No_further_action_is_needed'}

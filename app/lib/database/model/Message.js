@@ -84,8 +84,6 @@ export default class Message extends Model {
 
 	@json('md', sanitizer) md;
 
-	@json('content', sanitizer) content;
-
 	@field('comment') comment;
 
 	asPlain() {
@@ -127,7 +125,6 @@ export default class Message extends Model {
 			e2e: this.e2e,
 			tshow: this.tshow,
 			md: this.md,
-			content: this.content,
 			comment: this.comment
 		};
 	}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import I18n from '../../i18n';
@@ -9,7 +9,6 @@ import sharedStyles from '../Styles';
 import { makeThreadName } from '../../lib/methods/helpers/room';
 import { ISubscription, TThreadModel } from '../../definitions';
 import { getRoomTitle, isGroupChat, isAndroid, isTablet } from '../../lib/methods/helpers';
-import { getMessageById } from '../../lib/database/services/Message';
 
 const androidMarginLeft = isTablet ? 0 : 4;
 
@@ -37,14 +36,13 @@ const styles = StyleSheet.create({
 
 interface IHeader {
 	room: ISubscription;
-	thread: TThreadModel | string;
+	thread: TThreadModel;
 }
 
 const Header = React.memo(({ room, thread }: IHeader) => {
-	const [title, setTitle] = useState('');
 	const { theme } = useTheme();
 	let type;
-	if ((thread as TThreadModel)?.id || typeof thread === 'string') {
+	if (thread?.id) {
 		type = 'thread';
 	} else if (room?.prid) {
 		type = 'discussion';
@@ -72,31 +70,15 @@ const Header = React.memo(({ room, thread }: IHeader) => {
 
 	const textColor = themes[theme].fontDefault;
 
-	useEffect(() => {
-		(async () => {
-			if ((thread as TThreadModel)?.id) {
-				const name = makeThreadName(thread as TThreadModel);
-				if (name) {
-					setTitle(name);
-					return;
-				}
-			}
-			if (typeof thread === 'string') {
-				// only occurs when sending images and there is no message in the thread
-				const data = await getMessageById(thread);
-				const msg = data?.asPlain()?.msg;
-				if (msg) {
-					setTitle(msg);
-					return;
-				}
-			}
-			const name = getRoomTitle(room);
-			setTitle(name);
-		})();
-	}, []);
+	let title;
+	if (thread?.id) {
+		title = makeThreadName(thread);
+	} else {
+		title = getRoomTitle(room);
+	}
 
 	return (
-		<View style={styles.container} accessible accessibilityLabel={`${I18n.t('Sending_to')} ${title}`} accessibilityRole='header'>
+		<View style={styles.container}>
 			<View style={styles.inner}>
 				<Text numberOfLines={1} style={styles.text}>
 					<Text style={[styles.text, { color: textColor }]} numberOfLines={1}>
