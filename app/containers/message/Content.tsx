@@ -47,8 +47,7 @@ const Content = React.memo(
 			content = (
 				<Text
 					style={[styles.textInfo, { color: themes[theme].fontSecondaryInfo }]}
-					accessibilityLabel={I18n.t('Encrypted_message')}
-				>
+					accessibilityLabel={I18n.t('Encrypted_message')}>
 					{I18n.t('Encrypted_message')}
 				</Text>
 			);
@@ -93,8 +92,7 @@ const Content = React.memo(
 						paddingHorizontal: 15,
 						alignSelf: itsMe ? 'flex-end' : 'flex-start'
 					}
-				]}
-			>
+				]}>
 				{content}
 			</View>
 		);

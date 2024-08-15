@@ -83,6 +83,7 @@ class MessageContainer extends React.Component<IMessageContainerProps, IMessageC
 
 	componentDidMount() {
 		const { item } = this.props;
+		console.log('itttttem ', item);
 		// @ts-ignore
 		if (item && item.experimentalSubscribe) {
 			// TODO: Update watermelonDB to recognize experimentalSubscribe at types
@@ -429,8 +430,7 @@ class MessageContainer extends React.Component<IMessageContainerProps, IMessageC
 					toggleFollowThread,
 					replies,
 					translateLanguage: canTranslateMessage ? autoTranslateLanguage : undefined
-				}}
-			>
+				}}>
 				{/* @ts-ignore*/}
 				<Message
 					id={id}

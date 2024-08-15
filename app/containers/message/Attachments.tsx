@@ -13,6 +13,7 @@ import CollapsibleQuote from './Components/CollapsibleQuote';
 import openLink from '../../lib/methods/helpers/openLink';
 import Markdown from '../markdown';
 import { getMessageFromAttachment } from './utils';
+import { View } from 'react-native';
 
 export type TElement = {
 	type: string;
@@ -54,7 +55,7 @@ const AttachedActions = ({ attachment, getCustomEmoji }: { attachment: IAttachme
 };
 
 const Attachments: React.FC<IMessageAttachments> = React.memo(
-	({ attachments, timeFormat, showAttachment, style, getCustomEmoji, isReply, author }: IMessageAttachments) => {
+	({ attachments, timeFormat, showAttachment, style, getCustomEmoji, isReply, author, itsMe }: IMessageAttachments) => {
 		const { translateLanguage } = useContext(MessageContext);
 
 		if (!attachments || attachments.length === 0) {
@@ -88,6 +89,7 @@ const Attachments: React.FC<IMessageAttachments> = React.memo(
 						style={style}
 						author={author}
 						msg={msg}
+						itsMe={itsMe}
 					/>
 				);
 			}

@@ -289,6 +289,7 @@ class MessagesView extends React.Component<IMessagesViewProps, IMessagesViewStat
 					}
 					return message;
 				});
+
 				this.setState({
 					messages: [...messages, ...urlRenderMessages],
 					total: result.total,

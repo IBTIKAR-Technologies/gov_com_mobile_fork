@@ -238,6 +238,8 @@ const SettingsView = (): React.ReactElement => {
 						testID='settings-view-security-privacy'
 					/>
 					<List.Separator />
+					<List.Item title='Share' showActionIndicator onPress={() => shareApp()} testID='settings-view-security-privacy' />
+					<List.Separator />
 				</List.Section>
 
 				<List.Section>

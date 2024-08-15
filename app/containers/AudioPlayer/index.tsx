@@ -25,6 +25,7 @@ interface IAudioPlayerProps {
 	rid: string;
 	// It's optional when comes from MessagesView
 	msgId?: string;
+	itsMe?: boolean;
 }
 
 const AudioPlayer = ({
@@ -33,7 +34,8 @@ const AudioPlayer = ({
 	onPlayButtonPress = () => {},
 	downloadState,
 	msgId,
-	rid
+	rid,
+	itsMe
 }: IAudioPlayerProps) => {
 	const isLoading = downloadState === 'loading';
 	const isDownloaded = downloadState === 'downloaded';
@@ -64,6 +66,7 @@ const AudioPlayer = ({
 	};
 
 	const handlePlaybackStatusUpdate = (data: AVPlaybackStatus) => {
+		console.log('dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ', data);
 		if (data.isLoaded && data.durationMillis) {
 			const durationSeconds = data.durationMillis / 1000;
 			duration.value = durationSeconds > 0 ? durationSeconds : 0;
@@ -170,7 +173,11 @@ const AudioPlayer = ({
 	}
 
 	return (
-		<View style={[styles.audioContainer, { backgroundColor: colors.surfaceLight, borderColor: colors.strokeExtraLight }]}>
+		<View
+			style={[
+				styles.audioContainer,
+				{ backgroundColor: itsMe ? '#d1fae5' : colors.surfaceLight, borderColor: colors.strokeExtraLight }
+			]}>
 			<PlayButton disabled={disabled} audioState={audioState} onPress={onPress} />
 			<Seek currentTime={currentTime} duration={duration} loaded={!disabled && isDownloaded} onChangeTime={setPosition} />
 			{audioState === 'playing' || focused ? <PlaybackSpeed /> : null}

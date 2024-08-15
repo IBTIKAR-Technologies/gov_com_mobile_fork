@@ -108,7 +108,8 @@ const Seek = ({ currentTime, duration, loaded = false, onChangeTime }: ISeek) =>
 		<TouchableNativeFeedback>
 			<View style={styles.seekContainer}>
 				<AnimatedTextInput
-					defaultValue={DEFAULT_TIME_LABEL}
+					// defaultValue={DEFAULT_TIME_LABEL}
+					value={`${timeLabel.value}`}
 					editable={false}
 					style={[styles.duration, { color: colors.fontDefault }]}
 					animatedProps={timeLabelAnimatedProps}
