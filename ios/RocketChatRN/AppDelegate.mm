@@ -2,9 +2,9 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
 #import "RNNotifications.h"
-#import "RNBootSplash.h"
+// #import "RNBootSplash.h"
 #import <Firebase.h>
-#import <Bugsnag/Bugsnag.h>
+// #import <Bugsnag/Bugsnag.h>
 #import <MMKV/MMKV.h>
 
 @implementation AppDelegate
@@ -14,7 +14,7 @@
   if(![FIRApp defaultApp]){
     [FIRApp configure];
   }
-  [Bugsnag start];
+  // [Bugsnag start];
   
   // AppGroup MMKV
   NSString *groupDir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppGroup"]].path;
@@ -28,7 +28,7 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
   [super application:application didFinishLaunchingWithOptions:launchOptions];
-  [RNBootSplash initWithStoryboard:@"LaunchScreen" rootView:self.window.rootViewController.view];
+  // [RNBootSplash initWithStoryboard:@"LaunchScreen" rootView:self.window.rootViewController.view];
   [[[SSLPinning alloc] init] migrate];
   
   self.watchConnection = [[WatchConnection alloc] initWithSession:[WCSession defaultSession]];
