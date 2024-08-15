@@ -1,21 +1,19 @@
+import { dequal } from 'dequal';
+import moment from 'moment';
 import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import moment from 'moment';
-import { dequal } from 'dequal';
 import FastImage from 'react-native-fast-image';
 
-import Touchable from './Touchable';
-import Markdown from '../markdown';
-import openLink from '../../lib/methods/helpers/openLink';
-import sharedStyles from '../../views/Styles';
-import { themes } from '../../lib/constants';
-import MessageContext from './Context';
-import { fileDownloadAndPreview } from './helpers/fileDownload';
 import { IAttachment, TGetCustomEmoji } from '../../definitions';
-import RCActivityIndicator from '../ActivityIndicator';
-import Attachments from './Attachments';
-import { TSupportedThemes, useTheme } from '../../theme';
+import { themes } from '../../lib/constants';
+import { fileDownloadAndPreview } from '../../lib/methods/helpers';
 import { formatAttachmentUrl } from '../../lib/methods/helpers/formatAttachmentUrl';
+import openLink from '../../lib/methods/helpers/openLink';
+import { TSupportedThemes, useTheme } from '../../theme';
+import sharedStyles from '../../views/Styles';
+import RCActivityIndicator from '../ActivityIndicator';
+import Markdown from '../markdown';
+import Attachments from './Attachments';
 import messageStyles from './styles';
 
 const styles = StyleSheet.create({
@@ -243,8 +241,7 @@ const Reply = React.memo(
 						}
 					]}
 					background={Touchable.Ripple(themes[theme].surfaceNeutral)}
-					disabled={loading || attachment.message_link}
-				>
+					disabled={loading || attachment.message_link}>
 					<View style={styles.attachmentContainer}>
 						<Title attachment={attachment} timeFormat={timeFormat} theme={theme} />
 						<Description attachment={attachment} getCustomEmoji={getCustomEmoji} theme={theme} />
@@ -264,8 +261,7 @@ const Reply = React.memo(
 									style={[
 										styles.backdrop,
 										{ backgroundColor: themes[theme].surfaceNeutral, opacity: themes[theme].attachmentLoadingOpacity }
-									]}
-								></View>
+									]}></View>
 								<RCActivityIndicator />
 							</View>
 						) : null}
