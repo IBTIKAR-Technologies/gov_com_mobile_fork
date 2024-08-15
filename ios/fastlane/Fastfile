@@ -35,7 +35,7 @@ platform :ios do
     )
     pilot(
       ipa: 'ios/Rocket.Chat.ipa',
-      app_identifier: options[:official] ? 'chat.rocket.ios' : 'chat.rocket.reactnative',
+      app_identifier: options[:official] ? 'mr.gov.mtnima.govcom' : 'chat.rocket.reactnative',
       skip_waiting_for_build_processing: true
     )
     upload_symbols_to_crashlytics(dsym_path: "./ios/Rocket.Chat.app.dSYM.zip")
@@ -72,27 +72,27 @@ platform :ios do
 
     match(
       type: "appstore",
-      app_identifier: ["chat.rocket.ios", "chat.rocket.ios.NotificationService", "chat.rocket.ios.Rocket-Chat-ShareExtension", "chat.rocket.ios.watchkitapp"],
+      app_identifier: ["mr.gov.mtnima.govcom", "mr.gov.mtnima.govcom.NotificationService", "mr.gov.mtnima.govcom.Rocket-Chat-ShareExtension", "mr.gov.mtnima.govcom.watchkitapp"],
       readonly: true,
       output_path: './'
     )
 
     update_code_signing_settings(
-      profile_name: "match AppStore chat.rocket.ios.NotificationService",
+      profile_name: "match AppStore mr.gov.mtnima.govcom.NotificationService",
       build_configurations: "Release",
       code_sign_identity: "iPhone Distribution",
       targets: "NotificationService",
     )
 
     update_code_signing_settings(
-      profile_name: "match AppStore chat.rocket.ios.Rocket-Chat-ShareExtension",
+      profile_name: "match AppStore mr.gov.mtnima.govcom.Rocket-Chat-ShareExtension",
       build_configurations: "Release",
       code_sign_identity: "iPhone Distribution",
       targets: "ShareRocketChatRN",
     )
 
     update_code_signing_settings(
-      profile_name: "match AppStore chat.rocket.ios.watchkitapp",
+      profile_name: "match AppStore mr.gov.mtnima.govcom.watchkitapp",
       build_configurations: "Release",
       code_sign_identity: "iPhone Distribution",
       targets: "Rocket.Chat.Watch",

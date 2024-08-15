@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import LottieSplashScreen from 'react-native-lottie-splash-screen';
+import RNBootSplash from 'react-native-bootsplash';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -86,6 +87,7 @@ const restore = function* restore() {
 
 const start = function* start() {
 	yield LottieSplashScreen.hide();
+	yield RNBootSplash.hide({ fade: true });
 };
 
 const root = function* root() {

@@ -14,7 +14,7 @@
 
 #import <MMKV/MMKV.h>
 #import <Firebase.h>
-#import <Bugsnag/Bugsnag.h>
+// #import <Bugsnag/Bugsnag.h>
 
 @interface ShareRocketChatRN : ReactNativeShareExtension <RCTBridgeDelegate>
 @end;
@@ -29,7 +29,7 @@ RCT_EXPORT_MODULE();
   if(![FIRApp defaultApp]){
     [FIRApp configure];
   }
-  [Bugsnag start];
+  // [Bugsnag start];
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
   
