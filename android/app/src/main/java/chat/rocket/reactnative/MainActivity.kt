@@ -29,13 +29,7 @@ class MainActivity : ReactActivity() {
         setTheme(R.style.AppTheme)
         SplashScreen.show(this, R.id.lottie)
         super.onCreate(null)
-        Thread.sleep(3000)
         SplashScreen.setAnimationFinished(true)
-        // sleep for 3 seconds
-        // CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute {
-        //     // Your code here executes after 3 seconds!
-            
-        // }
   }
 
   override fun invokeDefaultOnBackPressed() {
