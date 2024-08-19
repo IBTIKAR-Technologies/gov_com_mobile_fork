@@ -1,12 +1,9 @@
-import CookieManager from '@react-native-cookies/cookies';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, BackHandler, Linking, SafeAreaView, StyleSheet, View } from 'react-native';
-import WebView from 'react-native-webview';
+import { ActivityIndicator, BackHandler, SafeAreaView, StyleSheet, View } from 'react-native';
+import { JitsiMeeting, JitsiRefProps } from '@jitsi/react-native-sdk';
 
 import i18n from '../../i18n';
-import { userAgent } from '../../lib/constants';
 import { useAppSelector } from '../../lib/hooks';
 import { isIOS } from '../../lib/methods/helpers';
 import { getRoomIdFromJitsiCallUrl } from '../../lib/methods/helpers/getRoomIdFromJitsiCall';
@@ -16,47 +13,16 @@ import { getUserSelector } from '../../selectors/login';
 import { ChatsStackParamList } from '../../stacks/types';
 import JitsiAuthModal from './JitsiAuthModal';
 
-const JitsiMeetView = (): React.ReactElement => {
+const JitsiMeetViewScreen = (): React.ReactElement => {
 	const {
 		params: { rid, url, videoConf }
-	} = useRoute<RouteProp<ChatsStackParamList, 'JitsiMeetView'>>();
+	} = useRoute<RouteProp<ChatsStackParamList, 'JitsiMeeting'>>();
 	const { goBack } = useNavigation();
 	const user = useAppSelector(state => getUserSelector(state));
 	const serverUrl = useAppSelector(state => state.server.server);
 
 	const [authModal, setAuthModal] = useState(false);
-	const [cookiesSet, setCookiesSet] = useState(false);
-
-	const setCookies = async () => {
-		const date = new Date();
-		date.setDate(date.getDate() + 1);
-		const expires = date.toISOString();
-		const domain = serverUrl.replace(/^https?:\/\//, '');
-		const ck = { domain, version: '1', expires };
-
-		await CookieManager.set(serverUrl, {
-			name: 'rc_uid',
-			value: user.id,
-			...ck
-		});
-		await CookieManager.set(serverUrl, {
-			name: 'rc_token',
-			value: user.token,
-			...ck
-		});
-		setCookiesSet(true);
-	};
-
-	const handleJitsiApp = useCallback(async () => {
-		const callUrl = url.replace(/^https?:\/\//, '');
-		try {
-			await Linking.openURL(`org.jitsi.meet://${callUrl}`);
-			goBack();
-		} catch (error) {
-			// As the jitsi app was not opened, disable the backhandler on android
-			BackHandler.addEventListener('hardwareBackPress', () => true);
-		}
-	}, [goBack, url]);
+	const [loading, setLoading] = useState(true);
 
 	const onConferenceJoined = useCallback(() => {
 		logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_JOIN : events.JM_CONFERENCE_JOIN);
@@ -65,72 +31,53 @@ const JitsiMeetView = (): React.ReactElement => {
 		}
 	}, [rid, videoConf]);
 
-	const onNavigationStateChange = useCallback(
-		webViewState => {
-			const roomId = getRoomIdFromJitsiCallUrl(url);
-			console.log('sjei  dk ', url);
-			if (webViewState.url.includes('auth-static')) {
-				setAuthModal(true);
-				return false;
-			}
-			if ((roomId && !webViewState.url.includes(roomId)) || webViewState.url.includes('close')) {
-				if (isIOS) {
-					if (webViewState.navigationType) {
-						goBack();
-					}
-				} else {
-					goBack();
-				}
-			}
-			return true;
-		},
-		[goBack, url]
-	);
+	const onConferenceTerminated = useCallback(() => {
+		logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_TERMINATE : events.JM_CONFERENCE_TERMINATE);
+		if (!videoConf) endVideoConfTimer();
+		goBack();
+	}, [goBack, videoConf]);
 
-	useEffect(() => {
-		handleJitsiApp();
-		onConferenceJoined();
-		activateKeepAwake();
-
-		return () => {
-			logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_TERMINATE : events.JM_CONFERENCE_TERMINATE);
-			if (!videoConf) endVideoConfTimer();
-			deactivateKeepAwake();
-		};
-	}, [handleJitsiApp, onConferenceJoined, videoConf]);
-
-	useEffect(() => {
-		setCookies();
+	const onConferenceWillJoin = useCallback(() => {
+		setLoading(false);
 	}, []);
 
-	const callUrl = `${url}${url.includes('#config') ? '&' : '#'}config.disableDeepLinking=true`;
+	useEffect(() => {
+		BackHandler.addEventListener('hardwareBackPress', () => true);
+		return () => {
+			BackHandler.removeEventListener('hardwareBackPress', () => true);
+		};
+	}, []);
+
+	useEffect(() => {
+		onConferenceJoined();
+		return () => {
+			onConferenceTerminated();
+		};
+	}, [onConferenceJoined, onConferenceTerminated]);
+
+	const jitsiMeetProps: JitsiRefProps = {
+		onConferenceJoined,
+		onConferenceTerminated,
+		onConferenceWillJoin,
+		style: styles.jitsiMeet,
+		// Customize JitsiMeet with options like room, token, etc.
+		room: getRoomIdFromJitsiCallUrl(url),
+		userInfo: {
+			displayName: user.name,
+			email: user.email,
+			avatar: user.avatar
+		}
+	};
 
 	return (
 		<SafeAreaView style={styles.container}>
-			{authModal && <JitsiAuthModal setAuthModal={setAuthModal} callUrl={`${callUrl}?language=${i18n.locale}`} />}
-			{cookiesSet ? (
-				<WebView
-					source={{
-						uri: callUrl.replace(/"/g, "'"),
-						headers: {
-							Cookie: `rc_uid=${user.id}; rc_token=${user.token}`
-						}
-					}}
-					onNavigationStateChange={onNavigationStateChange}
-					onShouldStartLoadWithRequest={onNavigationStateChange}
-					style={styles.webviewContainer}
-					userAgent={userAgent}
-					javaScriptEnabled
-					domStorageEnabled
-					allowsInlineMediaPlayback
-					mediaCapturePermissionGrantType={'grant'}
-					mediaPlaybackRequiresUserAction={isIOS}
-					sharedCookiesEnabled
-				/>
-			) : (
-				<View style={[styles.webviewContainer, styles.loading]}>
+			{authModal && <JitsiAuthModal setAuthModal={setAuthModal} callUrl={`${url}?language=${i18n.locale}`} />}
+			{loading ? (
+				<View style={[styles.jitsiMeet, styles.loading]}>
 					<ActivityIndicator />
 				</View>
+			) : (
+				<JitsiMeeting {...jitsiMeetProps} />
 			)}
 		</SafeAreaView>
 	);
@@ -140,8 +87,14 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
-	webviewContainer: { flex: 1, backgroundColor: '#d1fae5' },
-	loading: { alignItems: 'center', justifyContent: 'center' }
+	jitsiMeet: {
+		flex: 1,
+		backgroundColor: '#d1fae5'
+	},
+	loading: {
+		alignItems: 'center',
+		justifyContent: 'center'
+	}
 });
 
-export default JitsiMeetView;
+export default JitsiMeetViewScreen;
