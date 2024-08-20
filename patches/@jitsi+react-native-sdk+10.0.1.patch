@@ -1,0 +1,679 @@
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/results.bin b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/results.bin
+new file mode 100644
+index 0000000..0d259dd
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/results.bin
+@@ -0,0 +1 @@
++o/classes
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/transformed/classes/classes_dex/classes.dex b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/transformed/classes/classes_dex/classes.dex
+new file mode 100644
+index 0000000..4e63bba
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/transformed/classes/classes_dex/classes.dex differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/.transforms/be2704d7cce0a54d5df9ab9b75de166d/results.bin b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/be2704d7cce0a54d5df9ab9b75de166d/results.bin
+new file mode 100644
+index 0000000..e3f0ff0
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/be2704d7cce0a54d5df9ab9b75de166d/results.bin
+@@ -0,0 +1 @@
++i/classes_global-synthetics
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/.transforms/c53f65b9f9b66bc7f9fac3f7aa2df1eb/results.bin b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/c53f65b9f9b66bc7f9fac3f7aa2df1eb/results.bin
+new file mode 100644
+index 0000000..61a58fa
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/c53f65b9f9b66bc7f9fac3f7aa2df1eb/results.bin
+@@ -0,0 +1 @@
++i/classes_dex
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/generated/source/buildConfig/debug/org/jitsi/meet/sdk/BuildConfig.java b/node_modules/@jitsi/react-native-sdk/android/build/generated/source/buildConfig/debug/org/jitsi/meet/sdk/BuildConfig.java
+new file mode 100644
+index 0000000..1ac18eb
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/generated/source/buildConfig/debug/org/jitsi/meet/sdk/BuildConfig.java
+@@ -0,0 +1,12 @@
++/**
++ * Automatically generated file. DO NOT MODIFY
++ */
++package org.jitsi.meet.sdk;
++
++public final class BuildConfig {
++  public static final boolean DEBUG = Boolean.parseBoolean("true");
++  public static final String LIBRARY_PACKAGE_NAME = "org.jitsi.meet.sdk";
++  public static final String BUILD_TYPE = "debug";
++  // Field from default config.
++  public static final boolean IS_NEW_ARCHITECTURE_ENABLED = false;
++}
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml
+new file mode 100644
+index 0000000..cae9182
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="org.jitsi.meet.sdk" >
++
++    <uses-sdk android:minSdkVersion="23" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output-metadata.json b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output-metadata.json
+new file mode 100644
+index 0000000..6801cf0
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output-metadata.json
+@@ -0,0 +1,18 @@
++{
++  "version": 3,
++  "artifactType": {
++    "type": "AAPT_FRIENDLY_MERGED_MANIFESTS",
++    "kind": "Directory"
++  },
++  "applicationId": "org.jitsi.meet.sdk",
++  "variantName": "debug",
++  "elements": [
++    {
++      "type": "SINGLE",
++      "filters": [],
++      "attributes": [],
++      "outputFile": "AndroidManifest.xml"
++    }
++  ],
++  "elementType": "File"
++}
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aar_metadata/debug/aar-metadata.properties b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aar_metadata/debug/aar-metadata.properties
+new file mode 100644
+index 0000000..776557e
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/aar_metadata/debug/aar-metadata.properties
+@@ -0,0 +1,5 @@
++aarFormatVersion=1.0
++aarMetadataVersion=1.0
++minCompileSdk=1
++minCompileSdkExtension=0
++minAndroidGradlePluginVersion=1.0.0
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
+new file mode 100644
+index 0000000..9e26dfe
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
+@@ -0,0 +1 @@
++{}
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_library_classes_jar/debug/classes.jar b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_library_classes_jar/debug/classes.jar
+new file mode 100644
+index 0000000..5bbf5d8
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_library_classes_jar/debug/classes.jar differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_r_class_jar/debug/R.jar b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_r_class_jar/debug/R.jar
+new file mode 100644
+index 0000000..f2482be
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_r_class_jar/debug/R.jar differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_symbol_list/debug/R.txt b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_symbol_list/debug/R.txt
+new file mode 100644
+index 0000000..a06c7b8
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compile_symbol_list/debug/R.txt
+@@ -0,0 +1,12 @@
++int drawable ic_notification 0x0
++int string app_name 0x0
++int string dropbox_app_key 0x0
++int string media_projection_notification_text 0x0
++int string media_projection_notification_title 0x0
++int string ongoing_notification_action_hang_up 0x0
++int string ongoing_notification_action_mute 0x0
++int string ongoing_notification_action_unmute 0x0
++int string ongoing_notification_channel_name 0x0
++int string ongoing_notification_text 0x0
++int string ongoing_notification_title 0x0
++int style JitsiMeetActivityStyle 0x0
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-hdpi-v4_ic_notification.png.flat b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-hdpi-v4_ic_notification.png.flat
+new file mode 100644
+index 0000000..74f58a1
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-hdpi-v4_ic_notification.png.flat differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-mdpi-v4_ic_notification.png.flat b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-mdpi-v4_ic_notification.png.flat
+new file mode 100644
+index 0000000..5093f4b
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-mdpi-v4_ic_notification.png.flat differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xhdpi-v4_ic_notification.png.flat b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xhdpi-v4_ic_notification.png.flat
+new file mode 100644
+index 0000000..da79f1d
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xhdpi-v4_ic_notification.png.flat differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xxhdpi-v4_ic_notification.png.flat b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xxhdpi-v4_ic_notification.png.flat
+new file mode 100644
+index 0000000..cbc6853
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xxhdpi-v4_ic_notification.png.flat differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xxxhdpi-v4_ic_notification.png.flat b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xxxhdpi-v4_ic_notification.png.flat
+new file mode 100644
+index 0000000..d78b25b
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xxxhdpi-v4_ic_notification.png.flat differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+new file mode 100644
+index 0000000..05c0b17
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+@@ -0,0 +1,6 @@
++#Tue Aug 20 14:03:40 GMT 2024
++org.jitsi.meet.sdk.jitsi_react-native-sdk-main-6\:/drawable-xhdpi/ic_notification.png=/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/ic_notification.png
++org.jitsi.meet.sdk.jitsi_react-native-sdk-main-6\:/drawable-xxhdpi/ic_notification.png=/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/ic_notification.png
++org.jitsi.meet.sdk.jitsi_react-native-sdk-main-6\:/drawable-xxxhdpi/ic_notification.png=/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/ic_notification.png
++org.jitsi.meet.sdk.jitsi_react-native-sdk-main-6\:/drawable-hdpi/ic_notification.png=/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/ic_notification.png
++org.jitsi.meet.sdk.jitsi_react-native-sdk-main-6\:/drawable-mdpi/ic_notification.png=/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/ic_notification.png
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/merged.dir/values/values.xml b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/merged.dir/values/values.xml
+new file mode 100644
+index 0000000..87e1578
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/merged.dir/values/values.xml
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <string name="app_name">Jitsi Meet SDK</string>
++    <string name="dropbox_app_key"/>
++    <string name="media_projection_notification_text">You are currently sharing your screen.</string>
++    <string name="media_projection_notification_title">Media projection</string>
++    <string name="ongoing_notification_action_hang_up">Hang up</string>
++    <string name="ongoing_notification_action_mute">Mute</string>
++    <string name="ongoing_notification_action_unmute">Unmute</string>
++    <string name="ongoing_notification_channel_name">Ongoing Conference Notifications</string>
++    <string name="ongoing_notification_text">You are currently in a meeting. Tap to return to it.</string>
++    <string name="ongoing_notification_title">Ongoing meeting</string>
++    <style name="JitsiMeetActivityStyle" parent="Theme.AppCompat.Light.NoActionBar"/>
++</resources>
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+new file mode 100644
+index 0000000..68764ae
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res"><file path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res/values/styles.xml" qualifiers=""><style name="JitsiMeetActivityStyle" parent="Theme.AppCompat.Light.NoActionBar"/></file><file path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res/values/strings.xml" qualifiers=""><string name="app_name">Jitsi Meet SDK</string><string name="dropbox_app_key"/><string name="media_projection_notification_title">Media projection</string><string name="media_projection_notification_text">You are currently sharing your screen.</string><string name="ongoing_notification_title">Ongoing meeting</string><string name="ongoing_notification_text">You are currently in a meeting. Tap to return to it.</string><string name="ongoing_notification_action_hang_up">Hang up</string><string name="ongoing_notification_action_mute">Mute</string><string name="ongoing_notification_action_unmute">Unmute</string><string name="ongoing_notification_channel_name">Ongoing Conference Notifications</string></file><file name="ic_notification" path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res/drawable-xhdpi/ic_notification.png" qualifiers="xhdpi-v4" type="drawable"/><file name="ic_notification" path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res/drawable-xxhdpi/ic_notification.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="ic_notification" path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res/drawable-hdpi/ic_notification.png" qualifiers="hdpi-v4" type="drawable"/><file name="ic_notification" path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res/drawable-mdpi/ic_notification.png" qualifiers="mdpi-v4" type="drawable"/><file name="ic_notification" path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/res/drawable-xxxhdpi/ic_notification.png" qualifiers="xxxhdpi-v4" type="drawable"/></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/generated/res/resValues/debug"/></dataSet><mergedItems/></merger>
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+new file mode 100644
+index 0000000..86cd255
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/jniLibs"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/debug/jniLibs"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/mergeDebugShaders/merger.xml b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+new file mode 100644
+index 0000000..c3996bd
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/shaders"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/debug/shaders"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/packageDebugAssets/merger.xml b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+new file mode 100644
+index 0000000..4bd17ea
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/assets"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/debug/assets"/></dataSet><dataSet config="generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/shader_assets/debug/out"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AndroidSettingsModule.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AndroidSettingsModule.class
+new file mode 100644
+index 0000000..ffc94a0
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AndroidSettingsModule.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AppInfoModule.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AppInfoModule.class
+new file mode 100644
+index 0000000..f1eaa4c
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AppInfoModule.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerConnectionService$1.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerConnectionService$1.class
+new file mode 100644
+index 0000000..54984ae
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerConnectionService$1.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerConnectionService.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerConnectionService.class
+new file mode 100644
+index 0000000..d0dc1ef
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerConnectionService.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$1.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$1.class
+new file mode 100644
+index 0000000..a2fc38f
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$1.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$2.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$2.class
+new file mode 100644
+index 0000000..54700ca
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$2.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$3.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$3.class
+new file mode 100644
+index 0000000..0d8c617
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric$3.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric.class
+new file mode 100644
+index 0000000..b26cb93
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioDeviceHandlerGeneric.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$1.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$1.class
+new file mode 100644
+index 0000000..34d08ce
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$1.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$2.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$2.class
+new file mode 100644
+index 0000000..f7997d8
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$2.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$3.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$3.class
+new file mode 100644
+index 0000000..1009b51
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$3.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$4.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$4.class
+new file mode 100644
+index 0000000..27d91ef
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$4.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$5.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$5.class
+new file mode 100644
+index 0000000..203966f
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$5.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$AudioDeviceHandlerInterface.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$AudioDeviceHandlerInterface.class
+new file mode 100644
+index 0000000..f8989bc
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule$AudioDeviceHandlerInterface.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule.class
+new file mode 100644
+index 0000000..6eb34c4
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/AudioModeModule.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/BuildConfig.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/BuildConfig.class
+new file mode 100644
+index 0000000..bfda949
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/BuildConfig.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ConnectionService$ConnectionImpl.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ConnectionService$ConnectionImpl.class
+new file mode 100644
+index 0000000..be7fe39
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ConnectionService$ConnectionImpl.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ConnectionService.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ConnectionService.class
+new file mode 100644
+index 0000000..ecf4ba9
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ConnectionService.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/JavaScriptSandboxModule.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/JavaScriptSandboxModule.class
+new file mode 100644
+index 0000000..a3b25de
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/JavaScriptSandboxModule.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/JitsiMeetReactNativePackage.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/JitsiMeetReactNativePackage.class
+new file mode 100644
+index 0000000..95af84d
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/JitsiMeetReactNativePackage.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/LocaleDetector.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/LocaleDetector.class
+new file mode 100644
+index 0000000..9844ff4
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/LocaleDetector.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/LogBridgeModule.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/LogBridgeModule.class
+new file mode 100644
+index 0000000..abbad0c
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/LogBridgeModule.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/PictureInPictureModule.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/PictureInPictureModule.class
+new file mode 100644
+index 0000000..919e444
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/PictureInPictureModule.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ProximityModule$1.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ProximityModule$1.class
+new file mode 100644
+index 0000000..4b41e57
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ProximityModule$1.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ProximityModule.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ProximityModule.class
+new file mode 100644
+index 0000000..d0cd65a
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/ProximityModule.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/RNConnectionService$CallAudioStateListener.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/RNConnectionService$CallAudioStateListener.class
+new file mode 100644
+index 0000000..2044c80
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/RNConnectionService$CallAudioStateListener.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/RNConnectionService.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/RNConnectionService.class
+new file mode 100644
+index 0000000..9e5141a
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/RNConnectionService.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetBaseLogHandler.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetBaseLogHandler.class
+new file mode 100644
+index 0000000..b71a00d
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetBaseLogHandler.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetDefaultLogHandler.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetDefaultLogHandler.class
+new file mode 100644
+index 0000000..f4a2ab7
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetDefaultLogHandler.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetLogger.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetLogger.class
+new file mode 100644
+index 0000000..7e1b116
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/log/JitsiMeetLogger.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/net/NAT64AddrInfo.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/net/NAT64AddrInfo.class
+new file mode 100644
+index 0000000..0b1869e
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/net/NAT64AddrInfo.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/net/NAT64AddrInfoModule.class b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/net/NAT64AddrInfoModule.class
+new file mode 100644
+index 0000000..3ea2adb
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/net/NAT64AddrInfoModule.class differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/asked-unmute.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/asked-unmute.mp3
+new file mode 100644
+index 0000000..2dc91dc
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/asked-unmute.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff.mp3
+new file mode 100644
+index 0000000..be320d0
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_fr.mp3
+new file mode 100644
+index 0000000..623cc9f
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_fr.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_frCA.mp3
+new file mode 100644
+index 0000000..623cc9f
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_frCA.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn.mp3
+new file mode 100644
+index 0000000..1ceed00
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_fr.mp3
+new file mode 100644
+index 0000000..0ca469f
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_fr.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_frCA.mp3
+new file mode 100644
+index 0000000..0ca469f
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_frCA.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.mp3
+new file mode 100644
+index 0000000..0029d2c
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.wav
+new file mode 100644
+index 0000000..012dbab
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.wav differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.mp3
+new file mode 100644
+index 0000000..975e3a7
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.wav
+new file mode 100644
+index 0000000..16ceb80
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.wav differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/knock.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/knock.mp3
+new file mode 100644
+index 0000000..6b68ec6
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/knock.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.mp3
+new file mode 100644
+index 0000000..d0780a9
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.wav
+new file mode 100644
+index 0000000..0c9cee0
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.wav differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff.mp3
+new file mode 100644
+index 0000000..db7e1b8
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_fr.mp3
+new file mode 100644
+index 0000000..366fdae
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_fr.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_frCA.mp3
+new file mode 100644
+index 0000000..366fdae
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_frCA.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn.mp3
+new file mode 100644
+index 0000000..0a1ec49
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_fr.mp3
+new file mode 100644
+index 0000000..90f120d
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_fr.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_frCA.mp3
+new file mode 100644
+index 0000000..90f120d
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_frCA.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noAudioSignal.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noAudioSignal.mp3
+new file mode 100644
+index 0000000..d80cc72
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noAudioSignal.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noisyAudioInput.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noisyAudioInput.mp3
+new file mode 100644
+index 0000000..d80cc72
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noisyAudioInput.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.mp3
+new file mode 100644
+index 0000000..f1103a0
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.wav
+new file mode 100644
+index 0000000..7a8b643
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.wav differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.mp3
+new file mode 100644
+index 0000000..398ebed
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.wav
+new file mode 100644
+index 0000000..4b60654
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.wav differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-applause.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-applause.mp3
+new file mode 100644
+index 0000000..2254bd2
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-applause.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-boo.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-boo.mp3
+new file mode 100644
+index 0000000..6ed9114
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-boo.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-crickets.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-crickets.mp3
+new file mode 100644
+index 0000000..7e3a6c3
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-crickets.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-laughter.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-laughter.mp3
+new file mode 100644
+index 0000000..772c381
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-laughter.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-raised-hand.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-raised-hand.mp3
+new file mode 100644
+index 0000000..2fd2f1e
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-raised-hand.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-surprise.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-surprise.mp3
+new file mode 100644
+index 0000000..63d48fa
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-surprise.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-thumbs-up.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-thumbs-up.mp3
+new file mode 100644
+index 0000000..92491a1
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-thumbs-up.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff.mp3
+new file mode 100644
+index 0000000..3c89861
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_fr.mp3
+new file mode 100644
+index 0000000..f36a379
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_fr.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_frCA.mp3
+new file mode 100644
+index 0000000..f36a379
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_frCA.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn.mp3
+new file mode 100644
+index 0000000..e8b9e85
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_fr.mp3
+new file mode 100644
+index 0000000..35c6568
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_fr.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_frCA.mp3
+new file mode 100644
+index 0000000..35c6568
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_frCA.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.mp3
+new file mode 100644
+index 0000000..857acda
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.wav
+new file mode 100644
+index 0000000..ab9fc1c
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.wav differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.mp3
+new file mode 100644
+index 0000000..937ef63
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.wav
+new file mode 100644
+index 0000000..b37d90e
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.wav differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/talkWhileMuted.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/talkWhileMuted.mp3
+new file mode 100644
+index 0000000..d80cc72
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/talkWhileMuted.mp3 differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/local_only_symbol_list/debug/R-def.txt b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/local_only_symbol_list/debug/R-def.txt
+new file mode 100644
+index 0000000..5d6c329
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/local_only_symbol_list/debug/R-def.txt
+@@ -0,0 +1,14 @@
++R_DEF: Internal format may change without notice
++local
++drawable ic_notification
++string app_name
++string dropbox_app_key
++string media_projection_notification_text
++string media_projection_notification_title
++string ongoing_notification_action_hang_up
++string ongoing_notification_action_mute
++string ongoing_notification_action_unmute
++string ongoing_notification_channel_name
++string ongoing_notification_text
++string ongoing_notification_title
++style JitsiMeetActivityStyle
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt
+new file mode 100644
+index 0000000..7d3fed8
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt
+@@ -0,0 +1,7 @@
++1<?xml version="1.0" encoding="utf-8"?>
++2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++3    package="org.jitsi.meet.sdk" >
++4
++5    <uses-sdk android:minSdkVersion="23" />
++6
++7</manifest>
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml
+new file mode 100644
+index 0000000..cae9182
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="org.jitsi.meet.sdk" >
++
++    <uses-sdk android:minSdkVersion="23" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/navigation_json/debug/navigation.json b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/navigation_json/debug/navigation.json
+new file mode 100644
+index 0000000..0637a08
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/navigation_json/debug/navigation.json
+@@ -0,0 +1 @@
++[]
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/ic_notification.png b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/ic_notification.png
+new file mode 100644
+index 0000000..da701e5
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-hdpi-v4/ic_notification.png differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/ic_notification.png b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/ic_notification.png
+new file mode 100644
+index 0000000..7540f39
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-mdpi-v4/ic_notification.png differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/ic_notification.png b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/ic_notification.png
+new file mode 100644
+index 0000000..bed1734
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/ic_notification.png differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/ic_notification.png b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/ic_notification.png
+new file mode 100644
+index 0000000..88bf389
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/ic_notification.png differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/ic_notification.png b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/ic_notification.png
+new file mode 100644
+index 0000000..f071fac
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/ic_notification.png differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/values/values.xml b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/values/values.xml
+new file mode 100644
+index 0000000..87e1578
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/values/values.xml
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <string name="app_name">Jitsi Meet SDK</string>
++    <string name="dropbox_app_key"/>
++    <string name="media_projection_notification_text">You are currently sharing your screen.</string>
++    <string name="media_projection_notification_title">Media projection</string>
++    <string name="ongoing_notification_action_hang_up">Hang up</string>
++    <string name="ongoing_notification_action_mute">Mute</string>
++    <string name="ongoing_notification_action_unmute">Unmute</string>
++    <string name="ongoing_notification_channel_name">Ongoing Conference Notifications</string>
++    <string name="ongoing_notification_text">You are currently in a meeting. Tap to return to it.</string>
++    <string name="ongoing_notification_title">Ongoing meeting</string>
++    <style name="JitsiMeetActivityStyle" parent="Theme.AppCompat.Light.NoActionBar"/>
++</resources>
+\ No newline at end of file
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar
+new file mode 100644
+index 0000000..15e09c6
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar differ
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
+new file mode 100644
+index 0000000..7ee399f
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
+@@ -0,0 +1,13 @@
++org.jitsi.meet.sdk
++drawable ic_notification
++string app_name
++string dropbox_app_key
++string media_projection_notification_text
++string media_projection_notification_title
++string ongoing_notification_action_hang_up
++string ongoing_notification_action_mute
++string ongoing_notification_action_unmute
++string ongoing_notification_channel_name
++string ongoing_notification_text
++string ongoing_notification_title
++style JitsiMeetActivityStyle
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/outputs/logs/manifest-merger-debug-report.txt b/node_modules/@jitsi/react-native-sdk/android/build/outputs/logs/manifest-merger-debug-report.txt
+new file mode 100644
+index 0000000..2086f41
+--- /dev/null
++++ b/node_modules/@jitsi/react-native-sdk/android/build/outputs/logs/manifest-merger-debug-report.txt
+@@ -0,0 +1,17 @@
++-- Merging decision tree log ---
++manifest
++ADDED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml:1:1-4:12
++INJECTED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml:1:1-4:12
++	package
++		ADDED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml:2:11-39
++		INJECTED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml
++	xmlns:android
++		ADDED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml:1:11-69
++uses-sdk
++INJECTED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
++INJECTED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml
++INJECTED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml
++	android:targetSdkVersion
++		INJECTED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml
++	android:minSdkVersion
++		INJECTED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml
+diff --git a/node_modules/@jitsi/react-native-sdk/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin b/node_modules/@jitsi/react-native-sdk/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
+new file mode 100644
+index 0000000..8a3a8af
+Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin differ
+diff --git a/node_modules/@jitsi/react-native-sdk/react/features/app/components/App.native.tsx b/node_modules/@jitsi/react-native-sdk/react/features/app/components/App.native.tsx
+index d018e72..5cf8538 100644
+--- a/node_modules/@jitsi/react-native-sdk/react/features/app/components/App.native.tsx
++++ b/node_modules/@jitsi/react-native-sdk/react/features/app/components/App.native.tsx
+@@ -2,7 +2,7 @@ import React, { ComponentType } from 'react';
+ import { NativeModules, Platform, StyleSheet, View } from 'react-native';
+ import DeviceInfo from 'react-native-device-info';
+ import { SafeAreaProvider } from 'react-native-safe-area-context';
+-import SplashScreen from 'react-native-splash-screen';
++import SplashScreen from 'react-native-lottie-splash-screen';
+ 
+ import BottomSheetContainer from '../../base/dialog/components/native/BottomSheetContainer';
+ import DialogContainer from '../../base/dialog/components/native/DialogContainer';

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "801318664702",
+    "project_id": "govcom-8a27b",
+    "storage_bucket": "govcom-8a27b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801318664702:android:1ce59da18dfe0a52fce8af",
+        "android_client_info": {
+          "package_name": "mr.gov.mtnima.govcom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9W24DsPUMBHXdgu8l_GfgeK16SBR-jy8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
