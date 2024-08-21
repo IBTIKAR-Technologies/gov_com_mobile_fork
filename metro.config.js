@@ -23,8 +23,9 @@ module.exports = (async () => {
 		resolver: { sourceExts, assetExts }
 	} = await getDefaultConfig();
 
-	return {
+	return mergeConfig(getDefaultConfig(__dirname), {
 		transformer: {
+			unstable_allowRequireContext: true,
 			babelTransformerPath: require.resolve('react-native-svg-transformer'),
 			// eslint-disable-next-line require-await
 			getTransformOptions: async () => ({
@@ -36,9 +37,9 @@ module.exports = (async () => {
 		},
 		resolver: {
 			assetExts: assetExts.filter(ext => ext !== 'svg'),
-			sourceExts: [...sourceExts, 'svg']
+			sourceExts: process.env.RUNNING_E2E_TESTS ? ['mock.ts', ...sourceExts, 'svg'] : [...sourceExts, 'svg']
 		}
-	};
+	});
 })();
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+// module.exports = mergeConfig(getDefaultConfig(__dirname), config);

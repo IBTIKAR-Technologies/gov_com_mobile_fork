@@ -7,8 +7,7 @@ index 0000000..0d259dd
 +o/classes
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/transformed/classes/classes_dex/classes.dex b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/transformed/classes/classes_dex/classes.dex
 new file mode 100644
-index 0000000..4e63bba
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/46bb5f74cf330c888e5a484bb2e3bb01/transformed/classes/classes_dex/classes.dex differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/.transforms/be2704d7cce0a54d5df9ab9b75de166d/results.bin b/node_modules/@jitsi/react-native-sdk/android/build/.transforms/be2704d7cce0a54d5df9ab9b75de166d/results.bin
 new file mode 100644
 index 0000000..e3f0ff0
@@ -147,11 +146,11 @@ index 0000000..d78b25b
 Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/compiled_local_resources/debug/out/drawable-xxxhdpi-v4_ic_notification.png.flat differ
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
 new file mode 100644
-index 0000000..05c0b17
+index 0000000..ef4cda3
 --- /dev/null
 +++ b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
 @@ -0,0 +1,6 @@
-+#Tue Aug 20 14:03:40 GMT 2024
++#Wed Aug 21 10:55:21 GMT 2024
 +org.jitsi.meet.sdk.jitsi_react-native-sdk-main-6\:/drawable-xhdpi/ic_notification.png=/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xhdpi-v4/ic_notification.png
 +org.jitsi.meet.sdk.jitsi_react-native-sdk-main-6\:/drawable-xxhdpi/ic_notification.png=/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxhdpi-v4/ic_notification.png
 +org.jitsi.meet.sdk.jitsi_react-native-sdk-main-6\:/drawable-xxxhdpi/ic_notification.png=/Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/build/intermediates/packaged_res/debug/drawable-xxxhdpi-v4/ic_notification.png
@@ -344,180 +343,136 @@ index 0000000..3ea2adb
 Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/javac/debug/classes/org/jitsi/meet/sdk/net/NAT64AddrInfoModule.class differ
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/asked-unmute.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/asked-unmute.mp3
 new file mode 100644
-index 0000000..2dc91dc
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/asked-unmute.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff.mp3
 new file mode 100644
-index 0000000..be320d0
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_fr.mp3
 new file mode 100644
-index 0000000..623cc9f
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_fr.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_frCA.mp3
 new file mode 100644
-index 0000000..623cc9f
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOff_frCA.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn.mp3
 new file mode 100644
-index 0000000..1ceed00
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_fr.mp3
 new file mode 100644
-index 0000000..0ca469f
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_fr.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_frCA.mp3
 new file mode 100644
-index 0000000..0ca469f
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/e2eeOn_frCA.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.mp3
 new file mode 100644
-index 0000000..0029d2c
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.wav
 new file mode 100644
-index 0000000..012dbab
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/incomingMessage.wav differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.mp3
 new file mode 100644
-index 0000000..975e3a7
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.wav
 new file mode 100644
-index 0000000..16ceb80
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/joined.wav differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/knock.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/knock.mp3
 new file mode 100644
-index 0000000..6b68ec6
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/knock.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.mp3
 new file mode 100644
-index 0000000..d0780a9
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.wav
 new file mode 100644
-index 0000000..0c9cee0
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/left.wav differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff.mp3
 new file mode 100644
-index 0000000..db7e1b8
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_fr.mp3
 new file mode 100644
-index 0000000..366fdae
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_fr.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_frCA.mp3
 new file mode 100644
-index 0000000..366fdae
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOff_frCA.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn.mp3
 new file mode 100644
-index 0000000..0a1ec49
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_fr.mp3
 new file mode 100644
-index 0000000..90f120d
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_fr.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_frCA.mp3
 new file mode 100644
-index 0000000..90f120d
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/liveStreamingOn_frCA.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noAudioSignal.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noAudioSignal.mp3
 new file mode 100644
-index 0000000..d80cc72
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noAudioSignal.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noisyAudioInput.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noisyAudioInput.mp3
 new file mode 100644
-index 0000000..d80cc72
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/noisyAudioInput.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.mp3
 new file mode 100644
-index 0000000..f1103a0
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.wav
 new file mode 100644
-index 0000000..7a8b643
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingRinging.wav differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.mp3
 new file mode 100644
-index 0000000..398ebed
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.wav
 new file mode 100644
-index 0000000..4b60654
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/outgoingStart.wav differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-applause.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-applause.mp3
 new file mode 100644
-index 0000000..2254bd2
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-applause.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-boo.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-boo.mp3
 new file mode 100644
-index 0000000..6ed9114
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-boo.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-crickets.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-crickets.mp3
 new file mode 100644
-index 0000000..7e3a6c3
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-crickets.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-laughter.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-laughter.mp3
 new file mode 100644
-index 0000000..772c381
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-laughter.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-raised-hand.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-raised-hand.mp3
 new file mode 100644
-index 0000000..2fd2f1e
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-raised-hand.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-surprise.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-surprise.mp3
 new file mode 100644
-index 0000000..63d48fa
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-surprise.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-thumbs-up.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-thumbs-up.mp3
 new file mode 100644
-index 0000000..92491a1
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/reactions-thumbs-up.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff.mp3
 new file mode 100644
-index 0000000..3c89861
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_fr.mp3
 new file mode 100644
-index 0000000..f36a379
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_fr.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_frCA.mp3
 new file mode 100644
-index 0000000..f36a379
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOff_frCA.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn.mp3
 new file mode 100644
-index 0000000..e8b9e85
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_fr.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_fr.mp3
 new file mode 100644
-index 0000000..35c6568
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_fr.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_frCA.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_frCA.mp3
 new file mode 100644
-index 0000000..35c6568
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/recordingOn_frCA.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.mp3
 new file mode 100644
-index 0000000..857acda
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.wav
 new file mode 100644
-index 0000000..ab9fc1c
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/rejected.wav differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.mp3
 new file mode 100644
-index 0000000..937ef63
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.wav b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.wav
 new file mode 100644
-index 0000000..b37d90e
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/ring.wav differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/talkWhileMuted.mp3 b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/talkWhileMuted.mp3
 new file mode 100644
-index 0000000..d80cc72
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/library_assets/debug/out/sounds/talkWhileMuted.mp3 differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/local_only_symbol_list/debug/R-def.txt b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/local_only_symbol_list/debug/R-def.txt
 new file mode 100644
 index 0000000..5d6c329
@@ -616,8 +571,7 @@ index 0000000..87e1578
 \ No newline at end of file
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar
 new file mode 100644
-index 0000000..15e09c6
-Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar differ
+index 0000000..e69de29
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt b/node_modules/@jitsi/react-native-sdk/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
 new file mode 100644
 index 0000000..7ee399f
@@ -662,7 +616,7 @@ index 0000000..2086f41
 +		INJECTED from /Users/mohamedsabbar/ibtikar/mobile/gov_com_mobile_fork/node_modules/@jitsi/react-native-sdk/android/src/main/AndroidManifest.xml
 diff --git a/node_modules/@jitsi/react-native-sdk/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin b/node_modules/@jitsi/react-native-sdk/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
 new file mode 100644
-index 0000000..8a3a8af
+index 0000000..5680478
 Binary files /dev/null and b/node_modules/@jitsi/react-native-sdk/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin differ
 diff --git a/node_modules/@jitsi/react-native-sdk/react/features/app/components/App.native.tsx b/node_modules/@jitsi/react-native-sdk/react/features/app/components/App.native.tsx
 index d018e72..5cf8538 100644
@@ -677,3 +631,31 @@ index d018e72..5cf8538 100644
  
  import BottomSheetContainer from '../../base/dialog/components/native/BottomSheetContainer';
  import DialogContainer from '../../base/dialog/components/native/DialogContainer';
+diff --git a/node_modules/@jitsi/react-native-sdk/react/features/base/util/copyText.native.ts b/node_modules/@jitsi/react-native-sdk/react/features/base/util/copyText.native.ts
+index bc4ec75..a72ce9c 100644
+--- a/node_modules/@jitsi/react-native-sdk/react/features/base/util/copyText.native.ts
++++ b/node_modules/@jitsi/react-native-sdk/react/features/base/util/copyText.native.ts
+@@ -1,4 +1,4 @@
+-import Clipboard from '@react-native-community/clipboard';
++import Clipboard from '@react-native-clipboard/clipboard';
+ 
+ /**
+  * Tries to copy a given text to the clipboard.
+@@ -8,11 +8,11 @@ import Clipboard from '@react-native-community/clipboard';
+  * @returns {Promise<boolean>}
+  */
+ export function copyText(textToCopy: string) {
+-    try {
+-        Clipboard.setString(textToCopy);
++	try {
++		Clipboard.setString(textToCopy);
+ 
+-        return true;
+-    } catch (e) {
+-        return false;
+-    }
++		return true;
++	} catch (e) {
++		return false;
++	}
+ }
