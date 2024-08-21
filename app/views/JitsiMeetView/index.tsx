@@ -1,11 +1,9 @@
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, BackHandler, SafeAreaView, StyleSheet, View } from 'react-native';
-import { JitsiMeeting, JitsiRefProps } from '@jitsi/react-native-sdk';
-
-import i18n from '../../i18n';
+import { ActivityIndicator, SafeAreaView, StyleSheet, View, Dimensions } from 'react-native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import JitsiMeet, { JitsiMeeting as JitsiMeetView } from '@jitsi/react-native-sdk';
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 import { useAppSelector } from '../../lib/hooks';
-import { isIOS } from '../../lib/methods/helpers';
 import { getRoomIdFromJitsiCallUrl } from '../../lib/methods/helpers/getRoomIdFromJitsiCall';
 import { events, logEvent } from '../../lib/methods/helpers/log';
 import { endVideoConfTimer, initVideoConfTimer } from '../../lib/methods/videoConfTimer';
@@ -13,16 +11,39 @@ import { getUserSelector } from '../../selectors/login';
 import { ChatsStackParamList } from '../../stacks/types';
 import JitsiAuthModal from './JitsiAuthModal';
 
-const JitsiMeetViewScreen = (): React.ReactElement => {
+const JitsiMeetViewComponent = (): React.ReactElement => {
 	const {
 		params: { rid, url, videoConf }
-	} = useRoute<RouteProp<ChatsStackParamList, 'JitsiMeeting'>>();
+	} = useRoute<RouteProp<ChatsStackParamList, 'JitsiMeetView'>>();
 	const { goBack } = useNavigation();
 	const user = useAppSelector(state => getUserSelector(state));
 	const serverUrl = useAppSelector(state => state.server.server);
 
 	const [authModal, setAuthModal] = useState(false);
-	const [loading, setLoading] = useState(true);
+	const [isConnected, setIsConnected] = useState(false);
+
+	const startCall = useCallback(() => {
+		const roomId = getRoomIdFromJitsiCallUrl(url);
+
+		if (!roomId) {
+			return;
+		}
+
+		const userInfo = {
+			displayName: user.username,
+			email: user.email,
+			avatar: user.avatar
+		};
+
+		const options = {
+			room: roomId,
+			serverUrl: serverUrl,
+			userInfo: userInfo
+		};
+
+		// JitsiMeetView(url, options);
+		setIsConnected(true);
+	}, [url, user, serverUrl]);
 
 	const onConferenceJoined = useCallback(() => {
 		logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_JOIN : events.JM_CONFERENCE_JOIN);
@@ -34,50 +55,47 @@ const JitsiMeetViewScreen = (): React.ReactElement => {
 	const onConferenceTerminated = useCallback(() => {
 		logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_TERMINATE : events.JM_CONFERENCE_TERMINATE);
 		if (!videoConf) endVideoConfTimer();
+		deactivateKeepAwake();
 		goBack();
 	}, [goBack, videoConf]);
 
-	const onConferenceWillJoin = useCallback(() => {
-		setLoading(false);
-	}, []);
-
 	useEffect(() => {
-		BackHandler.addEventListener('hardwareBackPress', () => true);
-		return () => {
-			BackHandler.removeEventListener('hardwareBackPress', () => true);
-		};
-	}, []);
+		activateKeepAwake();
+		startCall();
 
-	useEffect(() => {
-		onConferenceJoined();
-		return () => {
-			onConferenceTerminated();
+		const handleOrientationChange = () => {
+			// Handle orientation change if needed
 		};
-	}, [onConferenceJoined, onConferenceTerminated]);
 
-	const jitsiMeetProps: JitsiRefProps = {
-		onConferenceJoined,
-		onConferenceTerminated,
-		onConferenceWillJoin,
-		style: styles.jitsiMeet,
-		// Customize JitsiMeet with options like room, token, etc.
-		room: getRoomIdFromJitsiCallUrl(url),
-		userInfo: {
-			displayName: user.name,
-			email: user.email,
-			avatar: user.avatar
-		}
-	};
+		const dimensionListener = Dimensions.addEventListener('change', handleOrientationChange);
+
+		return () => {
+			if (isConnected) {
+				// JitsiMeetView.endCall();
+			}
+			if (dimensionListener) {
+				dimensionListener.remove();
+			}
+		};
+	}, [startCall, isConnected]);
 
 	return (
 		<SafeAreaView style={styles.container}>
-			{authModal && <JitsiAuthModal setAuthModal={setAuthModal} callUrl={`${url}?language=${i18n.locale}`} />}
-			{loading ? (
-				<View style={[styles.jitsiMeet, styles.loading]}>
+			{authModal ? (
+				<JitsiAuthModal setAuthModal={setAuthModal} callUrl={url} />
+			) : (
+				<JitsiMeetView
+					config={{}}
+					room='TEst'
+					onConferenceJoined={onConferenceJoined}
+					onConferenceTerminated={onConferenceTerminated}
+					style={styles.jitsiMeetView}
+				/>
+			)}
+			{!isConnected && (
+				<View style={[styles.jitsiMeetView, styles.loading]}>
 					<ActivityIndicator />
 				</View>
-			) : (
-				<JitsiMeeting {...jitsiMeetProps} />
 			)}
 		</SafeAreaView>
 	);
@@ -87,7 +105,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
-	jitsiMeet: {
+	jitsiMeetView: {
 		flex: 1,
 		backgroundColor: '#d1fae5'
 	},
@@ -97,4 +115,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default JitsiMeetViewScreen;
+export default JitsiMeetViewComponent;

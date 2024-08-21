@@ -1272,7 +1272,6 @@ class RoomView extends React.Component<IRoomViewProps, IRoomViewState> {
 			theme,
 			inAppFeedback
 		} = this.props;
-		console.log('ussser ', user);
 		const { action, selectedMessages } = this.state;
 		let dateSeparator = null;
 		let showUnreadSeparator = false;

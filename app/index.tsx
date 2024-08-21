@@ -116,7 +116,7 @@ export default class Root extends React.Component<{}, IState> {
 
 	componentWillUnmount() {
 		clearTimeout(this.listenerTimeout);
-		Dimensions.removeEventListener('change', this.onDimensionsChange);
+		// Dimensions.removeEventListener('change', this.onDimensionsChange);
 
 		unsubscribeTheme();
 		RNCallKeep.removeEventListener('answerCall');
@@ -212,8 +212,7 @@ export default class Root extends React.Component<{}, IState> {
 							themePreferences,
 							setTheme: this.setTheme,
 							colors: colors[theme]
-						}}
-					>
+						}}>
 						<DimensionsContext.Provider
 							value={{
 								width,
@@ -221,8 +220,7 @@ export default class Root extends React.Component<{}, IState> {
 								scale,
 								fontScale,
 								setDimensions: this.setDimensions
-							}}
-						>
+							}}>
 							<GestureHandlerRootView style={{ flex: 1 }}>
 								<ActionSheetProvider>
 									<AppContainer />
