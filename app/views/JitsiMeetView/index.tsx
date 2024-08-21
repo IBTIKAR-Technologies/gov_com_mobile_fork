@@ -13,6 +13,7 @@ import { endVideoConfTimer, initVideoConfTimer } from '../../lib/methods/videoCo
 import { getUserSelector } from '../../selectors/login';
 import { ChatsStackParamList } from '../../stacks/types';
 import JitsiAuthModal from './JitsiAuthModal';
+import i18n from '../../i18n';
 
 const JitsiMeetViewComponent = (): React.ReactElement => {
 	useKeepAwake();
@@ -127,11 +128,15 @@ const JitsiMeetViewComponent = (): React.ReactElement => {
 		onEndpointMessageReceived
 	};
 
+	console.log('usssssserrrrrr12 ', getRoomIdFromJitsiCallUrl(url));
+
+	const callUrl = `${url}${url.includes('#config') ? '&' : '#'}config.disableDeepLinking=true`;
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<JitsiMeeting
 				config={{
-					hideConferenceTimer: true,
+					hideConferenceTimer: false,
 					customToolbarButtons: [
 						{
 							icon: 'https://w7.pngwing.com/pngs/987/537/png-transparent-download-downloading-save-basic-user-interface-icon-thumbnail.png',
@@ -145,15 +150,22 @@ const JitsiMeetViewComponent = (): React.ReactElement => {
 						}
 					]
 				}}
-				eventListeners={eventListeners as any}
+				eventListeners={{
+					onConferenceJoined: () => console.log('Conference joined'),
+					onConferenceWillJoin: () => console.log('Conference will join'),
+					onParticipantJoined: participant => console.log('Participant joined', participant),
+					onParticipantLeft: participant => console.log('Participant left', participant)
+				}}
 				flags={{
 					'invite.enabled': true,
-					'ios.screensharing.enabled': true
+					// 'ios.screensharing.enabled': true,
+					'audio-only.enabled': true,
+					'speakerstats.enabled': true
 				}}
 				ref={jitsiMeeting}
 				style={{ flex: 1 }}
-				room={'room'}
-				serverURL={'https://meet.jit.si/'}
+				room={getRoomIdFromJitsiCallUrl(url) as string}
+				serverURL={`${callUrl}?language=${i18n.locale}`}
 			/>
 			{!isConnected && (
 				<View style={[styles.jitsiMeetView, styles.loading]}>
