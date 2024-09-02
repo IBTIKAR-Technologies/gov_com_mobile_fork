@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, SafeAreaView, StyleSheet, View, Dimensions } from 'react-native';
+import { ActivityIndicator, SafeAreaView, StyleSheet, View, Dimensions, Text, Button } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
-import { JitsiMeeting } from '@jitsi/react-native-sdk';
+import { JitsiMeeting, JitsiRefProps } from '@jitsi/react-native-sdk';
 import { useKeepAwake } from 'expo-keep-awake';
 import CookieManager from '@react-native-cookies/cookies';
 import { WebViewNavigation } from 'react-native-webview';
 
+import { DASHBOARD_URL } from '../LoginView/UserForm';
 import { useAppSelector } from '../../lib/hooks';
 import { getRoomIdFromJitsiCallUrl } from '../../lib/methods/helpers/getRoomIdFromJitsiCall';
 import { events, logEvent } from '../../lib/methods/helpers/log';
@@ -14,11 +15,14 @@ import { getUserSelector } from '../../selectors/login';
 import { ChatsStackParamList } from '../../stacks/types';
 import JitsiAuthModal from './JitsiAuthModal';
 import i18n from '../../i18n';
+import axios from 'axios';
+import { TouchableRipple } from 'react-native-paper';
+import { MaterialIcons } from 'react-native-vector-icons';
 
 const JitsiMeetViewComponent = (): React.ReactElement => {
-	useKeepAwake();
+	// useKeepAwake();
 	const {
-		params: { rid, url, videoConf }
+		params: { rid, url, videoConf, callId }
 	} = useRoute<RouteProp<ChatsStackParamList, 'JitsiMeetView'>>();
 	const { goBack } = useNavigation();
 	const user = useAppSelector(state => getUserSelector(state));
@@ -93,24 +97,27 @@ const JitsiMeetViewComponent = (): React.ReactElement => {
 		setIsConnected(true);
 	}, [url, user, serverUrl]);
 
-	const onConferenceJoined = useCallback(() => {
-		logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_JOIN : events.JM_CONFERENCE_JOIN);
-		if (rid && !videoConf) {
-			initVideoConfTimer(rid);
+	const onConferenceJoined = async () => {
+		try {
+			await axios.get(`${DASHBOARD_URL}/api/endcall?callId=${callId}&username=${user.username}`);
+			console.log('Call joined successfully');
+			goBack();
+		} catch (error) {
+			console.error('Error joining the call:', error);
 		}
-	}, [rid, videoConf]);
+	};
 
 	useEffect(() => {
-		onConferenceJoined();
+		// onConferenceJoined();
 		startCall();
 
 		return () => {
 			logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_TERMINATE : events.JM_CONFERENCE_TERMINATE);
 			if (!videoConf) endVideoConfTimer();
 		};
-	}, [startCall, onConferenceJoined, videoConf]);
+	}, [startCall, videoConf]);
 
-	const jitsiMeeting = useRef(null);
+	const jitsiMeeting = useRef<JitsiRefProps>(null);
 
 	const onReadyToClose = useCallback(() => {
 		// @ts-ignore
@@ -128,45 +135,86 @@ const JitsiMeetViewComponent = (): React.ReactElement => {
 		onEndpointMessageReceived
 	};
 
-	console.log('usssssserrrrrr12 ', getRoomIdFromJitsiCallUrl(url));
+	console.log('usssssserrrrrr12 ', user);
+
+	const endCall = async () => {
+		try {
+			await jitsiMeeting.current?.close();
+			await axios.get(`${DASHBOARD_URL}/api/endcall?callId=${callId}`);
+			console.log('Call ended successfully');
+			goBack();
+		} catch (error) {
+			console.error('Error ending the call:', error);
+		}
+	};
 
 	const callUrl = `${url}${url.includes('#config') ? '&' : '#'}config.disableDeepLinking=true`;
 
+	// useEffect(() => {
+	// 	// Set the audio output to the earpiece (speaker off)
+	// 	if (jitsiMeeting.current) {
+	// 		jitsiMeeting.current?.setAudioOnly(true);
+	// 	}
+	// }, []);
 	return (
 		<SafeAreaView style={styles.container}>
 			<JitsiMeeting
+				userInfo={{
+					displayName: user.username,
+					email: user?.emails?.[0]?.address as string,
+					avatarURL: user.avatarOrigin as string
+				}}
 				config={{
-					hideConferenceTimer: false,
-					customToolbarButtons: [
-						{
-							icon: 'https://w7.pngwing.com/pngs/987/537/png-transparent-download-downloading-save-basic-user-interface-icon-thumbnail.png',
-							id: 'btn1',
-							text: 'Button one'
-						},
-						{
-							icon: 'https://w7.pngwing.com/pngs/987/537/png-transparent-download-downloading-save-basic-user-interface-icon-thumbnail.png',
-							id: 'btn2',
-							text: 'Button two'
-						}
-					]
+					// hideConferenceTimer: false,
+					startAudioOnly: true,
+					// 'p2p.enabled': true,
+					'prejoinConfig.enabled': false
 				}}
 				eventListeners={{
-					onConferenceJoined: () => console.log('Conference joined'),
+					onConferenceBlurred: () => console.log('Conference blured'),
+					onConferenceFocused: () => console.log('Conference focused'),
+					onConferenceLeft: () => {
+						console.log('Conference left');
+						endCall();
+					},
+					onReadyToClose: () => console.log('Goback left'),
+					onConferenceJoined: () => {
+						console.log('Conference join');
+					},
 					onConferenceWillJoin: () => console.log('Conference will join'),
-					onParticipantJoined: participant => console.log('Participant joined', participant),
-					onParticipantLeft: participant => console.log('Participant left', participant)
+					onParticipantJoined: () => console.log('Participant joined'),
+					onParticipantLeft: participant => {
+						console.log('Participant left');
+						endCall();
+					}
 				}}
 				flags={{
-					'invite.enabled': true,
+					'invite.enabled': false,
 					// 'ios.screensharing.enabled': true,
 					'audio-only.enabled': true,
-					'speakerstats.enabled': true
+					'breakout-rooms.enabled': false,
+					'speakerstats.enabled': false,
+					'fullscreen.enabled': false,
+					'chat.enabled': false,
+					'meeting-name.enabled': false,
+					'video-mute.enabled': false,
+					'video-share.enabled': false,
+					'android.screensharing.enabled': false,
+					'ios.screensharing.enabled': false,
+					'add-people.enabled': false,
+					'calendar.enabled': false,
+					'close-captions.enabled': false,
+					'filmstrip.enabled': false,
+					'overflow-menu.enabled': false,
+					'security-options.enabled': false,
+					'settings.enabled': false
 				}}
 				ref={jitsiMeeting}
 				style={{ flex: 1 }}
 				room={getRoomIdFromJitsiCallUrl(url) as string}
 				serverURL={`${callUrl}?language=${i18n.locale}`}
 			/>
+			<Button title='Disconnect' onPress={endCall} />
 			{!isConnected && (
 				<View style={[styles.jitsiMeetView, styles.loading]}>
 					<ActivityIndicator />
