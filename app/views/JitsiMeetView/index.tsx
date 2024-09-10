@@ -18,6 +18,7 @@ import i18n from '../../i18n';
 import axios from 'axios';
 import { TouchableRipple } from 'react-native-paper';
 import { MaterialIcons } from 'react-native-vector-icons';
+import CallScreen from './CallScreen';
 
 const JitsiMeetViewComponent = (): React.ReactElement => {
 	// useKeepAwake();
@@ -30,6 +31,7 @@ const JitsiMeetViewComponent = (): React.ReactElement => {
 
 	const [authModal, setAuthModal] = useState(false);
 	const [cookiesSet, setCookiesSet] = useState(false);
+	const [call, setCall] = useState(true);
 
 	const setCookies = async () => {
 		const date = new Date();
@@ -107,24 +109,25 @@ const JitsiMeetViewComponent = (): React.ReactElement => {
 		}
 	};
 
-	useEffect(() => {
-		// onConferenceJoined();
-		startCall();
+	// useEffect(() => {
+	// 	// onConferenceJoined();
+	// 	startCall();
 
-		return () => {
-			logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_TERMINATE : events.JM_CONFERENCE_TERMINATE);
-			if (!videoConf) endVideoConfTimer();
-		};
-	}, [startCall, videoConf]);
+	// 	return () => {
+	// 		logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_TERMINATE : events.JM_CONFERENCE_TERMINATE);
+	// 		if (!videoConf) endVideoConfTimer();
+	// 	};
+	// }, [startCall, videoConf]);
 
 	const jitsiMeeting = useRef<JitsiRefProps>(null);
 
-	const onReadyToClose = useCallback(() => {
+	const onReadyToClose = () => {
 		// @ts-ignore
-
+		console.log('Ready to close');
+		// navigation.navigate("Home");
 		// @ts-ignore
 		jitsiMeeting.current.close();
-	}, []);
+	};
 
 	const onEndpointMessageReceived = useCallback(() => {
 		console.log('You got a message!');
@@ -135,13 +138,14 @@ const JitsiMeetViewComponent = (): React.ReactElement => {
 		onEndpointMessageReceived
 	};
 
-	console.log('usssssserrrrrr12 ', user);
-
 	const endCall = async () => {
 		try {
-			await jitsiMeeting.current?.close();
+			// onReadyToClose();
+			jitsiMeeting.current?.close(callId);
+			console.log('Call ended successfully');
 			await axios.get(`${DASHBOARD_URL}/api/endcall?callId=${callId}`);
 			console.log('Call ended successfully');
+			// setCall(false);
 			goBack();
 		} catch (error) {
 			console.error('Error ending the call:', error);
@@ -156,70 +160,84 @@ const JitsiMeetViewComponent = (): React.ReactElement => {
 	// 		jitsiMeeting.current?.setAudioOnly(true);
 	// 	}
 	// }, []);
+
 	return (
 		<SafeAreaView style={styles.container}>
-			<JitsiMeeting
-				userInfo={{
-					displayName: user.username,
-					email: user?.emails?.[0]?.address as string,
-					avatarURL: user.avatarOrigin as string
-				}}
-				config={{
-					// hideConferenceTimer: false,
-					startAudioOnly: true,
-					// 'p2p.enabled': true,
-					'prejoinConfig.enabled': false
-				}}
-				eventListeners={{
-					onConferenceBlurred: () => console.log('Conference blured'),
-					onConferenceFocused: () => console.log('Conference focused'),
-					onConferenceLeft: () => {
-						console.log('Conference left');
-						endCall();
-					},
-					onReadyToClose: () => console.log('Goback left'),
-					onConferenceJoined: () => {
-						console.log('Conference join');
-					},
-					onConferenceWillJoin: () => console.log('Conference will join'),
-					onParticipantJoined: () => console.log('Participant joined'),
-					onParticipantLeft: participant => {
-						console.log('Participant left');
-						endCall();
-					}
-				}}
-				flags={{
-					'invite.enabled': false,
-					// 'ios.screensharing.enabled': true,
-					'audio-only.enabled': true,
-					'breakout-rooms.enabled': false,
-					'speakerstats.enabled': false,
-					'fullscreen.enabled': false,
-					'chat.enabled': false,
-					'meeting-name.enabled': false,
-					'video-mute.enabled': false,
-					'video-share.enabled': false,
-					'android.screensharing.enabled': false,
-					'ios.screensharing.enabled': false,
-					'add-people.enabled': false,
-					'calendar.enabled': false,
-					'close-captions.enabled': false,
-					'filmstrip.enabled': false,
-					'overflow-menu.enabled': false,
-					'security-options.enabled': false,
-					'settings.enabled': false
-				}}
-				ref={jitsiMeeting}
-				style={{ flex: 1 }}
-				room={getRoomIdFromJitsiCallUrl(url) as string}
-				serverURL={`${callUrl}?language=${i18n.locale}`}
-			/>
-			<Button title='Disconnect' onPress={endCall} />
-			{!isConnected && (
-				<View style={[styles.jitsiMeetView, styles.loading]}>
-					<ActivityIndicator />
-				</View>
+			{jitsiMeeting.current ? (
+				<CallScreen
+					rid={rid}
+					callId={callId}
+					setMic={jitsiMeeting?.current?.setAudio as any}
+					mic={'EARPIECE'}
+					audio={false}
+					setAudio={jitsiMeeting?.current?.setAudioMuted as any}
+					avatar={''}
+					endCall={endCall}
+				/>
+			) : (
+				<Text>Loading...</Text>
 			)}
+			{/* {call && ( */}
+			<View style={{ display: 'none' }}>
+				<JitsiMeeting
+					userInfo={{
+						displayName: user.username,
+						email: user?.emails?.[0]?.address as string,
+						avatarURL: user.avatarOrigin as string
+					}}
+					config={{
+						// hideConferenceTimer: false,
+						startAudioOnly: true,
+						// 'p2p.enabled': true,
+						'prejoinConfig.enabled': false
+					}}
+					eventListeners={{
+						onConferenceBlurred: () => console.log('Conference blured'),
+						onConferenceFocused: () => console.log('Conference focused'),
+						onConferenceLeft: () => {
+							console.log('Conference left');
+							// endCall();
+						},
+						onReadyToClose,
+						onConferenceJoined: () => {
+							console.log('Conference join');
+						},
+						onConferenceWillJoin: () => console.log('Conference will join'),
+						onParticipantJoined: () => console.log('Participant joined'),
+						onParticipantLeft: participant => {
+							console.log('Participant left');
+							// endCall();
+						}
+					}}
+					flags={{
+						'invite.enabled': false,
+						// 'ios.screensharing.enabled': true,
+						'audio-only.enabled': true,
+						'breakout-rooms.enabled': true,
+						'speakerstats.enabled': false,
+						'fullscreen.enabled': false,
+						'chat.enabled': false,
+						'meeting-name.enabled': false,
+						'video-mute.enabled': false,
+						'video-share.enabled': false,
+						'android.screensharing.enabled': false,
+						'ios.screensharing.enabled': false,
+						'add-people.enabled': false,
+						'calendar.enabled': false,
+						'close-captions.enabled': false,
+						'filmstrip.enabled': false,
+						'overflow-menu.enabled': false,
+						'security-options.enabled': false,
+						'settings.enabled': false
+					}}
+					ref={jitsiMeeting}
+					style={{ flex: 1 }}
+					room={getRoomIdFromJitsiCallUrl(url) as string}
+					serverURL={`${callUrl}?language=${i18n.locale}`}
+				/>
+				<Button title='Disconnect' onPress={endCall} />
+			</View>
+			{/* )} */}
 		</SafeAreaView>
 	);
 };
