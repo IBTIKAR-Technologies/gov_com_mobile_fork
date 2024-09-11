@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutChangeEvent, View, TextInput, TextInputProps, TouchableNativeFeedback, Text } from 'react-native';
+import { LayoutChangeEvent, View, TextInput, TextInputProps, TouchableNativeFeedback } from 'react-native';
 import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, {
 	SharedValue,
@@ -15,6 +15,7 @@ import styles from './styles';
 import { useTheme } from '../../theme';
 import { SEEK_HIT_SLOP, THUMB_SEEK_SIZE, ACTIVE_OFFSET_X, DEFAULT_TIME_LABEL } from './constants';
 
+Animated.addWhitelistedNativeProps({ text: true });
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 interface ISeek {
@@ -108,8 +109,7 @@ const Seek = ({ currentTime, duration, loaded = false, onChangeTime }: ISeek) =>
 		<TouchableNativeFeedback>
 			<View style={styles.seekContainer}>
 				<AnimatedTextInput
-					// defaultValue={DEFAULT_TIME_LABEL}
-					value={`${timeLabel.value}`}
+					defaultValue={DEFAULT_TIME_LABEL}
 					editable={false}
 					style={[styles.duration, { color: colors.fontDefault }]}
 					animatedProps={timeLabelAnimatedProps}
