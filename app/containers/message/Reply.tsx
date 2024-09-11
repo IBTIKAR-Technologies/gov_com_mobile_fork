@@ -15,6 +15,8 @@ import RCActivityIndicator from '../ActivityIndicator';
 import Markdown from '../markdown';
 import Attachments from './Attachments';
 import messageStyles from './styles';
+import MessageContext from './Context';
+import Touchable from 'react-native-platform-touchable';
 
 const styles = StyleSheet.create({
 	button: {

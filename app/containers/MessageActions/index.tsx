@@ -398,13 +398,13 @@ const MessageActions = React.memo(
 				// }
 
 				// Reply
-				// if (!isReadOnly && !tmid) {
-				// 	options.push({
-				// 		title: I18n.t('Reply_in_Thread'),
-				// 		icon: 'threads',
-				// 		onPress: () => handleReply(message.id)
-				// 	});
-				// }
+				if (!isReadOnly && !tmid) {
+					options.push({
+						title: I18n.t('Reply_in_Thread'),
+						icon: 'threads',
+						onPress: () => handleReply(message.id)
+					});
+				}
 
 				// Reply in DM
 				// if (room.t !== 'd' && room.t !== 'l' && !videoConfBlock) {

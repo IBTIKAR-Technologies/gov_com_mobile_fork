@@ -189,29 +189,34 @@ class MessagesView extends React.Component<IMessagesViewProps, IMessagesViewStat
 					const { messages } = this.state;
 					const result = await Services.getFiles(this.rid, this.t, messages.length);
 					if (result.success) {
-						return { ...result, messages: result.files };
+						console.log('results::::: ', result);
+						const files = result?.files.filter(e => e.typeGroup !== 'audio');
+						return { ...result, messages: files };
 					}
 				},
 				noDataMsg: I18n.t('No_files'),
 				testID: 'room-files-view',
-				renderItem: (item: any) => (
-					<Message
-						{...renderItemCommonProps(item)}
-						theme={theme}
-						item={{
-							...item,
-							u: item.user,
-							ts: item.ts || item.uploadedAt,
-							attachments: [
-								{
-									title: item.name,
-									description: item.description,
-									...getFileUrlAndTypeFromMessage(item)
-								}
-							]
-						}}
-					/>
-				)
+				renderItem: (item: any) => {
+					console.log('iteemmmmeeeeee: ', item);
+					return (
+						<Message
+							{...renderItemCommonProps(item)}
+							theme={theme}
+							item={{
+								...item,
+								u: item.user,
+								ts: item.ts || item.uploadedAt,
+								attachments: [
+									{
+										title: item.name,
+										description: item.description,
+										...getFileUrlAndTypeFromMessage(item)
+									}
+								]
+							}}
+						/>
+					);
+				}
 			},
 			// Mentions Messages Screen
 			Mentions: {

@@ -2114,21 +2114,19 @@
   resolved "https://registry.yarnpkg.com/@jitsi/logger/-/logger-2.0.2.tgz#33491045e8c4b760df9c59e9885f401589f30c13"
   integrity sha512-qwbpRwuwkBFgh0F5jivq/5fAm46yVoXURc5LCklEs8lAShYVangFEXKW7RLpZuZ5nQnrHrlvU8MswQNREmvahg==
 
-"@jitsi/react-native-sdk@^10.1.3":
-  version "10.1.3"
-  resolved "https://registry.yarnpkg.com/@jitsi/react-native-sdk/-/react-native-sdk-10.1.3.tgz#ffb6c4334a782504fad19525d56122c266d74305"
-  integrity sha512-tnQhKIZPn6bgLwrayh5+dXP+2Iy+sl/BoxqY3FtXlW04l77Milcq6FEYeGwDzSE19mn+vvF98qPKTT3mbsrddw==
+"@jitsi/react-native-sdk@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@jitsi/react-native-sdk/-/react-native-sdk-2.2.1.tgz#3fba2fb05281423caaaa22ced5d03102dd9ed8f1"
+  integrity sha512-whD2d/AA9UoVkFqF4d0/bld7ykFCfe2maxaAVwtWWaFt+FI0H1o8/Cs+NSXF7uUT/JQSlJUBTHuIrtv7QbVxvg==
   dependencies:
-    "@braintree/sanitize-url" "7.0.0"
     "@jitsi/js-utils" "2.2.1"
     "@jitsi/logger" "2.0.2"
     "@jitsi/rtcstats" "9.5.1"
-    "@react-navigation/bottom-tabs" "6.6.0"
-    "@react-navigation/elements" "1.3.30"
-    "@react-navigation/material-top-tabs" "6.6.13"
-    "@react-navigation/native" "6.1.17"
-    "@react-navigation/stack" "6.4.0"
-    "@stomp/stompjs" "7.0.0"
+    "@react-navigation/bottom-tabs" "6.5.8"
+    "@react-navigation/elements" "1.3.18"
+    "@react-navigation/material-top-tabs" "6.6.3"
+    "@react-navigation/native" "6.1.7"
+    "@react-navigation/stack" "6.3.17"
     "@xmldom/xmldom" "0.8.7"
     base64-js "1.5.1"
     grapheme-splitter "1.0.4"
@@ -2138,26 +2136,24 @@
     js-md5 "0.6.1"
     js-sha512 "0.8.0"
     jwt-decode "2.2.0"
-    lib-jitsi-meet "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1852.0.0+526ec25d/lib-jitsi-meet.tgz"
-    lodash-es "4.17.21"
+    lib-jitsi-meet "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1811.0.0+86e2fb2b/lib-jitsi-meet.tgz"
+    lodash "4.17.21"
     moment "2.29.4"
     moment-duration-format "2.2.2"
     optional-require "1.0.3"
     promise.allsettled "1.0.4"
     punycode "2.3.0"
-    react-emoji-render "2.0.1"
+    react-emoji-render "1.2.4"
     react-i18next "10.11.4"
     react-linkify "1.0.0-alpha"
     react-native-dialog "https://github.com/jitsi/react-native-dialog/releases/download/v9.2.2-jitsi.1/react-native-dialog-9.2.2.tgz"
-    react-native-paper "5.10.3"
-    react-native-svg-transformer "1.2.0"
+    react-native-svg-transformer "1.1.0"
     react-native-tab-view "3.5.2"
     react-native-url-polyfill "2.0.0"
     react-native-youtube-iframe "2.3.0"
     react-redux "7.2.9"
     redux "4.0.4"
     redux-thunk "2.4.1"
-    text-encoding "0.7.0"
     unorm "1.6.0"
     util "0.12.1"
     uuid "8.3.2"
@@ -3089,12 +3085,12 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
-"@react-navigation/bottom-tabs@6.6.0":
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.6.0.tgz#e4028bf578c806e8b99cf0c58d077825e4d2188a"
-  integrity sha512-IuKp1nUk4VLI3pNMvEczLROWfrYsPQIDyi+wtpHnm0pD+UbNtarH3crl76UrB/ALZho+5rKJZ8JNr+QfVTiUzg==
+"@react-navigation/bottom-tabs@6.5.8":
+  version "6.5.8"
+  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.5.8.tgz#9536c6e45154abc183c363d07c94991e10b14856"
+  integrity sha512-0aa/jXea+LyBgR5NoRNWGKw0aFhjHwCkusigMRXIrCA4kINauDcAO0w0iFbZeKfaTCVAix5kK5UxDJJ2aJpevg==
   dependencies:
-    "@react-navigation/elements" "^1.3.30"
+    "@react-navigation/elements" "^1.3.18"
     color "^4.2.3"
     warn-once "^0.1.0"
 
@@ -3107,7 +3103,7 @@
     color "^4.2.3"
     warn-once "^0.1.0"
 
-"@react-navigation/core@^6.4.16", "@react-navigation/core@^6.4.8":
+"@react-navigation/core@^6.4.8", "@react-navigation/core@^6.4.9":
   version "6.4.17"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-6.4.17.tgz#f277a196b578c8a456efcc563d1c9bd87eb4ab04"
   integrity sha512-Nd76EpomzChWAosGqWOYE3ItayhDzIEzzZsT7PfGcRFDgW5miHV2t4MZcq9YIK4tzxZjVVpYbIynOOQQd1e0Cg==
@@ -3133,33 +3129,23 @@
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.17.tgz#9cb95765940f2841916fc71686598c22a3e4067e"
   integrity sha512-sui8AzHm6TxeEvWT/NEXlz3egYvCUog4tlXA4Xlb2Vxvy3purVXDq/XsM56lJl344U5Aj/jDzkVanOTMWyk4UA==
 
-"@react-navigation/elements@1.3.30":
-  version "1.3.30"
-  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.30.tgz#a81371f599af1070b12014f05d6c09b1a611fd9a"
-  integrity sha512-plhc8UvCZs0UkV+sI+3bisIyn78wz9O/BiWZXpounu72k/R/Sj5PuZYFJ1fi6psvriUveMCGh4LeZckAZu2qiQ==
+"@react-navigation/elements@1.3.18":
+  version "1.3.18"
+  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.18.tgz#d8364b40276f3efb9c229c39da3b8b465f18f0a2"
+  integrity sha512-/0hwnJkrr415yP0Hf4PjUKgGyfshrvNUKFXN85Mrt1gY49hy9IwxZgrrxlh0THXkPeq8q4VWw44eHDfAcQf20Q==
 
-"@react-navigation/elements@^1.3.17", "@react-navigation/elements@^1.3.30", "@react-navigation/elements@^1.3.31":
+"@react-navigation/elements@^1.3.17", "@react-navigation/elements@^1.3.18", "@react-navigation/elements@^1.3.31":
   version "1.3.31"
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.31.tgz#28dd802a0787bb03fc0e5be296daf1804dbebbcf"
   integrity sha512-bUzP4Awlljx5RKEExw8WYtif8EuQni2glDaieYROKTnaxsu9kEIA515sXQgUDZU4Ob12VoL7+z70uO3qrlfXcQ==
 
-"@react-navigation/material-top-tabs@6.6.13":
-  version "6.6.13"
-  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-6.6.13.tgz#d32a787d61ae7115797672cbaf477df149b7deba"
-  integrity sha512-utwS0SLl/dq6+PHWGOz4rNNkYzveqvbffXJ6TIrUdaWDDysjBa4btHUOVvXfNADIK4LafmbuRi0xA/zd6HoCPQ==
+"@react-navigation/material-top-tabs@6.6.3":
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-6.6.3.tgz#a8c651d322efea4483ac6cae08c4f3ba9141cf87"
+  integrity sha512-7rbBUUvVSKD8jV/a7iV2BTSQ83G7W8grGSwBNojdeXdeZpsUa+wmmKnPtBFhdPv7DDQp7nzAYRx6RCOPtjZSCw==
   dependencies:
     color "^4.2.3"
     warn-once "^0.1.0"
-
-"@react-navigation/native@6.1.17":
-  version "6.1.17"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-6.1.17.tgz#439f15a99809d26ea4682d2a3766081cf2ca31cf"
-  integrity sha512-mer3OvfwWOHoUSMJyLa4vnBH3zpFmCwuzrBPlw7feXklurr/ZDiLjLxUScOot6jLRMz/67GyilEYMmP99LL0RQ==
-  dependencies:
-    "@react-navigation/core" "^6.4.16"
-    escape-string-regexp "^4.0.0"
-    fast-deep-equal "^3.1.3"
-    nanoid "^3.1.23"
 
 "@react-navigation/native@6.1.6":
   version "6.1.6"
@@ -3167,6 +3153,16 @@
   integrity sha512-14PmSy4JR8HHEk04QkxQ0ZLuqtiQfb4BV9kkMXD2/jI4TZ+yc43OnO6fQ2o9wm+Bq8pY3DxyerC2AjNUz+oH7Q==
   dependencies:
     "@react-navigation/core" "^6.4.8"
+    escape-string-regexp "^4.0.0"
+    fast-deep-equal "^3.1.3"
+    nanoid "^3.1.23"
+
+"@react-navigation/native@6.1.7":
+  version "6.1.7"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-6.1.7.tgz#968ef85b76d35f63111890668836fe2f125bbf90"
+  integrity sha512-W6E3+AtTombMucCRo6q7vPmluq8hSjS+IxfazJ/SokOe7ChJX7eLvvralIsJkjFj3iWV1KgOSnHxa6hdiFasBw==
+  dependencies:
+    "@react-navigation/core" "^6.4.9"
     escape-string-regexp "^4.0.0"
     fast-deep-equal "^3.1.3"
     nanoid "^3.1.23"
@@ -3187,12 +3183,12 @@
     color "^4.2.3"
     warn-once "^0.1.0"
 
-"@react-navigation/stack@6.4.0":
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-6.4.0.tgz#46b9f690942a189b6542a3df71ab49e8ee781ec0"
-  integrity sha512-Jx7fm8x7zSUC6ggUb0VnvPuaIXkVPHckiY+e50mjrIRK4xAgnaLp6crHWYGmXjfi7ahaKL00o76ZgpgkwKw6zg==
+"@react-navigation/stack@6.3.17":
+  version "6.3.17"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-6.3.17.tgz#dd3375916a2adaa130659c0113fe05939bc19470"
+  integrity sha512-8/8ZvJROK3fp6PRmQ9MrXd9epBowA8NkfCaWW/N9H5arqwNX9lTXAkmcjicRhjpX+UNlMBR9dTLkWvPRe2vY9A==
   dependencies:
-    "@react-navigation/elements" "^1.3.30"
+    "@react-navigation/elements" "^1.3.18"
     color "^4.2.3"
     warn-once "^0.1.0"
 
@@ -3312,7 +3308,7 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@stomp/stompjs@7.0.0", "@stomp/stompjs@^7.0.0":
+"@stomp/stompjs@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@stomp/stompjs/-/stompjs-7.0.0.tgz#46b5c454a9dc8262e0b20f3b3dbacaa113993077"
   integrity sha512-fGdq4wPDnSV/KyOsjq4P+zLc8MFWC3lMmP5FBgLWKPJTYcuCbAIrnRGjB7q2jHZdYCOD5vxLuFoKIYLy5/u8Pw==
@@ -3606,7 +3602,7 @@
     "@svgr/babel-plugin-transform-react-native-svg" "8.1.0"
     "@svgr/babel-plugin-transform-svg-component" "8.0.0"
 
-"@svgr/core@^8.1.0":
+"@svgr/core@^8.0.0":
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/@svgr/core/-/core-8.1.0.tgz#41146f9b40b1a10beaf5cc4f361a16a3c1885e88"
   integrity sha512-8QqtOQT5ACVlmsvKOJNEaWmRPmcojMOzCz4Hs2BGG/toAp/K38LcsMRyLp349glq5AzJbCEeimEoxaX6v/fLrA==
@@ -3625,7 +3621,7 @@
     "@babel/types" "^7.21.3"
     entities "^4.4.0"
 
-"@svgr/plugin-jsx@^8.1.0":
+"@svgr/plugin-jsx@^8.0.1":
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/@svgr/plugin-jsx/-/plugin-jsx-8.1.0.tgz#96969f04a24b58b174ee4cd974c60475acbd6928"
   integrity sha512-0xiIyBsLlr8quN+WyuxooNW9RJ0Dpr8uOnH/xrCVO8GLUcwHISwj1AG0k+LFzteTkAA0GbX0kj9q6Dk70PTiPA==
@@ -3635,7 +3631,7 @@
     "@svgr/hast-util-to-babel-ast" "8.0.0"
     svg-parser "^2.0.4"
 
-"@svgr/plugin-svgo@^8.1.0":
+"@svgr/plugin-svgo@^8.0.1":
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/@svgr/plugin-svgo/-/plugin-svgo-8.1.0.tgz#b115b7b967b564f89ac58feae89b88c3decd0f00"
   integrity sha512-Ywtl837OGO9pTLIN/onoWLmDQ4zFUycI1g76vuKGEz6evR/ZTJlJuz3G/fIkb6OVBJ2g0o6CGJzaEjfmEo3AHA==
@@ -6466,6 +6462,11 @@ emittery@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.13.1.tgz#c04b8c3457490e0847ae51fced3af52d338e3dad"
   integrity sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==
+
+emoji-regex@^6.4.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-6.5.1.tgz#9baea929b155565c11ea41c6626eaa65cef992c2"
+  integrity sha512-PAHp6TxrCy7MGMFidro8uikr+zlJJKJ/Q6mm2ExZ7HwkyR9lSVFfE3kt36qcwa24BQL7y0G9axycGjK1A/0uNQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -9569,9 +9570,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1852.0.0+526ec25d/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1811.0.0+86e2fb2b/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1852.0.0+526ec25d/lib-jitsi-meet.tgz#f0151cb53fd4d0cba69724d122dc6cccf1415a79"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1811.0.0+86e2fb2b/lib-jitsi-meet.tgz#4f46c028066f229a0538fb68140e4fe1f4ca68f2"
   dependencies:
     "@jitsi/js-utils" "2.2.1"
     "@jitsi/logger" "2.0.2"
@@ -9739,7 +9740,7 @@ locate-path@^7.1.0:
   dependencies:
     p-locate "^6.0.0"
 
-lodash-es@4.17.21, lodash-es@^4.17.21:
+lodash-es@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
   integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
@@ -11869,13 +11870,13 @@ react-element-to-jsx-string@^15.0.0:
     is-plain-object "5.0.0"
     react-is "18.1.0"
 
-react-emoji-render@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-emoji-render/-/react-emoji-render-2.0.1.tgz#c02fb00f4421762e31a9a4c367068b3cdf2edaa2"
-  integrity sha512-SKtsdwgEf2BFNiE9y4UBFZBWjkRcyWmhMprVly52+J77/zxThcfaQ3sCA0+2LtGJIRMpm4DGWSvyLg72fd1rXQ==
+react-emoji-render@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/react-emoji-render/-/react-emoji-render-1.2.4.tgz#fa3542a692e1eed3236f0f12b8e3a61b2818e2c2"
+  integrity sha512-AqktVXV38uDpgf02BoCXrzLYFsHAsxfdWwjrLexSJ22l1JgB01y1KejjxW/zTuCzod6O7BZfiMS866LEEfMHmA==
   dependencies:
     classnames "^2.2.5"
-    emoji-regex "^8.0.0"
+    emoji-regex "^6.4.1"
     lodash.flatten "^4.4.0"
     prop-types "^15.5.8"
     string-replace-to-array "^1.0.1"
@@ -12286,14 +12287,14 @@ react-native-sound@0.11.2:
   resolved "https://registry.yarnpkg.com/react-native-sound/-/react-native-sound-0.11.2.tgz#e542dc5b9e16ab4b3ac7e6eaddb1fc8d98da9038"
   integrity sha512-LmGc8lgOK3qecYMVQpyHvww/C+wgT6sWeMpVbOe4NCRGC2yKd4fo4U0KBUo9PO7AqKESO3I/2GZg1/C0+bwiiA==
 
-react-native-svg-transformer@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-svg-transformer/-/react-native-svg-transformer-1.2.0.tgz#ef1b189634196fcbcc08571a9ec13f5a7beaae84"
-  integrity sha512-z6BbmYBvFccTFKNNQjRmHPCstLxgoQvieAa0WdxcJoe6E+E1uXD5GkFpZymAF/i9CAMu4fG76/COytcJ8sfaEg==
+react-native-svg-transformer@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-svg-transformer/-/react-native-svg-transformer-1.1.0.tgz#2032bc766e20533af8aec81df49c218f08d4dbbd"
+  integrity sha512-I/yIxryg7FH5DKAvKHL0VsOfARHPkXdgIl0AUhndWpQzUYgpFs+kJcCP7XoZR+gn0t36JE+q9f4x3p/arZFx5g==
   dependencies:
-    "@svgr/core" "^8.1.0"
-    "@svgr/plugin-jsx" "^8.1.0"
-    "@svgr/plugin-svgo" "^8.1.0"
+    "@svgr/core" "^8.0.0"
+    "@svgr/plugin-jsx" "^8.0.1"
+    "@svgr/plugin-svgo" "^8.0.1"
     path-dirname "^1.0.2"
 
 react-native-svg@13.13.0:
