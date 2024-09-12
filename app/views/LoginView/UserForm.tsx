@@ -9,7 +9,8 @@ import {
 	TouchableOpacity,
 	KeyboardAvoidingView,
 	Platform,
-	Dimensions
+	Dimensions,
+	ScrollView
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
@@ -225,9 +226,8 @@ const UserForm = () => {
 				maxWidth: Dimensions.get('screen').width,
 				maxHeight: Dimensions.get('screen').height
 			}}
-			keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
-		>
-			<View style={styles.container}>
+			keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}>
+			<ScrollView contentContainerStyle={styles.container}>
 				<StatusBar backgroundColor='#005D0D' barStyle='light-content' />
 
 				<View style={styles.contentBox}>
@@ -257,8 +257,7 @@ const UserForm = () => {
 											style={[
 												styles.resendLink,
 												{ fontSize: 18, color: '#005D0D', marginTop: 20, borderBottomColor: '#005D0D', borderBottomWidth: 1 }
-											]}
-										>
+											]}>
 											Resend OTP
 										</Text>
 									</TouchableOpacity>
@@ -272,8 +271,7 @@ const UserForm = () => {
 											{
 												textAlign: 'center'
 											}
-										]}
-									>
+										]}>
 										{I18n.t('otp_code')}
 									</Text>
 									<Text style={[styles.description2]}>
@@ -335,7 +333,7 @@ const UserForm = () => {
 						</>
 					)}
 				</View>
-			</View>
+			</ScrollView>
 		</KeyboardAvoidingView>
 	);
 };

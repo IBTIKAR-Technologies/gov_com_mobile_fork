@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity, ImageBackground, Animated } from 'react-native';
+import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity, ImageBackground, Animated, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CompositeNavigationProp } from '@react-navigation/core';
@@ -148,7 +148,7 @@ const WorkspaceView = () => {
 	);
 
 	const renderPagination = () => (
-		<View style={localStyles.pagination}>
+		<ScrollView contentContainerStyle={localStyles.pagination}>
 			{splashScreens.map((_, index) => (
 				<TouchableOpacity
 					onPress={() => setCurrentPage(index)}
@@ -156,8 +156,7 @@ const WorkspaceView = () => {
 					style={[
 						{ paddingHorizontal: 7, justifyContent: 'center', alignItems: 'center', borderRadius: 20, marginHorizontal: 5 },
 						{ backgroundColor: currentPage === index ? 'white' : 'transparent' }
-					]}
-				>
+					]}>
 					<Text style={currentPage === index ? localStyles.activeDot : localStyles.dot}>{index + 1}</Text>
 				</TouchableOpacity>
 			))}
@@ -165,7 +164,7 @@ const WorkspaceView = () => {
 			<TouchableOpacity onPress={navigateToNextPage}>
 				<CustomIcon name='arrow-right' size={35} color='#ffffff' />
 			</TouchableOpacity>
-		</View>
+		</ScrollView>
 	);
 
 	const navigateToNextPage = () => {
@@ -185,7 +184,7 @@ const WorkspaceView = () => {
 	};
 
 	return (
-		<View style={localStyles.container}>
+		<ScrollView contentContainerStyle={localStyles.container}>
 			<ImageBackground source={require('../../static/images/splashBg.png')} style={localStyles.backgroundImage}>
 				<PagerView ref={ref} style={localStyles.viewPager} initialPage={0} useNext={false}>
 					<Memoized item={splashScreens[currentPage]} index={currentPage} />
@@ -194,7 +193,7 @@ const WorkspaceView = () => {
 				{renderPagination()}
 				{/* <LanguageSelect outside={true} /> */}
 			</ImageBackground>
-		</View>
+		</ScrollView>
 	);
 };
 

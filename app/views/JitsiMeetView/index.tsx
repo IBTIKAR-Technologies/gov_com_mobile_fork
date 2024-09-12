@@ -15,12 +15,10 @@ import { endVideoConfTimer, initVideoConfTimer } from '../../lib/methods/videoCo
 import { getUserSelector } from '../../selectors/login';
 import { ChatsStackParamList } from '../../stacks/types';
 import JitsiAuthModal from './JitsiAuthModal';
-import axios from 'axios';
-import { DASHBOARD_URL } from 'views/LoginView/UserForm';
 
 const JitsiMeetView = (): React.ReactElement => {
 	const {
-		params: { rid, url, videoConf, callId }
+		params: { rid, url, videoConf }
 	} = useRoute<RouteProp<ChatsStackParamList, 'JitsiMeetView'>>();
 	const { goBack } = useNavigation();
 	const user = useAppSelector(state => getUserSelector(state));
@@ -67,16 +65,6 @@ const JitsiMeetView = (): React.ReactElement => {
 		}
 	}, [rid, videoConf]);
 
-	const endCall = async () => {
-		try {
-			await axios.get(`${DASHBOARD_URL}/api/endcall?callId=${callId}&username=${user.username}`);
-			console.log('Call joined successfully');
-			goBack();
-		} catch (error) {
-			console.error('Error joining the call:', error);
-		}
-	};
-
 	const onNavigationStateChange = useCallback(
 		webViewState => {
 			const roomId = getRoomIdFromJitsiCallUrl(url);
@@ -88,7 +76,6 @@ const JitsiMeetView = (): React.ReactElement => {
 			if ((roomId && !webViewState.url.includes(roomId)) || webViewState.url.includes('close')) {
 				if (isIOS) {
 					if (webViewState.navigationType) {
-						endCall();
 						goBack();
 					}
 				} else {
@@ -117,6 +104,8 @@ const JitsiMeetView = (): React.ReactElement => {
 	}, []);
 
 	const callUrl = `${url}${url.includes('#config') ? '&' : '#'}config.disableDeepLinking=true`;
+
+	console.log('callurllllllllll:::', callUrl);
 
 	return (
 		<SafeAreaView style={styles.container}>
