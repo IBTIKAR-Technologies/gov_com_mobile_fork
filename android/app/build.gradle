@@ -91,8 +91,8 @@ android {
         applicationId APPLICATION_ID
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
-        versionName "0.2.3"
+        versionCode 8
+        versionName "0.2.4"
         vectorDrawables.useSupportLibrary = true
         if (!isFoss) {
             missingDimensionStrategy "RNNotifications.reactNativeVersion", "reactNative60" // See note below!
