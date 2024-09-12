@@ -43,6 +43,7 @@ export function callJitsiWithoutServer(path: string): void {
 	const { Jitsi_SSL } = store.getState().settings;
 	const protocol = Jitsi_SSL ? 'https://' : 'http://';
 	const url = `${protocol}${path}`;
+	console.log('Heeeeeeeeeeeeeeree');
 	Navigation.navigate('JitsiMeetView', { url, onlyAudio: false });
 }
 
