@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
+
 import sharedStyles from '../Styles';
 import Button from '../../containers/Button';
 import { useTheme } from '../../theme';
@@ -42,6 +43,7 @@ const JitsiAuthModal = ({
 	const { goBack } = useNavigation();
 	const { colors } = useTheme();
 	const user = useAppSelector(state => getUserSelector(state));
+
 	const isAdmin = !!user.roles?.includes('admin');
 
 	return (
