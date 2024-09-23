@@ -13,7 +13,7 @@ import { appStart } from '../actions/app';
 import { useTheme } from '../theme';
 import { themes } from '../lib/constants';
 import sharedStyles from '../views/Styles';
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const styles = StyleSheet.create({
 	iosPadding: {
@@ -33,11 +33,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-const LanguageSelect = ({
-	outside
-}: {
-	outside: boolean
-}) => {
+const LanguageSelect = ({ outside }: { outside: boolean }) => {
 	const { languageDefault } = useAppSelector(state => ({
 		languageDefault: getUserSelector(state).language,
 		id: getUserSelector(state).id
@@ -47,39 +43,40 @@ const LanguageSelect = ({
 		...styles.viewContainer,
 		...(isIOS ? styles.iosPadding : {}),
 		// borderColor: themes[theme].separatorColor,
-		// backgroundColor: themes[theme].backgroundColor, 
-		borderColor: themes[theme].tintColor, 
-        borderWidth: 1, 
-        borderRadius: 6,
-        backgroundColor: themes[theme].backgroundColor,
+		// backgroundColor: themes[theme].backgroundColor,
+		borderColor: themes[theme].tintColor,
+		borderWidth: 1,
+		borderRadius: 6,
+		backgroundColor: themes[theme].backgroundColor
 	};
-	
+
 	const dispatch = useDispatch();
 
 	const submit = async (language: string) => {
 		if (I18n.locale === language) {
 			return;
 		}
-		
 
 		const shouldRestart = isRTL(language) || isRTL(languageDefault);
-		if(outside) {
+		if (outside) {
 			if (shouldRestart) {
 				setLanguage(language);
 				await AsyncStorage.setItem('selectedLanguage', language);
-	
+				console.log("await AsyncStorage.get('selectedLanguage', language);", await AsyncStorage.getItem('selectedLanguage'));
+
 				await RNRestart.Restart();
 			} else {
 				setLanguage(language);
+				console.log("await AsyncStorage.get('selectedLanguage', language);", await AsyncStorage.getItem('selectedLanguage'));
 			}
-			return
+			return;
 		}
 		dispatch(appStart({ root: RootEnum.ROOT_LOADING, text: I18n.t('Change_language_loading') }));
 
-		
 		if (shouldRestart) {
 			setLanguage(language);
 			await AsyncStorage.setItem('selectedLanguage', language);
+			console.log("await AsyncStorage.get('selectedLanguage', language);", await AsyncStorage.getItem('selectedLanguage'));
 
 			await RNRestart.Restart();
 		} else {
@@ -108,12 +105,11 @@ const LanguageSelect = ({
 				textInputProps={{
 					// style property was Omitted in lib, but can be used normally
 					// @ts-ignore
-					style: { 
-                        ...styles.pickerText, 
-                        color: themes[theme].tintColor,
-                        fontWeight: 'bold', 
-						
-                    }
+					style: {
+						...styles.pickerText,
+						color: themes[theme].tintColor,
+						fontWeight: 'bold'
+					}
 				}}
 			/>
 		</View>

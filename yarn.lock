@@ -11448,6 +11448,11 @@ react-native-slowlog@1.0.2:
   resolved "https://registry.yarnpkg.com/react-native-slowlog/-/react-native-slowlog-1.0.2.tgz#5520979e3ef9d5273495d431ff3be34f02e35c89"
   integrity sha512-pUiKi045MS4K+eCiqk/OB8w0V0M1nxa1pWidydHyKB6VordefOl6yO68kqiw+AWn90GgsjGdovThVlOC0dXH1A==
 
+react-native-sse@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-sse/-/react-native-sse-1.2.1.tgz#d7d063173bf5f3cd2cb6978141ec5d57591dff4b"
+  integrity sha512-zejanlScF+IB9tYnbdry0MT34qjBXbiV/E72qGz33W/tX1bx8MXsbB4lxiuPETc9v/008vYZ60yjIstW22VlVg==
+
 react-native-svg@13.8.0:
   version "13.8.0"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-13.8.0.tgz#b6a22cf77f8098f910490a13aeb160a37e182f97"

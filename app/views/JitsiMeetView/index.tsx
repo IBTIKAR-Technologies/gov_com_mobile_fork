@@ -5,6 +5,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, BackHandler, Linking, SafeAreaView, StyleSheet, View } from 'react-native';
 import WebView from 'react-native-webview';
 
+import axios from 'axios';
+import EventSource from 'react-native-sse';
 import i18n from '../../i18n';
 import { userAgent } from '../../lib/constants';
 import { useAppSelector } from '../../lib/hooks';
@@ -15,10 +17,13 @@ import { endVideoConfTimer, initVideoConfTimer } from '../../lib/methods/videoCo
 import { getUserSelector } from '../../selectors/login';
 import { ChatsStackParamList } from '../../stacks/types';
 import JitsiAuthModal from './JitsiAuthModal';
+import { DASHBOARD_URL } from '../LoginView/UserForm';
+import database from '../../lib/database';
+import { Q } from '@nozbe/watermelondb';
 
 const JitsiMeetView = (): React.ReactElement => {
 	const {
-		params: { rid, url, videoConf }
+		params: { rid, url, videoConf, callId }
 	} = useRoute<RouteProp<ChatsStackParamList, 'JitsiMeetView'>>();
 	const { goBack } = useNavigation();
 	const user = useAppSelector(state => getUserSelector(state));
@@ -60,10 +65,20 @@ const JitsiMeetView = (): React.ReactElement => {
 
 	const onConferenceJoined = useCallback(() => {
 		logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_JOIN : events.JM_CONFERENCE_JOIN);
+		console.log('ConferenceJoined');
 		if (rid && !videoConf) {
 			initVideoConfTimer(rid);
 		}
 	}, [rid, videoConf]);
+
+	const onConferenceLeft = useCallback(() => {
+		logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_TERMINATE : events.JM_CONFERENCE_TERMINATE);
+		console.log('ConferenceLeft', events);
+		// if (rid && !videoConf) {
+		// 	initVideoConfTimer(rid);
+		// }
+		// goBack();
+	}, [videoConf]);
 
 	const onNavigationStateChange = useCallback(
 		webViewState => {
@@ -76,10 +91,12 @@ const JitsiMeetView = (): React.ReactElement => {
 			if ((roomId && !webViewState.url.includes(roomId)) || webViewState.url.includes('close')) {
 				if (isIOS) {
 					if (webViewState.navigationType) {
-						goBack();
+						// goBack();
+						endCall();
 					}
 				} else {
-					goBack();
+					endCall();
+					// goBack();
 				}
 			}
 			return true;
@@ -87,26 +104,144 @@ const JitsiMeetView = (): React.ReactElement => {
 		[goBack, url]
 	);
 
+	const endCall = async () => {
+		await axios.get(`${DASHBOARD_URL}/api/endcall?callId=${callId}`);
+
+		db.get('messages')
+			.query(Q.where('blocks', Q.like(`%\"callId\":\"${callId}\"%`)))
+			.observe()
+			.subscribe(async videoConferences => {
+				// Assuming there's an item with id=1 or modify logic as needed
+				if (videoConferences.length > 0) {
+					const specificItem = videoConferences[0];
+					await db.write(async () => {
+						await specificItem.update(message => {
+							message._raw._status = 'updated'; // Modify as needed
+						});
+					});
+					// console.log('Specific item', specificItem._raw.blocks);
+					// console.log('Specific item1', specificItem._raw._status === "updated");
+				}
+			});
+
+		goBack();
+	};
+
 	useEffect(() => {
 		handleJitsiApp();
 		onConferenceJoined();
+		onConferenceLeft();
 		activateKeepAwake();
+		// endCall();
 
 		return () => {
 			logEvent(videoConf ? events.LIVECHAT_VIDEOCONF_TERMINATE : events.JM_CONFERENCE_TERMINATE);
-			if (!videoConf) endVideoConfTimer();
+			console.log('events::kd: ', events);
+			if (!videoConf) {
+				endVideoConfTimer();
+			}
 			deactivateKeepAwake();
 		};
-	}, [handleJitsiApp, onConferenceJoined, videoConf]);
+	}, [handleJitsiApp, onConferenceJoined, onConferenceLeft, videoConf]);
 
 	useEffect(() => {
 		setCookies();
 	}, []);
 
+	// useEffect(() => {
+	// 	endCall();
+	// }, [endCall]);
+
 	const callUrl = `${url}${url.includes('#config') ? '&' : '#'}config.disableDeepLinking=true`;
 
 	console.log('callurllllllllll:::', callUrl);
 
+	const handleConferenceLeft = (event: any) => {
+		// Handle the logic when the conference is left
+		console.log('Conference left:', event.nativeEvent.data);
+		// You can navigate to a different screen or perform any action here
+	};
+
+	const [callEnded, setCallEnded] = useState(false);
+	// const endCall = useCallback(() => {
+	// 	const db = database.active;
+	// 	const subscription = db
+	// 		.get('rocketchat_video_conference') // 'rocketchat_video_conference' is the table name
+	// 		.query(Q.where('_id', callId))
+	// 		.observe()
+	// 		.subscribe(videoConferences => {
+	// 			// Assuming there's an item with id=1 or modify logic as needed
+	// 			const specificItem = videoConferences.find(item => item.id === '1');
+	// 			if (specificItem) {
+	// 				console.log('specificItem: ', specificItem);
+	// 			}
+	// 		});
+	// 	// subscription();
+
+	// 	// Clean up subscription when component unmounts
+	// 	return () => subscription.unsubscribe();
+	// }, [callId]);
+
+	// const getActiveConferences = useCallback(async () => {
+	const db = database.active;
+	// const activeConferences =
+
+	// db.get('messages')
+	// 	.query(Q.where('blocks', Q.like(`%\"callId\":\"${'66ec1e5a01ec06f348d29901'}\"%`)))
+	// 	.observe()
+	// 	.subscribe(videoConferences => {
+	// 		// Assuming there's an item with id=1 or modify logic as needed
+	// 		if (videoConferences.length > 0) {
+	// 			const specificItem = videoConferences[0];
+	// 			console.log('Specific item', callId); // 66ec1e5a01ec06f348d29901;
+	// 			console.log('Specific item1', specificItem._raw);
+	// 		}
+	// 	});
+
+	// .query(Q.where('_id', '66ea9eb101ec06f348d2959b'))
+	// .fetch();
+
+	// console.log('activeConferences1', activeConferences?._j?.[activeConferences?._j?.length - 1]);
+	// }, []);
+
+	// useEffect(() => {
+	// 	getActiveConferences();
+	// 	// const db = database.active;
+	// 	// const subscription = db
+	// 	// 	.get('rocketchat_video_conference') // 'rocketchat_video_conference' is the table name
+	// 	// 	.query(Q.where('_id', callId))
+	// 	// 	.observe()
+	// 	// 	.subscribe(changes => console.log('Changes: ', changes));
+	// 	// return () => subscription?.unsubscribe();
+	// }, [getActiveConferences]);
+
+	useEffect(() => {
+		// Create a function to perform the query
+		const intervalId = setInterval(() => {
+			db.get('messages')
+				.query(Q.where('blocks', Q.like(`%\"callId\":\"${callId}\"%`)))
+				.observe()
+				.subscribe(videoConferences => {
+					// Assuming there's an item with id=1 or modify logic as needed
+					if (videoConferences.length > 0) {
+						const specificItem = videoConferences[0];
+						console.log('Specific item', callId); // 66ec1e5a01ec06f348d29901;
+						console.log('Specific item1', specificItem._raw);
+						if (specificItem._raw._status === 'updated') goBack();
+					}
+				});
+		}, 500);
+
+		return () => clearInterval(intervalId);
+
+		// Run the function every 0.5 seconds
+		// 	const intervalId = setInterval(() => {
+		// 		checkVideoConferences();
+		// 	}, 500);
+
+		// 	// Cleanup the interval when the component unmounts
+		// 	return () => clearInterval(intervalId);
+	}, []);
 	return (
 		<SafeAreaView style={styles.container}>
 			{authModal && <JitsiAuthModal setAuthModal={setAuthModal} callUrl={`${callUrl}?language=${i18n.locale}`} />}
@@ -120,13 +255,12 @@ const JitsiMeetView = (): React.ReactElement => {
 					}}
 					onNavigationStateChange={onNavigationStateChange}
 					onShouldStartLoadWithRequest={onNavigationStateChange}
-					style={styles.webviewContainer}
-					userAgent={userAgent}
+					style={{ flex: 1 }}
 					javaScriptEnabled
 					domStorageEnabled
 					allowsInlineMediaPlayback
 					mediaCapturePermissionGrantType={'grant'}
-					mediaPlaybackRequiresUserAction={isIOS}
+					mediaPlaybackRequiresUserAction={false}
 					sharedCookiesEnabled
 				/>
 			) : (
