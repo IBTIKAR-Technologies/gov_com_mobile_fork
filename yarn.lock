@@ -11421,6 +11421,11 @@ react-native-screens@3.29.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
+react-native-screenshot-prevent@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-screenshot-prevent/-/react-native-screenshot-prevent-1.2.1.tgz#f784a3303139690b9e8c1ef00f69839810941016"
+  integrity sha512-zY6U3xNlFrquCJJVNoyR6DcAv2c6tOHQIcleBUQo4OrbSKz5a94Y3MkuzVwpE+IMlxCASymenDwfMtnWopSiVA==
+
 react-native-scrollable-tab-view@ptomasroos/react-native-scrollable-tab-view:
   version "1.1.0"
   resolved "https://codeload.github.com/ptomasroos/react-native-scrollable-tab-view/tar.gz/583a66f7fd3eb2cac1a05c71d7167d78a8ad9de6"

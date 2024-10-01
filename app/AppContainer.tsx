@@ -17,6 +17,8 @@ import MasterDetailStack from './stacks/MasterDetailStack';
 import { ThemeContext } from './theme';
 import { setCurrentScreen } from './lib/methods/helpers/log';
 
+// enableScreens();
+
 // SetUsernameStack
 const SetUsername = createStackNavigator<SetUsernameStackParamList>();
 const SetUsernameStack = () => (

@@ -33,6 +33,11 @@
   
   self.watchConnection = [[WatchConnection alloc] initWithSession:[WCSession defaultSession]];
 
+// Prevent screen recording
+    self.window.layer.contents = nil;
+    self.window.layer.opaque = YES;
+    self.window.secureTextEntry = YES;
+    
   return YES;
 }
 

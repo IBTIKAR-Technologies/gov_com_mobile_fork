@@ -9,6 +9,7 @@ import android.os.Bundle
 import org.devio.rn.splashscreen.SplashScreen;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.view.WindowManager;
 
 class MainActivity : ReactActivity() {
 
@@ -30,6 +31,7 @@ class MainActivity : ReactActivity() {
         SplashScreen.show(this, R.id.lottie)
         super.onCreate(null)
         SplashScreen.setAnimationFinished(true)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
   }
 
   override fun invokeDefaultOnBackPressed() {
