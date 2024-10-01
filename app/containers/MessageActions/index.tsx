@@ -440,13 +440,13 @@ const MessageActions = React.memo(
 				// });
 
 				// Copy
-				if (!videoConfBlock) {
-					options.push({
-						title: I18n.t('Copy'),
-						icon: 'copy',
-						onPress: () => handleCopy(message)
-					});
-				}
+				// if (!videoConfBlock) {
+				// 	options.push({
+				// 		title: I18n.t('Copy'),
+				// 		icon: 'copy',
+				// 		onPress: () => handleCopy(message)
+				// 	});
+				// }
 
 				// Share
 				// options.push({
