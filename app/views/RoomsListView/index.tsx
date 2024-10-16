@@ -525,8 +525,7 @@ class RoomsListView extends React.Component<IRoomsListViewProps, IRoomsListViewS
 						borderRadius: 100,
 						alignItems: 'center',
 						justifyContent: 'center'
-					}}
-				>
+					}}>
 					<CustomIcon name='search' size={28} onPress={this.initSearching} color='#ffffff' />
 				</View>
 			)
@@ -1029,11 +1028,10 @@ class RoomsListView extends React.Component<IRoomsListViewProps, IRoomsListViewS
 						borderTopLeftRadius: 40,
 						borderTopRightRadius: 40,
 						backgroundColor: 'white'
-					}}
-				>
+					}}>
 					<FlatList
 						ref={this.getScrollRef}
-						data={searching ? search?.filter(d => d._id !== global.sysAdminId) : chats}
+						data={searching ? search?.filter(d => d._id !== global.sysAdminId) : chats?.filter(e => e.lastMessage)}
 						extraData={searching ? search : chats}
 						keyExtractor={item => keyExtractor(item, searching)}
 						style={[styles.list]}

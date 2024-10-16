@@ -44,6 +44,8 @@ const RoomItemContainer = React.memo(
 		const roomSubscription = useRef<Subscription | null>(null);
 		const userId = item.t === 'd' && id && !isGroupChat(item) ? id : null;
 
+		console.log('itemm:::::', item);
+
 		useEffect(() => {
 			const init = () => {
 				if (item?.observe) {
@@ -74,6 +76,8 @@ const RoomItemContainer = React.memo(
 		if (date) {
 			accessibilityLabel = `, ${I18n.t('last_message')} ${date}`;
 		}
+
+		// if (!item.lastMessage) return;
 
 		return (
 			<RoomItem
