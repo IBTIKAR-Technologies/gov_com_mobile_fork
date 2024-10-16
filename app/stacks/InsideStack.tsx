@@ -167,8 +167,7 @@ const SettingsStackNavigator = () => {
 
 	return (
 		<SettingsStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
-		>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
 			<SettingsStack.Screen
 				options={{
 					title: i18n.t('SettingsView'),
@@ -208,8 +207,7 @@ const AdminPanelStackNavigator = () => {
 
 	return (
 		<AdminPanelStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
-		>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
 			<AdminPanelStack.Screen name='AdminPanelView' component={AdminPanelView} />
 		</AdminPanelStack.Navigator>
 	);
@@ -222,8 +220,7 @@ const DisplayPrefStackNavigator = () => {
 
 	return (
 		<DisplayPrefStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
-		>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
 			<DisplayPrefStack.Screen name='DisplayPrefsView' component={DisplayPrefsView} />
 		</DisplayPrefStack.Navigator>
 	);
@@ -235,8 +232,7 @@ const NewMessageStackNavigator = () => {
 
 	return (
 		<NewMessageStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
-		>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
 			<NewMessageStack.Screen name='NewMessageView' component={NewMessageView} />
 			<NewMessageStack.Screen name='SelectedUsersViewCreateChannel' component={SelectedUsersView} />
 			<NewMessageStack.Screen name='CreateChannelView' component={CreateChannelView} />
@@ -253,8 +249,7 @@ const E2ESaveYourPasswordStackNavigator = () => {
 
 	return (
 		<E2ESaveYourPasswordStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
-		>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
 			<E2ESaveYourPasswordStack.Screen name='E2ESaveYourPasswordView' component={E2ESaveYourPasswordView} />
 			<E2ESaveYourPasswordStack.Screen name='E2EHowItWorksView' component={E2EHowItWorksView} />
 		</E2ESaveYourPasswordStack.Navigator>
@@ -268,8 +263,7 @@ const E2EEnterYourPasswordStackNavigator = () => {
 
 	return (
 		<E2EEnterYourPasswordStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}
-		>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation } as StackNavigationOptions}>
 			<E2EEnterYourPasswordStack.Screen name='E2EEnterYourPasswordView' component={E2EEnterYourPasswordView} />
 		</E2EEnterYourPasswordStack.Navigator>
 	);
@@ -326,8 +320,7 @@ const BottomTabNavigator = ({ isMasterDetail }) => {
 				tabBarInactiveTintColor: themes[theme].auxiliaryText,
 				tabBarLabel: route.name,
 				headerShown: false
-			})}
-		>
+			})}>
 			<Tab.Screen name='Messages' component={ChatsStackNavigator} options={{ tabBarLabel: i18n.t('Messages') }} />
 			<Tab.Screen name='Settings' component={SettingsStackNavigator} options={{ tabBarLabel: i18n.t('Settings') }} />
 			{isMasterDetail && <Tab.Screen name='Admin' component={AdminPanelStackNavigator} options={{ tabBarLabel: 'Admin' }} />}
@@ -339,8 +332,7 @@ const InsideStackNavigator = () => {
 	const { theme } = React.useContext(ThemeContext);
 	return (
 		<InsideStack.Navigator
-			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...ModalAnimation, presentation: 'transparentModal' }}
-		>
+			screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...ModalAnimation, presentation: 'transparentModal' }}>
 			<InsideStack.Screen name='BottomTabNavigator' component={BottomTabNavigator} options={{ headerShown: false }} />
 			<InsideStack.Screen name='NewMessageStackNavigator' component={NewMessageStackNavigator} options={{ headerShown: false }} />
 			<InsideStack.Screen
